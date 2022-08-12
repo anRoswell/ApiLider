@@ -1,0 +1,801 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SID_PROTOCOL2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DespachoId" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Role" Type="Int32" Nullable="false" />
+    <Property Name="VerificationToken" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Verified" Type="DateTime" Precision="3" />
+    <Property Name="ResetToken" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ResetTokenExpires" Type="DateTime" Precision="3" />
+    <Property Name="PasswordReset" Type="DateTime" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Updated" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="RefreshToken" Relationship="Self.FK_RefreshToken_Accounts" FromRole="Accounts" ToRole="RefreshToken" />
+  </EntityType>
+  <EntityType Name="ArchivosZip">
+    <Key>
+      <PropertyRef Name="IdArchivosZip" />
+    </Key>
+    <Property Name="IdArchivosZip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdLote" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="NombreInstancia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NombreCuaderno" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NombreArchivo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TipoArchivo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="lotes" Relationship="Self.FK_ArchivosZip_lotes" FromRole="ArchivosZip" ToRole="lotes" />
+  </EntityType>
+  <EntityType Name="auditorias">
+    <Key>
+      <PropertyRef Name="auditoria_id" />
+    </Key>
+    <Property Name="auditoria_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="auditoria_accion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="auditoria_fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="auditoria_usuario_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="usuarios" Relationship="Self.FK_auditorias_usuarios" FromRole="auditorias" ToRole="usuarios" />
+  </EntityType>
+  <EntityType Name="CALIDAD">
+    <Key>
+      <PropertyRef Name="calidad_id" />
+    </Key>
+    <Property Name="calidad_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="calidad_Porcentajelotes" Type="Int32" />
+    <Property Name="calidad_PorcentajeError" Type="Int32" />
+    <Property Name="calidad_CantidadRegistrosbase" Type="Decimal" Precision="5" Scale="0" />
+    <Property Name="calidad_CantidadErrores" Type="Decimal" Precision="5" Scale="0" />
+    <Property Name="calidad_uno" Type="Int32" />
+    <Property Name="calidad_dos" Type="Int32" />
+    <Property Name="calidad_indice0" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="calidad_indice1" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CALIDAD_ANM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CALIDAD_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ITEM" Type="Int32" Nullable="false" />
+    <Property Name="NA" Type="Int32" Nullable="false" />
+    <Property Name="CUMPLE" Type="Int32" Nullable="false" />
+    <Property Name="NOCUMPLE" Type="Int32" Nullable="false" />
+    <Property Name="OBSERVACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FECHA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="USUARIO" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CALIDADLOTES">
+    <Key>
+      <PropertyRef Name="calidadlote_id" />
+    </Key>
+    <Property Name="calidadlote_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="calidadlote_calidad_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="calidadlote_lote_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="calidadlote_imagen_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="calidadlote_marca" Type="Int32" Nullable="false" />
+    <Property Name="calidadlote_error" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="campos">
+    <Key>
+      <PropertyRef Name="campo_id" />
+    </Key>
+    <Property Name="campo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="campo_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="campo_etiqueta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="campo_tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="campo_lista_id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="campo_esrequerido" Type="Int32" Nullable="false" />
+    <Property Name="campodepende_campo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campodepende_campovalorloactiva" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="campo_ancho" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campo_alto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campo_contador_portipodoc" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campo_asociado_nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="campo_fijo_valor" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="campo_expresion_cadenaexp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="campo_contador_localacarpeta" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="listas" Relationship="Self.FK_campos_listas" FromRole="campos" ToRole="listas" />
+    <NavigationProperty Name="camposxtipodoc" Relationship="Self.FK_camposxtipodoc_campos" FromRole="campos" ToRole="camposxtipodoc" />
+    <NavigationProperty Name="datos" Relationship="Self.FK_datos_campos" FromRole="campos" ToRole="datos" />
+  </EntityType>
+  <EntityType Name="CAMPOSPROCESOSTIPOSDEDOCUMENTO">
+    <Key>
+      <PropertyRef Name="campoprocesotipo_id" />
+    </Key>
+    <Property Name="campoprocesotipo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="campoprocesotipo_proceso_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campoprocesotipo_campotipo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campoprocesotipo_ordenz" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campoprocesotipo_modificable" Type="Decimal" Precision="5" Scale="0" />
+    <Property Name="campoprocesotipo_insertarendatos" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="campoprocesotipo_endatos" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="campoprocesotipo_envariable" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="camposxtipodoc">
+    <Key>
+      <PropertyRef Name="campotipodoc_id" />
+    </Key>
+    <Property Name="campotipodoc_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="campotipodoc_tipodoc_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipodoc_campo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipodoc_campoorden" Type="Int32" />
+    <Property Name="campotipo_esrequeridounvalor" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="campotipo_tipodevalidacion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="campotipo_valoresadmitidos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="campotipo_cadenaconexionbd" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="campotipo_nombretabla" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="campotipo_tipodetabla" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="campotipo_nombrecampoentabla" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="campotipo_asumeunvaloranterior" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_modificablevalorasum" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_diccionario_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_esfechadedocumento" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_dic_campopadre_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_id_grupo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_id_masdeuno" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_siocr" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_siocr_enlinea" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_siocr_posxsi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_siocr_posysi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_siocr_posxid" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_siocr_posyid" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_sibcr" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_sibcr_enlinea" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_sibcr_estandar" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="campotipo_sibcr_posxsi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_sibcr_posysi" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_sibcr_posxid" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_sibcr_posyid" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_siboton" Type="Int16" />
+    <Property Name="campotipo_sifirmadigital" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_sifirmadigitalglobal" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_sifirmaelectronica" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="campotipo_sifedetalle" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="campos" Relationship="Self.FK_camposxtipodoc_campos" FromRole="camposxtipodoc" ToRole="campos" />
+  </EntityType>
+  <EntityType Name="datos">
+    <Key>
+      <PropertyRef Name="dato_id" />
+    </Key>
+    <Property Name="dato_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dato_imagen_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="dato_campo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="dato_numero" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="dato_texto" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="dato_memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dato_fecha" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="dato_error" Type="Int32" Nullable="false" />
+    <Property Name="dato_descripcionError" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="campos" Relationship="Self.FK_datos_campos" FromRole="datos" ToRole="campos" />
+    <NavigationProperty Name="imagenes" Relationship="Self.FK_datos_imagenes" FromRole="datos" ToRole="imagenes" />
+  </EntityType>
+  <EntityType Name="datos_2">
+    <Key>
+      <PropertyRef Name="dato_id" />
+    </Key>
+    <Property Name="dato_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dato_imagen_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="dato_campo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="dato_numero" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="dato_texto" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="dato_memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dato_fecha" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="dato_Iguales" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="dato_digitado1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dato_digitado2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="dato_nuevoValor" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="dato_error" Type="Int32" Nullable="false" />
+    <Property Name="dato_descripcionError" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="datos_finales">
+    <Key>
+      <PropertyRef Name="dato_id" />
+    </Key>
+    <Property Name="dato_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dato_imagen_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="dato_campo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="dato_numero" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="dato_texto" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="dato_memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dato_fecha" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="dato_lote_id" Type="Int32" Nullable="false" />
+    <Property Name="dato_indice1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="dato_indice2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="dato_indice3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="dato_indice4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="dato_paginas" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="dato_fecha_registro" Type="DateTime" Precision="0" />
+    <Property Name="dato_tamano" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="dato_extension" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DATOSRAD">
+    <Key>
+      <PropertyRef Name="datorad_id" />
+    </Key>
+    <Property Name="datorad_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="datorad_radicacion_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="datorad_campo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="datorad_numero" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="datorad_texto" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="datorad_memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="datorad_fecha" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Despachos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Municipio" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CodDespacho" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="NombreDespacho" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="imagenes">
+    <Key>
+      <PropertyRef Name="imagen_id" />
+    </Key>
+    <Property Name="imagen_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="imagen_orden" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="imagen_nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="imagen_lote_id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="imagen_tipodoc_id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="imagen_indice" Type="Int32" />
+    <Property Name="imagen_estado" Type="Int32" Nullable="false" />
+    <Property Name="imagen_fechaindexa" Type="DateTime" Precision="0" />
+    <Property Name="imagen_usuarioindexa_id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="imagen_tipodoc_id2" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="imagen_tipodoc_id3" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="imagen_fechaReindexa" Type="DateTime" Precision="0" />
+    <Property Name="imagen_usuarioReindexa_id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="imagen_fechaVerifica" Type="DateTime" Precision="0" />
+    <Property Name="imagen_usuarioVerifica_id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="imagen_fechaCalidad" Type="DateTime" Precision="0" />
+    <Property Name="imagen_usuarioCalidad_id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="imagen_fechaAuditoria" Type="DateTime" Precision="0" />
+    <Property Name="imagen_usuarioAuditoria_id" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="imagen_marcaAuditoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="imagen_obsAuditoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="datos" Relationship="Self.FK_datos_imagenes" FromRole="imagenes" ToRole="datos" />
+    <NavigationProperty Name="lotes" Relationship="Self.FK_imagenes_lotes" FromRole="imagenes" ToRole="lotes" />
+  </EntityType>
+  <EntityType Name="listas">
+    <Key>
+      <PropertyRef Name="lista_id" />
+    </Key>
+    <Property Name="lista_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="lista_codigo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="lista_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="campos" Relationship="Self.FK_campos_listas" FromRole="listas" ToRole="campos" />
+    <NavigationProperty Name="valoreslistas" Relationship="Self.FK_valoreslistas_listas" FromRole="listas" ToRole="valoreslistas" />
+  </EntityType>
+  <EntityType Name="lotes">
+    <Key>
+      <PropertyRef Name="lote_id" />
+    </Key>
+    <Property Name="lote_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="lote_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lote_serie_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="lote_estado" Type="Int32" Nullable="false" />
+    <Property Name="lote_fechaimporta" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="lote_usuarioimporta_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="ArchivosZip" Relationship="Self.FK_ArchivosZip_lotes" FromRole="lotes" ToRole="ArchivosZip" />
+    <NavigationProperty Name="imagenes" Relationship="Self.FK_imagenes_lotes" FromRole="lotes" ToRole="imagenes" />
+    <NavigationProperty Name="series" Relationship="Self.FK_lotes_series" FromRole="lotes" ToRole="series" />
+    <NavigationProperty Name="usuarios" Relationship="Self.FK_lotes_usuarios_01" FromRole="lotes" ToRole="usuarios" />
+  </EntityType>
+  <EntityType Name="PERSONAS_NOMINAS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDENT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="NOMBRES" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="APELLIDOS" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PROCESOS">
+    <Key>
+      <PropertyRef Name="proceso_id" />
+    </Key>
+    <Property Name="proceso_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="proceso_nombre" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="proceso_descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="proceso_unidad_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="proceso_multiple" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="proceso_nombresdocuanexos" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="RAD_ALIST">
+    <Key>
+      <PropertyRef Name="radicacion_id" />
+    </Key>
+    <Property Name="radicacion_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="radicacion_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="radicacion_fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="radicacion_hora" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="radicacion_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="radicacion_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="alista_imagenes" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="alista_fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="alista_hora" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="alista_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="alista_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="digitalizo_fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="digitalizo_hora" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="digitalizo_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="digitalizo_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="digitalizo_imagenes" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="verifico_fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="verifico_hora" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="verifico_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="verifico_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="verifico_imagenes" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="verifico_observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="importo_fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="importo_hora" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="importo_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="importo_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="radicacion_tipolote_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="radicacion_tipodoc_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="radicacion_camposvariables" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="alista_camposvariables" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RefreshToken">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountId" Type="Int32" Nullable="false" />
+    <Property Name="Token" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Expires" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedByIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Revoked" Type="DateTime" Precision="3" />
+    <Property Name="RevokedByIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReplacedByToken" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_RefreshToken_Accounts" FromRole="RefreshToken" ToRole="Accounts" />
+  </EntityType>
+  <EntityType Name="series">
+    <Key>
+      <PropertyRef Name="serie_id" />
+    </Key>
+    <Property Name="serie_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="serie_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="serie_rutaplanos" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="serie_rutaimagenes" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="lotes" Relationship="Self.FK_lotes_series" FromRole="series" ToRole="lotes" />
+  </EntityType>
+  <EntityType Name="tiposdedocumentos">
+    <Key>
+      <PropertyRef Name="tipodoc_id" />
+    </Key>
+    <Property Name="tipodoc_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodoc_nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tipodedocumento_tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tipodedocumento_archivosoporte" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_nombreraizlote" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="tipodedocumento_numerolote" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_selcarpetaimag" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_nuevoasumvalor" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_senumeranfolio" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_camid_campnfol" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_posxnumfolio" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_posynumfolio" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_comotesauriza" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tipodedocumento_diccionario_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_aceptanotas" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_aceptamarcas" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_serie_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_tradicion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tipodedocumento_valorprimario" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tipodedocumento_valorsecundari" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tipodedocumento_patronnomdoc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="tipodedocumento_cpid_creabanen" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_impretq_campos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tipodedocumento_impretq_archi" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="tipodedocumento_cierracarpeta" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_iduni_campo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_siocr" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_siocr_enlinea" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="campo_id_siocr" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_sibcr" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_sibcr_enlinea" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_sibcr_estandar" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="campo_id_sibcr" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_sifirmadigital" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="campo_id_sifirma" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedoc_sifirmadigitalglobal" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_sisubdocumentos" Type="Int16" />
+    <Property Name="tipodedocumento_sisellodetiempo" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="campo_id_sisellodetiempo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_sifirmaelectronica" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="campo_id_sifirmaelectronica" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipodedocumento_sifedetalle" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TIPOSDELOTES">
+    <Key>
+      <PropertyRef Name="tipolote_id" />
+    </Key>
+    <Property Name="tipolote_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipolote_nombre" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="tipolote_proceso_id_radicacion" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipolote_siradicacion" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipolote_sialistamiento" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipolote_sidigitalizacion" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipolote_sivalidacionimagenes" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipolote_proceso_id_indexacion" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipolote_siindexacion" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipolote_proceso_id_reindexacion" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipolote_sireindexacion" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipolote_siverificacion" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipolote_sicontrolcalidad1" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipolote_sicontrolcalidad2" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipolote_sientrega" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="tipolote_xml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tipolote_proceso_id_alistamiento" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="tipolote_repositorio_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TQM_LOCK">
+    <Key>
+      <PropertyRef Name="BatchID" />
+    </Key>
+    <Property Name="BatchID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="DateTimeLock" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TQM_LOCK_CALIDAD">
+    <Key>
+      <PropertyRef Name="BatchID" />
+    </Key>
+    <Property Name="BatchID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="DateTimeLock" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="usuario_id" />
+    </Key>
+    <Property Name="usuario_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="usuario_perfil" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="usuario_login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="usuario_password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="auditorias" Relationship="Self.FK_auditorias_usuarios" FromRole="usuarios" ToRole="auditorias" />
+    <NavigationProperty Name="lotes" Relationship="Self.FK_lotes_usuarios_01" FromRole="usuarios" ToRole="lotes" />
+    <NavigationProperty Name="errores" Relationship="Self.FK_errores_usuarios" FromRole="usuarios" ToRole="errores" />
+  </EntityType>
+  <EntityType Name="valoreslistas">
+    <Key>
+      <PropertyRef Name="valorlista_id" />
+    </Key>
+    <Property Name="valorlista_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="valorlista_valor" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="valorlista_orden" Type="Int32" Nullable="false" />
+    <Property Name="valorlista_lista_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="valorlista_valor02" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="listas" Relationship="Self.FK_valoreslistas_listas" FromRole="valoreslistas" ToRole="listas" />
+  </EntityType>
+  <EntityType Name="EQUIVALENCIAS">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="CODIGO" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CODIGO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TIPO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="errores">
+    <Key>
+      <PropertyRef Name="error_id" />
+      <PropertyRef Name="error_fecha" />
+      <PropertyRef Name="error_usuario_id" />
+    </Key>
+    <Property Name="error_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="error_fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="error_usuario_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="error_excepcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="error_stackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="error_estado" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="usuarios" Relationship="Self.FK_errores_usuarios" FromRole="errores" ToRole="usuarios" />
+  </EntityType>
+  <Association Name="FK_RefreshToken_Accounts">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+    <End Role="RefreshToken" Type="Self.RefreshToken" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RefreshToken">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArchivosZip_lotes">
+    <End Role="lotes" Type="Self.lotes" Multiplicity="1" />
+    <End Role="ArchivosZip" Type="Self.ArchivosZip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lotes">
+        <PropertyRef Name="lote_id" />
+      </Principal>
+      <Dependent Role="ArchivosZip">
+        <PropertyRef Name="IdLote" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_auditorias_usuarios">
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+    <End Role="auditorias" Type="Self.auditorias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="usuario_id" />
+      </Principal>
+      <Dependent Role="auditorias">
+        <PropertyRef Name="auditoria_usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_campos_listas">
+    <End Role="listas" Type="Self.listas" Multiplicity="0..1" />
+    <End Role="campos" Type="Self.campos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="listas">
+        <PropertyRef Name="lista_id" />
+      </Principal>
+      <Dependent Role="campos">
+        <PropertyRef Name="campo_lista_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_camposxtipodoc_campos">
+    <End Role="campos" Type="Self.campos" Multiplicity="1" />
+    <End Role="camposxtipodoc" Type="Self.camposxtipodoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="campos">
+        <PropertyRef Name="campo_id" />
+      </Principal>
+      <Dependent Role="camposxtipodoc">
+        <PropertyRef Name="campotipodoc_campo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_datos_campos">
+    <End Role="campos" Type="Self.campos" Multiplicity="1" />
+    <End Role="datos" Type="Self.datos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="campos">
+        <PropertyRef Name="campo_id" />
+      </Principal>
+      <Dependent Role="datos">
+        <PropertyRef Name="dato_campo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_datos_imagenes">
+    <End Role="imagenes" Type="Self.imagenes" Multiplicity="1" />
+    <End Role="datos" Type="Self.datos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="imagenes">
+        <PropertyRef Name="imagen_id" />
+      </Principal>
+      <Dependent Role="datos">
+        <PropertyRef Name="dato_imagen_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_imagenes_lotes">
+    <End Role="lotes" Type="Self.lotes" Multiplicity="0..1" />
+    <End Role="imagenes" Type="Self.imagenes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lotes">
+        <PropertyRef Name="lote_id" />
+      </Principal>
+      <Dependent Role="imagenes">
+        <PropertyRef Name="imagen_lote_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_valoreslistas_listas">
+    <End Role="listas" Type="Self.listas" Multiplicity="1" />
+    <End Role="valoreslistas" Type="Self.valoreslistas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="listas">
+        <PropertyRef Name="lista_id" />
+      </Principal>
+      <Dependent Role="valoreslistas">
+        <PropertyRef Name="valorlista_lista_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_lotes_series">
+    <End Role="series" Type="Self.series" Multiplicity="1" />
+    <End Role="lotes" Type="Self.lotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="series">
+        <PropertyRef Name="serie_id" />
+      </Principal>
+      <Dependent Role="lotes">
+        <PropertyRef Name="lote_serie_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_lotes_usuarios_01">
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+    <End Role="lotes" Type="Self.lotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="usuario_id" />
+      </Principal>
+      <Dependent Role="lotes">
+        <PropertyRef Name="lote_usuarioimporta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_errores_usuarios">
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+    <End Role="errores" Type="Self.errores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="usuario_id" />
+      </Principal>
+      <Dependent Role="errores">
+        <PropertyRef Name="error_usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SID_PROTOCOL2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+    <EntitySet Name="ArchivosZip" EntityType="Self.ArchivosZip" />
+    <EntitySet Name="auditorias" EntityType="Self.auditorias" />
+    <EntitySet Name="CALIDAD" EntityType="Self.CALIDAD" />
+    <EntitySet Name="CALIDAD_ANM" EntityType="Self.CALIDAD_ANM" />
+    <EntitySet Name="CALIDADLOTES" EntityType="Self.CALIDADLOTES" />
+    <EntitySet Name="campos" EntityType="Self.campos" />
+    <EntitySet Name="CAMPOSPROCESOSTIPOSDEDOCUMENTO" EntityType="Self.CAMPOSPROCESOSTIPOSDEDOCUMENTO" />
+    <EntitySet Name="camposxtipodoc" EntityType="Self.camposxtipodoc" />
+    <EntitySet Name="datos" EntityType="Self.datos" />
+    <EntitySet Name="datos_2" EntityType="Self.datos_2" />
+    <EntitySet Name="datos_finales" EntityType="Self.datos_finales" />
+    <EntitySet Name="DATOSRAD" EntityType="Self.DATOSRAD" />
+    <EntitySet Name="Despachos" EntityType="Self.Despachos" />
+    <EntitySet Name="imagenes" EntityType="Self.imagenes" />
+    <EntitySet Name="listas" EntityType="Self.listas" />
+    <EntitySet Name="lotes" EntityType="Self.lotes" />
+    <EntitySet Name="PERSONAS_NOMINAS" EntityType="Self.PERSONAS_NOMINAS" />
+    <EntitySet Name="PROCESOS" EntityType="Self.PROCESOS" />
+    <EntitySet Name="RAD_ALIST" EntityType="Self.RAD_ALIST" />
+    <EntitySet Name="RefreshToken" EntityType="Self.RefreshToken" />
+    <EntitySet Name="series" EntityType="Self.series" />
+    <EntitySet Name="tiposdedocumentos" EntityType="Self.tiposdedocumentos" />
+    <EntitySet Name="TIPOSDELOTES" EntityType="Self.TIPOSDELOTES" />
+    <EntitySet Name="TQM_LOCK" EntityType="Self.TQM_LOCK" />
+    <EntitySet Name="TQM_LOCK_CALIDAD" EntityType="Self.TQM_LOCK_CALIDAD" />
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+    <EntitySet Name="valoreslistas" EntityType="Self.valoreslistas" />
+    <EntitySet Name="EQUIVALENCIAS" EntityType="Self.EQUIVALENCIAS" />
+    <EntitySet Name="errores" EntityType="Self.errores" />
+    <AssociationSet Name="FK_RefreshToken_Accounts" Association="Self.FK_RefreshToken_Accounts">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="RefreshToken" EntitySet="RefreshToken" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArchivosZip_lotes" Association="Self.FK_ArchivosZip_lotes">
+      <End Role="lotes" EntitySet="lotes" />
+      <End Role="ArchivosZip" EntitySet="ArchivosZip" />
+    </AssociationSet>
+    <AssociationSet Name="FK_auditorias_usuarios" Association="Self.FK_auditorias_usuarios">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="auditorias" EntitySet="auditorias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_campos_listas" Association="Self.FK_campos_listas">
+      <End Role="listas" EntitySet="listas" />
+      <End Role="campos" EntitySet="campos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_camposxtipodoc_campos" Association="Self.FK_camposxtipodoc_campos">
+      <End Role="campos" EntitySet="campos" />
+      <End Role="camposxtipodoc" EntitySet="camposxtipodoc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_datos_campos" Association="Self.FK_datos_campos">
+      <End Role="campos" EntitySet="campos" />
+      <End Role="datos" EntitySet="datos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_datos_imagenes" Association="Self.FK_datos_imagenes">
+      <End Role="imagenes" EntitySet="imagenes" />
+      <End Role="datos" EntitySet="datos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_imagenes_lotes" Association="Self.FK_imagenes_lotes">
+      <End Role="lotes" EntitySet="lotes" />
+      <End Role="imagenes" EntitySet="imagenes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_valoreslistas_listas" Association="Self.FK_valoreslistas_listas">
+      <End Role="listas" EntitySet="listas" />
+      <End Role="valoreslistas" EntitySet="valoreslistas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_lotes_series" Association="Self.FK_lotes_series">
+      <End Role="series" EntitySet="series" />
+      <End Role="lotes" EntitySet="lotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_lotes_usuarios_01" Association="Self.FK_lotes_usuarios_01">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="lotes" EntitySet="lotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_errores_usuarios" Association="Self.FK_errores_usuarios">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="errores" EntitySet="errores" />
+    </AssociationSet>
+    <FunctionImport Name="CONSULTAR_ARCHIVOS_ZIP" ReturnType="Collection(String)">
+      <Parameter Name="ID_LOTE" Mode="In" Type="Int32" />
+      <Parameter Name="INSTANCIA" Mode="In" Type="String" />
+      <Parameter Name="CUADERNO" Mode="In" Type="String" />
+      <Parameter Name="TIPO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CONSULTAR_DESPACHOS_X_MUNICIPIO" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_DESPACHOS_X_MUNICIPIO_Result)">
+      <Parameter Name="MUNICIPIO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CONSULTAR_DOCUMENTOS_EXPEDIENTE" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result)">
+      <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CONSULTAR_EXPEDIENTES" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_Result)">
+      <Parameter Name="DEMANDANTE" Mode="In" Type="String" />
+      <Parameter Name="DEMANDADO" Mode="In" Type="String" />
+      <Parameter Name="RADICADO" Mode="In" Type="String" />
+      <Parameter Name="DESPACHO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CONSULTAR_EXPEDIENTES_TODOS" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_TODOS_Result)">
+      <Parameter Name="DESPACHO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CONSULTAR_MUNICIPIOS" ReturnType="Collection(String)" />
+    <FunctionImport Name="CONSULTAR_RUTA_ZIP_CD_PLANO" ReturnType="Collection(String)">
+      <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
+      <Parameter Name="NOMBRE_ARCHIVO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CONSULTAR_RUTA_ZIP_EXPEDIENTE" ReturnType="Collection(String)">
+      <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="REPORTE_PRODUCCION" ReturnType="Collection(SID_PROTOCOL2Model.REPORTE_PRODUCCION_Result)">
+      <Parameter Name="FECHAINICIAL" Mode="In" Type="DateTime" />
+      <Parameter Name="FECHAFINAL" Mode="In" Type="DateTime" />
+      <Parameter Name="DESPACHO" Mode="In" Type="String" />
+      <Parameter Name="MUNICIPIO" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="CONSULTAR_DESPACHOS_X_MUNICIPIO_Result">
+    <Property Type="String" Name="CODDESPACHO" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="NOMBREDESPACHO" Nullable="false" MaxLength="300" />
+  </ComplexType>
+  <ComplexType Name="CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result">
+    <Property Type="Int32" Name="ID_LOTE" Nullable="false" />
+    <Property Type="String" Name="RADICADO" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ESTADO_DOCUMENTO" Nullable="false" />
+    <Property Type="String" Name="TIPO_DOCUMENTO" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="RUTA_DOCUMENTO" Nullable="true" MaxLength="852" />
+    <Property Type="String" Name="INSTANCIA" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="CUADERNO" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="CONSULTAR_EXPEDIENTES_Result">
+    <Property Type="Int32" Name="LOTE" Nullable="false" />
+    <Property Type="String" Name="DEMANDANTE" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="DEMANDADO" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="TIPO" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="RADICADO_PROCESO" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="CONSULTAR_EXPEDIENTES_TODOS_Result">
+    <Property Type="Int32" Name="LOTE" Nullable="false" />
+    <Property Type="String" Name="DEMANDANTE" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="DEMANDADO" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="TIPO" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="RADICADO_PROCESO" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="REPORTE_PRODUCCION_Result">
+    <Property Type="String" Name="MUNICIPIO" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="COD_DESPACHO" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="NOMBRE_DESPACHO" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="RADICADO_LOTE" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="FECHA_PROCESADO_LOTE" Nullable="true" Precision="16" />
+    <Property Type="Int32" Name="TOTAL_DOCUMENTOS" Nullable="true" />
+    <Property Type="Int32" Name="TOTAL_PAGINAS" Nullable="true" />
+  </ComplexType>
+</Schema>

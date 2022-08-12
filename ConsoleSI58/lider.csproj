@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4935B0FE-4307-4622-96D0-EA8833FCF7F9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Lider</RootNamespace>
+    <AssemblyName>Lider</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\access.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\accessSubService.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Accounts.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArchivosZip.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\auditorias.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CALIDAD.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CALIDADLOTES.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CALIDAD_ANM.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\campos.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CAMPOSPROCESOSTIPOSDEDOCUMENTO.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\camposxtipodoc.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\categorys.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CONSULTAR_DESPACHOS_X_MUNICIPIO_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CONSULTAR_EXPEDIENTES_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CONSULTAR_EXPEDIENTES_TODOS_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\contactanos.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\contrato.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\costoXPeriodo.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ctasCorriente.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\datos.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DATOSRAD.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\datos_2.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\datos_finales.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Despachos.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\documents.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\documentServicio.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EQUIVALENCIAS.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\errores.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\features.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\featureServicio.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\grupos.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\grupoServicio.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\identificationTypes.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\imagenes.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\initialDate.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\listas.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\logs.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lotes.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\menus.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelLider.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelLider.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelLider.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelLider.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelLider.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelPbxRegisters.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelPbxRegisters.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelPbxRegisters.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelPbxRegisters.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelPbxRegisters.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pagosOnLine.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pagosOnLineEstados.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\parameters.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\parametersPbx.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\parametrosGrales.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\parents.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pay.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\payDetail.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PERSONAS_NOMINAS.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\prioridades.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\prioritys.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PROCESOS.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\profiles.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RAD_ALIST.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RefreshToken.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\registroPbx.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\REPORTE_PRODUCCION_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\series.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicioAdquirido.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicioAdquiridoBeneficiarios.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicioAdquiridoBeneficiariosExequialDelete.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicioAuxExequialDelete.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicioAuxExequialDetalleDelete.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicioAuxPlanCigueniaDelete.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicioAuxPlanCigueniaDetalleDelete.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicioAuxSocialDesempleoDelete.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicioAuxSocialDesempleoDetalleDelete.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicioJuridicoDelete.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicioJuridicoDetalleDelete.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicios.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\serviciosSolicitados.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\serviciosSolicitadosClasificacion.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\serviciosSolicitadosDocumentos.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\serviciosToSave.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sliders.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\smtp.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\stateService.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tiposdedocumentos.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TIPOSDELOTES.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tokenUri.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TQM_LOCK.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TQM_LOCK_CALIDAD.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ubicanos.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\urlApiItbx.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\users.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\userTypes.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\userTypesGrupos.cs">
+      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usuarios.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\valoreslistas.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Models\ModelPbxRegisters.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelPbxRegisters.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Models\ModelLider.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelLider.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\ModelLider.edmx.diagram">
+      <DependentUpon>ModelLider.edmx</DependentUpon>
+    </None>
+    <None Include="Models\ModelPbxRegisters.edmx.diagram">
+      <DependentUpon>ModelPbxRegisters.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\ModelLider.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelLider.edmx</DependentUpon>
+      <LastGenOutput>ModelLider.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelLider.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelLider.edmx</DependentUpon>
+      <LastGenOutput>ModelLider.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelPbxRegisters.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelPbxRegisters.Context.cs</LastGenOutput>
+      <DependentUpon>ModelPbxRegisters.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ModelPbxRegisters.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelPbxRegisters.edmx</DependentUpon>
+      <LastGenOutput>ModelPbxRegisters.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

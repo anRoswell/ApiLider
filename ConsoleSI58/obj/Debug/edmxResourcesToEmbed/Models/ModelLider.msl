@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SID_PROTOCOL2ModelStoreContainer" CdmEntityContainer="SID_PROTOCOL2Entities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Accounts">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DespachoId" ColumnName="DespachoId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="VerificationToken" ColumnName="VerificationToken" />
+          <ScalarProperty Name="Verified" ColumnName="Verified" />
+          <ScalarProperty Name="ResetToken" ColumnName="ResetToken" />
+          <ScalarProperty Name="ResetTokenExpires" ColumnName="ResetTokenExpires" />
+          <ScalarProperty Name="PasswordReset" ColumnName="PasswordReset" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArchivosZip">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.ArchivosZip">
+        <MappingFragment StoreEntitySet="ArchivosZip">
+          <ScalarProperty Name="IdArchivosZip" ColumnName="IdArchivosZip" />
+          <ScalarProperty Name="IdLote" ColumnName="IdLote" />
+          <ScalarProperty Name="NombreInstancia" ColumnName="NombreInstancia" />
+          <ScalarProperty Name="NombreCuaderno" ColumnName="NombreCuaderno" />
+          <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />
+          <ScalarProperty Name="TipoArchivo" ColumnName="TipoArchivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="auditorias">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.auditorias">
+        <MappingFragment StoreEntitySet="auditorias">
+          <ScalarProperty Name="auditoria_id" ColumnName="auditoria_id" />
+          <ScalarProperty Name="auditoria_accion" ColumnName="auditoria_accion" />
+          <ScalarProperty Name="auditoria_fecha" ColumnName="auditoria_fecha" />
+          <ScalarProperty Name="auditoria_usuario_id" ColumnName="auditoria_usuario_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CALIDAD">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.CALIDAD">
+        <MappingFragment StoreEntitySet="CALIDAD">
+          <ScalarProperty Name="calidad_id" ColumnName="calidad_id" />
+          <ScalarProperty Name="calidad_Porcentajelotes" ColumnName="calidad_Porcentajelotes" />
+          <ScalarProperty Name="calidad_PorcentajeError" ColumnName="calidad_PorcentajeError" />
+          <ScalarProperty Name="calidad_CantidadRegistrosbase" ColumnName="calidad_CantidadRegistrosbase" />
+          <ScalarProperty Name="calidad_CantidadErrores" ColumnName="calidad_CantidadErrores" />
+          <ScalarProperty Name="calidad_uno" ColumnName="calidad_uno" />
+          <ScalarProperty Name="calidad_dos" ColumnName="calidad_dos" />
+          <ScalarProperty Name="calidad_indice0" ColumnName="calidad_indice0" />
+          <ScalarProperty Name="calidad_indice1" ColumnName="calidad_indice1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CALIDAD_ANM">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.CALIDAD_ANM">
+        <MappingFragment StoreEntitySet="CALIDAD_ANM">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CALIDAD_ID" ColumnName="CALIDAD_ID" />
+          <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+          <ScalarProperty Name="NA" ColumnName="NA" />
+          <ScalarProperty Name="CUMPLE" ColumnName="CUMPLE" />
+          <ScalarProperty Name="NOCUMPLE" ColumnName="NOCUMPLE" />
+          <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CALIDADLOTES">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.CALIDADLOTES">
+        <MappingFragment StoreEntitySet="CALIDADLOTES">
+          <ScalarProperty Name="calidadlote_id" ColumnName="calidadlote_id" />
+          <ScalarProperty Name="calidadlote_calidad_id" ColumnName="calidadlote_calidad_id" />
+          <ScalarProperty Name="calidadlote_lote_id" ColumnName="calidadlote_lote_id" />
+          <ScalarProperty Name="calidadlote_imagen_id" ColumnName="calidadlote_imagen_id" />
+          <ScalarProperty Name="calidadlote_marca" ColumnName="calidadlote_marca" />
+          <ScalarProperty Name="calidadlote_error" ColumnName="calidadlote_error" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="campos">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.campos">
+        <MappingFragment StoreEntitySet="campos">
+          <ScalarProperty Name="campo_id" ColumnName="campo_id" />
+          <ScalarProperty Name="campo_nombre" ColumnName="campo_nombre" />
+          <ScalarProperty Name="campo_etiqueta" ColumnName="campo_etiqueta" />
+          <ScalarProperty Name="campo_tipo" ColumnName="campo_tipo" />
+          <ScalarProperty Name="campo_lista_id" ColumnName="campo_lista_id" />
+          <ScalarProperty Name="campo_esrequerido" ColumnName="campo_esrequerido" />
+          <ScalarProperty Name="campodepende_campo_id" ColumnName="campodepende_campo_id" />
+          <ScalarProperty Name="campodepende_campovalorloactiva" ColumnName="campodepende_campovalorloactiva" />
+          <ScalarProperty Name="campo_ancho" ColumnName="campo_ancho" />
+          <ScalarProperty Name="campo_alto" ColumnName="campo_alto" />
+          <ScalarProperty Name="campo_contador_portipodoc" ColumnName="campo_contador_portipodoc" />
+          <ScalarProperty Name="campo_asociado_nombre" ColumnName="campo_asociado_nombre" />
+          <ScalarProperty Name="campo_fijo_valor" ColumnName="campo_fijo_valor" />
+          <ScalarProperty Name="campo_expresion_cadenaexp" ColumnName="campo_expresion_cadenaexp" />
+          <ScalarProperty Name="campo_contador_localacarpeta" ColumnName="campo_contador_localacarpeta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAMPOSPROCESOSTIPOSDEDOCUMENTO">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.CAMPOSPROCESOSTIPOSDEDOCUMENTO">
+        <MappingFragment StoreEntitySet="CAMPOSPROCESOSTIPOSDEDOCUMENTO">
+          <ScalarProperty Name="campoprocesotipo_id" ColumnName="campoprocesotipo_id" />
+          <ScalarProperty Name="campoprocesotipo_proceso_id" ColumnName="campoprocesotipo_proceso_id" />
+          <ScalarProperty Name="campoprocesotipo_campotipo_id" ColumnName="campoprocesotipo_campotipo_id" />
+          <ScalarProperty Name="campoprocesotipo_ordenz" ColumnName="campoprocesotipo_ordenz" />
+          <ScalarProperty Name="campoprocesotipo_modificable" ColumnName="campoprocesotipo_modificable" />
+          <ScalarProperty Name="campoprocesotipo_insertarendatos" ColumnName="campoprocesotipo_insertarendatos" />
+          <ScalarProperty Name="campoprocesotipo_endatos" ColumnName="campoprocesotipo_endatos" />
+          <ScalarProperty Name="campoprocesotipo_envariable" ColumnName="campoprocesotipo_envariable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="camposxtipodoc">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.camposxtipodoc">
+        <MappingFragment StoreEntitySet="camposxtipodoc">
+          <ScalarProperty Name="campotipodoc_id" ColumnName="campotipodoc_id" />
+          <ScalarProperty Name="campotipodoc_tipodoc_id" ColumnName="campotipodoc_tipodoc_id" />
+          <ScalarProperty Name="campotipodoc_campo_id" ColumnName="campotipodoc_campo_id" />
+          <ScalarProperty Name="campotipodoc_campoorden" ColumnName="campotipodoc_campoorden" />
+          <ScalarProperty Name="campotipo_esrequeridounvalor" ColumnName="campotipo_esrequeridounvalor" />
+          <ScalarProperty Name="campotipo_tipodevalidacion" ColumnName="campotipo_tipodevalidacion" />
+          <ScalarProperty Name="campotipo_valoresadmitidos" ColumnName="campotipo_valoresadmitidos" />
+          <ScalarProperty Name="campotipo_cadenaconexionbd" ColumnName="campotipo_cadenaconexionbd" />
+          <ScalarProperty Name="campotipo_nombretabla" ColumnName="campotipo_nombretabla" />
+          <ScalarProperty Name="campotipo_tipodetabla" ColumnName="campotipo_tipodetabla" />
+          <ScalarProperty Name="campotipo_nombrecampoentabla" ColumnName="campotipo_nombrecampoentabla" />
+          <ScalarProperty Name="campotipo_asumeunvaloranterior" ColumnName="campotipo_asumeunvaloranterior" />
+          <ScalarProperty Name="campotipo_modificablevalorasum" ColumnName="campotipo_modificablevalorasum" />
+          <ScalarProperty Name="campotipo_diccionario_id" ColumnName="campotipo_diccionario_id" />
+          <ScalarProperty Name="campotipo_esfechadedocumento" ColumnName="campotipo_esfechadedocumento" />
+          <ScalarProperty Name="campotipo_dic_campopadre_id" ColumnName="campotipo_dic_campopadre_id" />
+          <ScalarProperty Name="campotipo_id_grupo" ColumnName="campotipo_id_grupo" />
+          <ScalarProperty Name="campotipo_id_masdeuno" ColumnName="campotipo_id_masdeuno" />
+          <ScalarProperty Name="campotipo_siocr" ColumnName="campotipo_siocr" />
+          <ScalarProperty Name="campotipo_siocr_enlinea" ColumnName="campotipo_siocr_enlinea" />
+          <ScalarProperty Name="campotipo_siocr_posxsi" ColumnName="campotipo_siocr_posxsi" />
+          <ScalarProperty Name="campotipo_siocr_posysi" ColumnName="campotipo_siocr_posysi" />
+          <ScalarProperty Name="campotipo_siocr_posxid" ColumnName="campotipo_siocr_posxid" />
+          <ScalarProperty Name="campotipo_siocr_posyid" ColumnName="campotipo_siocr_posyid" />
+          <ScalarProperty Name="campotipo_sibcr" ColumnName="campotipo_sibcr" />
+          <ScalarProperty Name="campotipo_sibcr_enlinea" ColumnName="campotipo_sibcr_enlinea" />
+          <ScalarProperty Name="campotipo_sibcr_estandar" ColumnName="campotipo_sibcr_estandar" />
+          <ScalarProperty Name="campotipo_sibcr_posxsi" ColumnName="campotipo_sibcr_posxsi" />
+          <ScalarProperty Name="campotipo_sibcr_posysi" ColumnName="campotipo_sibcr_posysi" />
+          <ScalarProperty Name="campotipo_sibcr_posxid" ColumnName="campotipo_sibcr_posxid" />
+          <ScalarProperty Name="campotipo_sibcr_posyid" ColumnName="campotipo_sibcr_posyid" />
+          <ScalarProperty Name="campotipo_siboton" ColumnName="campotipo_siboton" />
+          <ScalarProperty Name="campotipo_sifirmadigital" ColumnName="campotipo_sifirmadigital" />
+          <ScalarProperty Name="campotipo_sifirmadigitalglobal" ColumnName="campotipo_sifirmadigitalglobal" />
+          <ScalarProperty Name="campotipo_sifirmaelectronica" ColumnName="campotipo_sifirmaelectronica" />
+          <ScalarProperty Name="campotipo_sifedetalle" ColumnName="campotipo_sifedetalle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="datos">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.datos">
+        <MappingFragment StoreEntitySet="datos">
+          <ScalarProperty Name="dato_id" ColumnName="dato_id" />
+          <ScalarProperty Name="dato_imagen_id" ColumnName="dato_imagen_id" />
+          <ScalarProperty Name="dato_campo_id" ColumnName="dato_campo_id" />
+          <ScalarProperty Name="dato_numero" ColumnName="dato_numero" />
+          <ScalarProperty Name="dato_texto" ColumnName="dato_texto" />
+          <ScalarProperty Name="dato_memo" ColumnName="dato_memo" />
+          <ScalarProperty Name="dato_fecha" ColumnName="dato_fecha" />
+          <ScalarProperty Name="dato_error" ColumnName="dato_error" />
+          <ScalarProperty Name="dato_descripcionError" ColumnName="dato_descripcionError" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="datos_2">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.datos_2">
+        <MappingFragment StoreEntitySet="datos_2">
+          <ScalarProperty Name="dato_id" ColumnName="dato_id" />
+          <ScalarProperty Name="dato_imagen_id" ColumnName="dato_imagen_id" />
+          <ScalarProperty Name="dato_campo_id" ColumnName="dato_campo_id" />
+          <ScalarProperty Name="dato_numero" ColumnName="dato_numero" />
+          <ScalarProperty Name="dato_texto" ColumnName="dato_texto" />
+          <ScalarProperty Name="dato_memo" ColumnName="dato_memo" />
+          <ScalarProperty Name="dato_fecha" ColumnName="dato_fecha" />
+          <ScalarProperty Name="dato_Iguales" ColumnName="dato_Iguales" />
+          <ScalarProperty Name="dato_digitado1" ColumnName="dato_digitado1" />
+          <ScalarProperty Name="dato_digitado2" ColumnName="dato_digitado2" />
+          <ScalarProperty Name="dato_nuevoValor" ColumnName="dato_nuevoValor" />
+          <ScalarProperty Name="dato_error" ColumnName="dato_error" />
+          <ScalarProperty Name="dato_descripcionError" ColumnName="dato_descripcionError" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="datos_finales">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.datos_finales">
+        <MappingFragment StoreEntitySet="datos_finales">
+          <ScalarProperty Name="dato_id" ColumnName="dato_id" />
+          <ScalarProperty Name="dato_imagen_id" ColumnName="dato_imagen_id" />
+          <ScalarProperty Name="dato_campo_id" ColumnName="dato_campo_id" />
+          <ScalarProperty Name="dato_numero" ColumnName="dato_numero" />
+          <ScalarProperty Name="dato_texto" ColumnName="dato_texto" />
+          <ScalarProperty Name="dato_memo" ColumnName="dato_memo" />
+          <ScalarProperty Name="dato_fecha" ColumnName="dato_fecha" />
+          <ScalarProperty Name="dato_lote_id" ColumnName="dato_lote_id" />
+          <ScalarProperty Name="dato_indice1" ColumnName="dato_indice1" />
+          <ScalarProperty Name="dato_indice2" ColumnName="dato_indice2" />
+          <ScalarProperty Name="dato_indice3" ColumnName="dato_indice3" />
+          <ScalarProperty Name="dato_indice4" ColumnName="dato_indice4" />
+          <ScalarProperty Name="dato_paginas" ColumnName="dato_paginas" />
+          <ScalarProperty Name="dato_fecha_registro" ColumnName="dato_fecha_registro" />
+          <ScalarProperty Name="dato_tamano" ColumnName="dato_tamano" />
+          <ScalarProperty Name="dato_extension" ColumnName="dato_extension" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSRAD">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.DATOSRAD">
+        <MappingFragment StoreEntitySet="DATOSRAD">
+          <ScalarProperty Name="datorad_id" ColumnName="datorad_id" />
+          <ScalarProperty Name="datorad_radicacion_id" ColumnName="datorad_radicacion_id" />
+          <ScalarProperty Name="datorad_campo_id" ColumnName="datorad_campo_id" />
+          <ScalarProperty Name="datorad_numero" ColumnName="datorad_numero" />
+          <ScalarProperty Name="datorad_texto" ColumnName="datorad_texto" />
+          <ScalarProperty Name="datorad_memo" ColumnName="datorad_memo" />
+          <ScalarProperty Name="datorad_fecha" ColumnName="datorad_fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Despachos">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Despachos">
+        <MappingFragment StoreEntitySet="Despachos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+          <ScalarProperty Name="CodDespacho" ColumnName="CodDespacho" />
+          <ScalarProperty Name="NombreDespacho" ColumnName="NombreDespacho" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="imagenes">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.imagenes">
+        <MappingFragment StoreEntitySet="imagenes">
+          <ScalarProperty Name="imagen_id" ColumnName="imagen_id" />
+          <ScalarProperty Name="imagen_orden" ColumnName="imagen_orden" />
+          <ScalarProperty Name="imagen_nombre" ColumnName="imagen_nombre" />
+          <ScalarProperty Name="imagen_lote_id" ColumnName="imagen_lote_id" />
+          <ScalarProperty Name="imagen_tipodoc_id" ColumnName="imagen_tipodoc_id" />
+          <ScalarProperty Name="imagen_indice" ColumnName="imagen_indice" />
+          <ScalarProperty Name="imagen_estado" ColumnName="imagen_estado" />
+          <ScalarProperty Name="imagen_fechaindexa" ColumnName="imagen_fechaindexa" />
+          <ScalarProperty Name="imagen_usuarioindexa_id" ColumnName="imagen_usuarioindexa_id" />
+          <ScalarProperty Name="imagen_tipodoc_id2" ColumnName="imagen_tipodoc_id2" />
+          <ScalarProperty Name="imagen_tipodoc_id3" ColumnName="imagen_tipodoc_id3" />
+          <ScalarProperty Name="imagen_fechaReindexa" ColumnName="imagen_fechaReindexa" />
+          <ScalarProperty Name="imagen_usuarioReindexa_id" ColumnName="imagen_usuarioReindexa_id" />
+          <ScalarProperty Name="imagen_fechaVerifica" ColumnName="imagen_fechaVerifica" />
+          <ScalarProperty Name="imagen_usuarioVerifica_id" ColumnName="imagen_usuarioVerifica_id" />
+          <ScalarProperty Name="imagen_fechaCalidad" ColumnName="imagen_fechaCalidad" />
+          <ScalarProperty Name="imagen_usuarioCalidad_id" ColumnName="imagen_usuarioCalidad_id" />
+          <ScalarProperty Name="imagen_fechaAuditoria" ColumnName="imagen_fechaAuditoria" />
+          <ScalarProperty Name="imagen_usuarioAuditoria_id" ColumnName="imagen_usuarioAuditoria_id" />
+          <ScalarProperty Name="imagen_marcaAuditoria" ColumnName="imagen_marcaAuditoria" />
+          <ScalarProperty Name="imagen_obsAuditoria" ColumnName="imagen_obsAuditoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listas">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.listas">
+        <MappingFragment StoreEntitySet="listas">
+          <ScalarProperty Name="lista_id" ColumnName="lista_id" />
+          <ScalarProperty Name="lista_codigo" ColumnName="lista_codigo" />
+          <ScalarProperty Name="lista_nombre" ColumnName="lista_nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lotes">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.lotes">
+        <MappingFragment StoreEntitySet="lotes">
+          <ScalarProperty Name="lote_id" ColumnName="lote_id" />
+          <ScalarProperty Name="lote_nombre" ColumnName="lote_nombre" />
+          <ScalarProperty Name="lote_serie_id" ColumnName="lote_serie_id" />
+          <ScalarProperty Name="lote_estado" ColumnName="lote_estado" />
+          <ScalarProperty Name="lote_fechaimporta" ColumnName="lote_fechaimporta" />
+          <ScalarProperty Name="lote_usuarioimporta_id" ColumnName="lote_usuarioimporta_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PERSONAS_NOMINAS">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.PERSONAS_NOMINAS">
+        <MappingFragment StoreEntitySet="PERSONAS_NOMINAS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDENT" ColumnName="IDENT" />
+          <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+          <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROCESOS">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.PROCESOS">
+        <MappingFragment StoreEntitySet="PROCESOS">
+          <ScalarProperty Name="proceso_id" ColumnName="proceso_id" />
+          <ScalarProperty Name="proceso_nombre" ColumnName="proceso_nombre" />
+          <ScalarProperty Name="proceso_descripcion" ColumnName="proceso_descripcion" />
+          <ScalarProperty Name="proceso_unidad_id" ColumnName="proceso_unidad_id" />
+          <ScalarProperty Name="proceso_multiple" ColumnName="proceso_multiple" />
+          <ScalarProperty Name="proceso_nombresdocuanexos" ColumnName="proceso_nombresdocuanexos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RAD_ALIST">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.RAD_ALIST">
+        <MappingFragment StoreEntitySet="RAD_ALIST">
+          <ScalarProperty Name="radicacion_id" ColumnName="radicacion_id" />
+          <ScalarProperty Name="radicacion_lote" ColumnName="radicacion_lote" />
+          <ScalarProperty Name="radicacion_fecha" ColumnName="radicacion_fecha" />
+          <ScalarProperty Name="radicacion_hora" ColumnName="radicacion_hora" />
+          <ScalarProperty Name="radicacion_usuario" ColumnName="radicacion_usuario" />
+          <ScalarProperty Name="radicacion_estado" ColumnName="radicacion_estado" />
+          <ScalarProperty Name="alista_imagenes" ColumnName="alista_imagenes" />
+          <ScalarProperty Name="alista_fecha" ColumnName="alista_fecha" />
+          <ScalarProperty Name="alista_hora" ColumnName="alista_hora" />
+          <ScalarProperty Name="alista_usuario" ColumnName="alista_usuario" />
+          <ScalarProperty Name="alista_estado" ColumnName="alista_estado" />
+          <ScalarProperty Name="digitalizo_fecha" ColumnName="digitalizo_fecha" />
+          <ScalarProperty Name="digitalizo_hora" ColumnName="digitalizo_hora" />
+          <ScalarProperty Name="digitalizo_usuario" ColumnName="digitalizo_usuario" />
+          <ScalarProperty Name="digitalizo_estado" ColumnName="digitalizo_estado" />
+          <ScalarProperty Name="digitalizo_imagenes" ColumnName="digitalizo_imagenes" />
+          <ScalarProperty Name="verifico_fecha" ColumnName="verifico_fecha" />
+          <ScalarProperty Name="verifico_hora" ColumnName="verifico_hora" />
+          <ScalarProperty Name="verifico_usuario" ColumnName="verifico_usuario" />
+          <ScalarProperty Name="verifico_estado" ColumnName="verifico_estado" />
+          <ScalarProperty Name="verifico_imagenes" ColumnName="verifico_imagenes" />
+          <ScalarProperty Name="verifico_observaciones" ColumnName="verifico_observaciones" />
+          <ScalarProperty Name="importo_fecha" ColumnName="importo_fecha" />
+          <ScalarProperty Name="importo_hora" ColumnName="importo_hora" />
+          <ScalarProperty Name="importo_usuario" ColumnName="importo_usuario" />
+          <ScalarProperty Name="importo_estado" ColumnName="importo_estado" />
+          <ScalarProperty Name="radicacion_tipolote_id" ColumnName="radicacion_tipolote_id" />
+          <ScalarProperty Name="radicacion_tipodoc_id" ColumnName="radicacion_tipodoc_id" />
+          <ScalarProperty Name="radicacion_camposvariables" ColumnName="radicacion_camposvariables" />
+          <ScalarProperty Name="alista_camposvariables" ColumnName="alista_camposvariables" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RefreshToken">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.RefreshToken">
+        <MappingFragment StoreEntitySet="RefreshToken">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="Expires" ColumnName="Expires" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="CreatedByIp" ColumnName="CreatedByIp" />
+          <ScalarProperty Name="Revoked" ColumnName="Revoked" />
+          <ScalarProperty Name="RevokedByIp" ColumnName="RevokedByIp" />
+          <ScalarProperty Name="ReplacedByToken" ColumnName="ReplacedByToken" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="series">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.series">
+        <MappingFragment StoreEntitySet="series">
+          <ScalarProperty Name="serie_id" ColumnName="serie_id" />
+          <ScalarProperty Name="serie_nombre" ColumnName="serie_nombre" />
+          <ScalarProperty Name="serie_rutaplanos" ColumnName="serie_rutaplanos" />
+          <ScalarProperty Name="serie_rutaimagenes" ColumnName="serie_rutaimagenes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tiposdedocumentos">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.tiposdedocumentos">
+        <MappingFragment StoreEntitySet="tiposdedocumentos">
+          <ScalarProperty Name="tipodoc_id" ColumnName="tipodoc_id" />
+          <ScalarProperty Name="tipodoc_nombre" ColumnName="tipodoc_nombre" />
+          <ScalarProperty Name="tipodedocumento_tipo" ColumnName="tipodedocumento_tipo" />
+          <ScalarProperty Name="tipodedocumento_archivosoporte" ColumnName="tipodedocumento_archivosoporte" />
+          <ScalarProperty Name="tipodedocumento_nombreraizlote" ColumnName="tipodedocumento_nombreraizlote" />
+          <ScalarProperty Name="tipodedocumento_numerolote" ColumnName="tipodedocumento_numerolote" />
+          <ScalarProperty Name="tipodedocumento_selcarpetaimag" ColumnName="tipodedocumento_selcarpetaimag" />
+          <ScalarProperty Name="tipodedocumento_nuevoasumvalor" ColumnName="tipodedocumento_nuevoasumvalor" />
+          <ScalarProperty Name="tipodedocumento_senumeranfolio" ColumnName="tipodedocumento_senumeranfolio" />
+          <ScalarProperty Name="tipodedocumento_camid_campnfol" ColumnName="tipodedocumento_camid_campnfol" />
+          <ScalarProperty Name="tipodedocumento_posxnumfolio" ColumnName="tipodedocumento_posxnumfolio" />
+          <ScalarProperty Name="tipodedocumento_posynumfolio" ColumnName="tipodedocumento_posynumfolio" />
+          <ScalarProperty Name="tipodedocumento_comotesauriza" ColumnName="tipodedocumento_comotesauriza" />
+          <ScalarProperty Name="tipodedocumento_diccionario_id" ColumnName="tipodedocumento_diccionario_id" />
+          <ScalarProperty Name="tipodedocumento_aceptanotas" ColumnName="tipodedocumento_aceptanotas" />
+          <ScalarProperty Name="tipodedocumento_aceptamarcas" ColumnName="tipodedocumento_aceptamarcas" />
+          <ScalarProperty Name="tipodedocumento_serie_id" ColumnName="tipodedocumento_serie_id" />
+          <ScalarProperty Name="tipodedocumento_tradicion" ColumnName="tipodedocumento_tradicion" />
+          <ScalarProperty Name="tipodedocumento_valorprimario" ColumnName="tipodedocumento_valorprimario" />
+          <ScalarProperty Name="tipodedocumento_valorsecundari" ColumnName="tipodedocumento_valorsecundari" />
+          <ScalarProperty Name="tipodedocumento_patronnomdoc" ColumnName="tipodedocumento_patronnomdoc" />
+          <ScalarProperty Name="tipodedocumento_cpid_creabanen" ColumnName="tipodedocumento_cpid_creabanen" />
+          <ScalarProperty Name="tipodedocumento_impretq_campos" ColumnName="tipodedocumento_impretq_campos" />
+          <ScalarProperty Name="tipodedocumento_impretq_archi" ColumnName="tipodedocumento_impretq_archi" />
+          <ScalarProperty Name="tipodedocumento_cierracarpeta" ColumnName="tipodedocumento_cierracarpeta" />
+          <ScalarProperty Name="tipodedocumento_iduni_campo_id" ColumnName="tipodedocumento_iduni_campo_id" />
+          <ScalarProperty Name="tipodedocumento_siocr" ColumnName="tipodedocumento_siocr" />
+          <ScalarProperty Name="tipodedocumento_siocr_enlinea" ColumnName="tipodedocumento_siocr_enlinea" />
+          <ScalarProperty Name="campo_id_siocr" ColumnName="campo_id_siocr" />
+          <ScalarProperty Name="tipodedocumento_sibcr" ColumnName="tipodedocumento_sibcr" />
+          <ScalarProperty Name="tipodedocumento_sibcr_enlinea" ColumnName="tipodedocumento_sibcr_enlinea" />
+          <ScalarProperty Name="tipodedocumento_sibcr_estandar" ColumnName="tipodedocumento_sibcr_estandar" />
+          <ScalarProperty Name="campo_id_sibcr" ColumnName="campo_id_sibcr" />
+          <ScalarProperty Name="tipodedocumento_sifirmadigital" ColumnName="tipodedocumento_sifirmadigital" />
+          <ScalarProperty Name="campo_id_sifirma" ColumnName="campo_id_sifirma" />
+          <ScalarProperty Name="tipodedoc_sifirmadigitalglobal" ColumnName="tipodedoc_sifirmadigitalglobal" />
+          <ScalarProperty Name="tipodedocumento_sisubdocumentos" ColumnName="tipodedocumento_sisubdocumentos" />
+          <ScalarProperty Name="tipodedocumento_sisellodetiempo" ColumnName="tipodedocumento_sisellodetiempo" />
+          <ScalarProperty Name="campo_id_sisellodetiempo" ColumnName="campo_id_sisellodetiempo" />
+          <ScalarProperty Name="tipodedocumento_sifirmaelectronica" ColumnName="tipodedocumento_sifirmaelectronica" />
+          <ScalarProperty Name="campo_id_sifirmaelectronica" ColumnName="campo_id_sifirmaelectronica" />
+          <ScalarProperty Name="tipodedocumento_sifedetalle" ColumnName="tipodedocumento_sifedetalle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOSDELOTES">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.TIPOSDELOTES">
+        <MappingFragment StoreEntitySet="TIPOSDELOTES">
+          <ScalarProperty Name="tipolote_id" ColumnName="tipolote_id" />
+          <ScalarProperty Name="tipolote_nombre" ColumnName="tipolote_nombre" />
+          <ScalarProperty Name="tipolote_proceso_id_radicacion" ColumnName="tipolote_proceso_id_radicacion" />
+          <ScalarProperty Name="tipolote_siradicacion" ColumnName="tipolote_siradicacion" />
+          <ScalarProperty Name="tipolote_sialistamiento" ColumnName="tipolote_sialistamiento" />
+          <ScalarProperty Name="tipolote_sidigitalizacion" ColumnName="tipolote_sidigitalizacion" />
+          <ScalarProperty Name="tipolote_sivalidacionimagenes" ColumnName="tipolote_sivalidacionimagenes" />
+          <ScalarProperty Name="tipolote_proceso_id_indexacion" ColumnName="tipolote_proceso_id_indexacion" />
+          <ScalarProperty Name="tipolote_siindexacion" ColumnName="tipolote_siindexacion" />
+          <ScalarProperty Name="tipolote_proceso_id_reindexacion" ColumnName="tipolote_proceso_id_reindexacion" />
+          <ScalarProperty Name="tipolote_sireindexacion" ColumnName="tipolote_sireindexacion" />
+          <ScalarProperty Name="tipolote_siverificacion" ColumnName="tipolote_siverificacion" />
+          <ScalarProperty Name="tipolote_sicontrolcalidad1" ColumnName="tipolote_sicontrolcalidad1" />
+          <ScalarProperty Name="tipolote_sicontrolcalidad2" ColumnName="tipolote_sicontrolcalidad2" />
+          <ScalarProperty Name="tipolote_sientrega" ColumnName="tipolote_sientrega" />
+          <ScalarProperty Name="tipolote_xml" ColumnName="tipolote_xml" />
+          <ScalarProperty Name="tipolote_proceso_id_alistamiento" ColumnName="tipolote_proceso_id_alistamiento" />
+          <ScalarProperty Name="tipolote_repositorio_id" ColumnName="tipolote_repositorio_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TQM_LOCK">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.TQM_LOCK">
+        <MappingFragment StoreEntitySet="TQM_LOCK">
+          <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+          <ScalarProperty Name="DateTimeLock" ColumnName="DateTimeLock" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TQM_LOCK_CALIDAD">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.TQM_LOCK_CALIDAD">
+        <MappingFragment StoreEntitySet="TQM_LOCK_CALIDAD">
+          <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+          <ScalarProperty Name="DateTimeLock" ColumnName="DateTimeLock" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuarios">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.usuarios">
+        <MappingFragment StoreEntitySet="usuarios">
+          <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+          <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
+          <ScalarProperty Name="usuario_perfil" ColumnName="usuario_perfil" />
+          <ScalarProperty Name="usuario_login" ColumnName="usuario_login" />
+          <ScalarProperty Name="usuario_password" ColumnName="usuario_password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="valoreslistas">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.valoreslistas">
+        <MappingFragment StoreEntitySet="valoreslistas">
+          <ScalarProperty Name="valorlista_id" ColumnName="valorlista_id" />
+          <ScalarProperty Name="valorlista_valor" ColumnName="valorlista_valor" />
+          <ScalarProperty Name="valorlista_orden" ColumnName="valorlista_orden" />
+          <ScalarProperty Name="valorlista_lista_id" ColumnName="valorlista_lista_id" />
+          <ScalarProperty Name="valorlista_valor02" ColumnName="valorlista_valor02" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EQUIVALENCIAS">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.EQUIVALENCIAS">
+        <MappingFragment StoreEntitySet="EQUIVALENCIAS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+          <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="errores">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.errores">
+        <MappingFragment StoreEntitySet="errores">
+          <ScalarProperty Name="error_id" ColumnName="error_id" />
+          <ScalarProperty Name="error_fecha" ColumnName="error_fecha" />
+          <ScalarProperty Name="error_usuario_id" ColumnName="error_usuario_id" />
+          <ScalarProperty Name="error_excepcion" ColumnName="error_excepcion" />
+          <ScalarProperty Name="error_stackTrace" ColumnName="error_stackTrace" />
+          <ScalarProperty Name="error_estado" ColumnName="error_estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CONSULTAR_ARCHIVOS_ZIP" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_ARCHIVOS_ZIP" />
+    <FunctionImportMapping FunctionImportName="CONSULTAR_DESPACHOS_X_MUNICIPIO" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_DESPACHOS_X_MUNICIPIO">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_DESPACHOS_X_MUNICIPIO_Result">
+          <ScalarProperty Name="CODDESPACHO" ColumnName="CODDESPACHO" />
+          <ScalarProperty Name="NOMBREDESPACHO" ColumnName="NOMBREDESPACHO" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CONSULTAR_DOCUMENTOS_EXPEDIENTE" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_DOCUMENTOS_EXPEDIENTE">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result">
+          <ScalarProperty Name="ID_LOTE" ColumnName="ID_LOTE" />
+          <ScalarProperty Name="RADICADO" ColumnName="RADICADO" />
+          <ScalarProperty Name="ESTADO_DOCUMENTO" ColumnName="ESTADO_DOCUMENTO" />
+          <ScalarProperty Name="TIPO_DOCUMENTO" ColumnName="TIPO_DOCUMENTO" />
+          <ScalarProperty Name="RUTA_DOCUMENTO" ColumnName="RUTA_DOCUMENTO" />
+          <ScalarProperty Name="INSTANCIA" ColumnName="INSTANCIA" />
+          <ScalarProperty Name="CUADERNO" ColumnName="CUADERNO" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CONSULTAR_EXPEDIENTES" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_EXPEDIENTES">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_Result">
+          <ScalarProperty Name="LOTE" ColumnName="LOTE" />
+          <ScalarProperty Name="DEMANDANTE" ColumnName="DEMANDANTE" />
+          <ScalarProperty Name="DEMANDADO" ColumnName="DEMANDADO" />
+          <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+          <ScalarProperty Name="RADICADO_PROCESO" ColumnName="RADICADO_PROCESO" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CONSULTAR_EXPEDIENTES_TODOS" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_EXPEDIENTES_TODOS">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_TODOS_Result">
+          <ScalarProperty Name="LOTE" ColumnName="LOTE" />
+          <ScalarProperty Name="DEMANDANTE" ColumnName="DEMANDANTE" />
+          <ScalarProperty Name="DEMANDADO" ColumnName="DEMANDADO" />
+          <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+          <ScalarProperty Name="RADICADO_PROCESO" ColumnName="RADICADO_PROCESO" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CONSULTAR_MUNICIPIOS" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_MUNICIPIOS" />
+    <FunctionImportMapping FunctionImportName="CONSULTAR_RUTA_ZIP_CD_PLANO" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_RUTA_ZIP_CD_PLANO" />
+    <FunctionImportMapping FunctionImportName="CONSULTAR_RUTA_ZIP_EXPEDIENTE" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_RUTA_ZIP_EXPEDIENTE" />
+    <FunctionImportMapping FunctionImportName="REPORTE_PRODUCCION" FunctionName="SID_PROTOCOL2Model.Store.REPORTE_PRODUCCION">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.REPORTE_PRODUCCION_Result">
+          <ScalarProperty Name="MUNICIPIO" ColumnName="MUNICIPIO" />
+          <ScalarProperty Name="COD_DESPACHO" ColumnName="COD_DESPACHO" />
+          <ScalarProperty Name="NOMBRE_DESPACHO" ColumnName="NOMBRE_DESPACHO" />
+          <ScalarProperty Name="RADICADO_LOTE" ColumnName="RADICADO_LOTE" />
+          <ScalarProperty Name="FECHA_PROCESADO_LOTE" ColumnName="FECHA_PROCESADO_LOTE" />
+          <ScalarProperty Name="TOTAL_DOCUMENTOS" ColumnName="TOTAL_DOCUMENTOS" />
+          <ScalarProperty Name="TOTAL_PAGINAS" ColumnName="TOTAL_PAGINAS" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

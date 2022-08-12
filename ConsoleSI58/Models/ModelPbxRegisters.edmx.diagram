@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dde6e835758e486996e518743cd608c9" Name="Diagram1">
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.documents" Width="1.5" PointX="6" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.features" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.access" Width="1.5" PointX="11" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.accessSubService" Width="1.5" PointX="10.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.categorys" Width="1.5" PointX="13" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.contactanos" Width="1.5" PointX="12.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.costoXPeriodo" Width="1.5" PointX="13.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.ctasCorriente" Width="1.5" PointX="5.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.documentServicio" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.featureServicio" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.grupos" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.grupoServicio" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.identificationTypes" Width="1.5" PointX="1.5" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.menus" Width="1.5" PointX="8.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.pagosOnLineEstados" Width="1.5" PointX="13.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.parameters" Width="1.5" PointX="10.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.parents" Width="1.5" PointX="14.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.prioritys" Width="1.5" PointX="10.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.profiles" Width="1.5" PointX="1.5" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicioAdquirido" Width="1.5" PointX="11" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicioAdquiridoBeneficiarios" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicioAdquiridoBeneficiariosExequialDelete" Width="1.5" PointX="15.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicioAuxExequialDelete" Width="1.5" PointX="6" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicioAuxExequialDetalleDelete" Width="1.5" PointX="8.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicioAuxPlanCigueniaDelete" Width="1.5" PointX="6" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicioAuxPlanCigueniaDetalleDelete" Width="1.5" PointX="8.25" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicioAuxSocialDesempleoDelete" Width="1.5" PointX="6" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicioAuxSocialDesempleoDetalleDelete" Width="1.5" PointX="8.25" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicioJuridicoDelete" Width="1.5" PointX="6" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicioJuridicoDetalleDelete" Width="1.5" PointX="8.25" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.servicios" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.serviciosSolicitados" Width="1.5" PointX="6" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.serviciosSolicitadosClasificacion" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.serviciosSolicitadosDocumentos" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.sliders" Width="1.5" PointX="15.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.stateService" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.sysdiagrams" Width="1.5" PointX="15.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.ubicanos" Width="1.5" PointX="13.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.users" Width="1.5" PointX="3.75" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.userTypes" Width="1.5" PointX="15.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.userTypesGrupos" Width="1.5" PointX="16.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.contrato" Width="1.5" PointX="17.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.parametrosGrales" Width="1.5" PointX="17.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.prioridades" Width="1.5" PointX="3.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.smtp" Width="1.5" PointX="17.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.pagosOnLine" Width="1.5" PointX="18.75" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_serviciosSolicitadosDocumentos_documents" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_featureServicio_features" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_access_menus" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_access_profiles" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_categorys_prioritys" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_featureServicio_servicios" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_grupoServicio_grupo" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_servicioAdquirido_grupo" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_serviciosSolicitados_grupos" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_grupoServicio_servicios" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK__users__identific__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_menus_menus" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK__users__profileId__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_servicioAdquirido_users" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_beneficiarioDelServicio_servicios" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_servicioAuxExequial_stateService" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_servicioAuxExequialDetalle_servicioAuxExequial" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_servicioAuxPlanCiguenia_stateService" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_servicioAuxPlanCigueniaDetalle_servicioAuxPlanCiguenia" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_servicioAuxSocialDesempleo_stateService" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_servicioAuxSocialDesempleoDetalle_servicioAuxSocialDesempleo" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_servicioJuridico_stateService" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_servicioJuridicoDetalle_servicioJuridico" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_serviciosSolicitados_servicios" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_serviciosSolicitadosClasificacion_servicios" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_serviciosSolicitadosDocumentos_servicios" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_serviciosSolicitados_stateService" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_serviciosSolicitados_users" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_serviciosSolicitadosDocumentos_serviciosSolicitados" ManuallyRouted="false" />
+        <AssociationConnector Association="solucionesIntegrales58Model.FK_serviciosSolicitadosClasificacion_prioridades" ManuallyRouted="false" />
+      </Diagram>
+      <Diagram DiagramId="242c83611f9a42d6a9432d45bd1fab40" Name="DiagramPbx" >
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.initialDate" Width="1.5" PointX="0.75" PointY="0.5" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.parametersPbx" Width="1.5" PointX="2.75" PointY="0.5" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.tokenUri" Width="1.5" PointX="6.625" PointY="0.5" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.urlApiItbx" Width="1.5" PointX="8.625" PointY="0.5" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.registroPbx" Width="1.5" PointX="4.625" PointY="0.5" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.logs" Width="1.5" PointX="10.5" PointY="0.5" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.serviciosToSave" Width="1.5" PointX="12.375" PointY="0.5" />
+      </Diagram>
+      <Diagram DiagramId="269c01d02cc149ac8b1f59498ecbd1bf" Name="DiagramPay" >
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.pay" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="solucionesIntegrales58Model.payDetail" Width="1.5" PointX="2.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

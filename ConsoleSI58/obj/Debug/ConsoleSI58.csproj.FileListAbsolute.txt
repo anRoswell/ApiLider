@@ -1,0 +1,48 @@
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.csprojAssemblyReference.cache
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.csproj.CoreCompileInputs.cache
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\bin\Debug\ConsoleSI58.exe.config
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\bin\Debug\ConsoleSI58.exe
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\bin\Debug\ConsoleSI58.pdb
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\bin\Debug\Newtonsoft.Json.dll
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\bin\Debug\Newtonsoft.Json.xml
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.csproj.CopyComplete
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.exe
+C:\Users\alnavarro\Documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.pdb
+C:\Users\alnavarro\documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.dll
+C:\Users\alnavarro\documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\alnavarro\documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.xml
+C:\Users\alnavarro\documents\Visual Studio 2017\Projects\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.SqlServer.xml
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\ConsoleSI58.exe.config
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\ConsoleSI58.exe
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\ConsoleSI58.pdb
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.dll
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.SqlServer.dll
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\Newtonsoft.Json.dll
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\System.Net.Http.Formatting.dll
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.xml
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.SqlServer.xml
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\Newtonsoft.Json.xml
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\System.Net.Http.Formatting.xml
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.csprojAssemblyReference.cache
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.csproj.CoreCompileInputs.cache
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.csproj.CopyComplete
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.exe
+D:\WorkSpaceTFS2019\syspotecConsoleApp\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.pdb
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\ConsoleSI58.exe.config
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\ConsoleSI58.exe
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\ConsoleSI58.pdb
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.dll
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.SqlServer.dll
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\Newtonsoft.Json.dll
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\System.Net.Http.Formatting.dll
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.xml
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\EntityFramework.SqlServer.xml
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\Newtonsoft.Json.xml
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\bin\Debug\System.Net.Http.Formatting.xml
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.csprojAssemblyReference.cache
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.csproj.CoreCompileInputs.cache
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.csproj.CopyComplete
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.exe
+D:\WorkSpaceTFS2022\SyspotecDevOpsConsole\SI58_PBX_Proyect\ConsoleSI58\ConsoleSI58\obj\Debug\ConsoleSI58.pdb

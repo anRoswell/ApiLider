@@ -1,0 +1,769 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="solucionesIntegrales58ModelStoreContainer" CdmEntityContainer="solucionesIntegrales58Entities">
+    <EntitySetMapping Name="documents">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.documents">
+        <MappingFragment StoreEntitySet="documents">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="userIdcreatedAt" ColumnName="userIdcreatedAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="userIdupdatedAt" ColumnName="userIdupdatedAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="features">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.features">
+        <MappingFragment StoreEntitySet="features">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="userIdcreatedAt" ColumnName="userIdcreatedAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="userIdupdatedAt" ColumnName="userIdupdatedAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="access">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.access">
+        <MappingFragment StoreEntitySet="access">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="profileId" ColumnName="profileId" />
+          <ScalarProperty Name="menuId" ColumnName="menuId" />
+          <ScalarProperty Name="create" ColumnName="create" />
+          <ScalarProperty Name="update" ColumnName="update" />
+          <ScalarProperty Name="delete" ColumnName="delete" />
+          <ScalarProperty Name="all" ColumnName="all" />
+          <ScalarProperty Name="list" ColumnName="list" />
+          <ScalarProperty Name="upload" ColumnName="upload" />
+          <ScalarProperty Name="admin" ColumnName="admin" />
+          <ScalarProperty Name="disabled" ColumnName="disabled" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="accessSubService">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.accessSubService">
+        <MappingFragment StoreEntitySet="accessSubService">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="servicioId" ColumnName="servicioId" />
+          <ScalarProperty Name="juridico" ColumnName="juridico" />
+          <ScalarProperty Name="auxilioExequial" ColumnName="auxilioExequial" />
+          <ScalarProperty Name="auxSocialDesempleo" ColumnName="auxSocialDesempleo" />
+          <ScalarProperty Name="planCiguenia" ColumnName="planCiguenia" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categorys">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.categorys">
+        <MappingFragment StoreEntitySet="categorys">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="priorityId" ColumnName="priorityId" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contactanos">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.contactanos">
+        <MappingFragment StoreEntitySet="contactanos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="numeroContacto" ColumnName="numeroContacto" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="costoXPeriodo">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.costoXPeriodo">
+        <MappingFragment StoreEntitySet="costoXPeriodo">
+          <ScalarProperty Name="int" ColumnName="int" />
+          <ScalarProperty Name="month" ColumnName="month" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="cost" ColumnName="cost" />
+          <ScalarProperty Name="userCreatedId" ColumnName="userCreatedId" />
+          <ScalarProperty Name="userModifyId" ColumnName="userModifyId" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ctasCorriente">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.ctasCorriente">
+        <MappingFragment StoreEntitySet="ctasCorriente">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="documentServicio">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.documentServicio">
+        <MappingFragment StoreEntitySet="documentServicio">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="servicioId" ColumnName="servicioId" />
+          <ScalarProperty Name="documentId" ColumnName="documentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="featureServicio">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.featureServicio">
+        <MappingFragment StoreEntitySet="featureServicio">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="servicioId" ColumnName="servicioId" />
+          <ScalarProperty Name="feaureId" ColumnName="feaureId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="grupos">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.grupos">
+        <MappingFragment StoreEntitySet="grupos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="userTypesId" ColumnName="userTypesId" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="userIdcreatedAt" ColumnName="userIdcreatedAt" />
+          <ScalarProperty Name="userIdupdatedAt" ColumnName="userIdupdatedAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="grupoServicio">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.grupoServicio">
+        <MappingFragment StoreEntitySet="grupoServicio">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="grupoId" ColumnName="grupoId" />
+          <ScalarProperty Name="servicioId" ColumnName="servicioId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="identificationTypes">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.identificationTypes">
+        <MappingFragment StoreEntitySet="identificationTypes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="menus">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.menus">
+        <MappingFragment StoreEntitySet="menus">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="menuId" ColumnName="menuId" />
+          <ScalarProperty Name="order" ColumnName="order" />
+          <ScalarProperty Name="divider" ColumnName="divider" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pagosOnLineEstados">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.pagosOnLineEstados">
+        <MappingFragment StoreEntitySet="pagosOnLineEstados">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="parameters">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.parameters">
+        <MappingFragment StoreEntitySet="parameters">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="showSlider" ColumnName="showSlider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="parents">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.parents">
+        <MappingFragment StoreEntitySet="parents">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prioritys">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.prioritys">
+        <MappingFragment StoreEntitySet="prioritys">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="profiles">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.profiles">
+        <MappingFragment StoreEntitySet="profiles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicioAdquirido">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicioAdquirido">
+        <MappingFragment StoreEntitySet="servicioAdquirido">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="grupoId" ColumnName="grupoId" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="urlFirmaTmp" ColumnName="urlFirmaTmp" />
+          <ScalarProperty Name="urlFirmaFinal" ColumnName="urlFirmaFinal" />
+          <ScalarProperty Name="contratoUrl" ColumnName="contratoUrl" />
+          <ScalarProperty Name="terminosCondiciones" ColumnName="terminosCondiciones" />
+          <ScalarProperty Name="nroContrato" ColumnName="nroContrato" />
+          <ScalarProperty Name="payNomina" ColumnName="payNomina" />
+          <ScalarProperty Name="pin" ColumnName="pin" />
+          <ScalarProperty Name="beneficiariosTmp" ColumnName="beneficiariosTmp" />
+          <ScalarProperty Name="userIdcreatedAt" ColumnName="userIdcreatedAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="userIdupdatedAt" ColumnName="userIdupdatedAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicioAdquiridoBeneficiarios">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicioAdquiridoBeneficiarios">
+        <MappingFragment StoreEntitySet="servicioAdquiridoBeneficiarios">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="parentesco" ColumnName="parentesco" />
+          <ScalarProperty Name="completeName" ColumnName="completeName" />
+          <ScalarProperty Name="edad" ColumnName="edad" />
+          <ScalarProperty Name="servicioAdquiridoId" ColumnName="servicioAdquiridoId" />
+          <ScalarProperty Name="servicioId" ColumnName="servicioId" />
+          <ScalarProperty Name="userIdcreatedAt" ColumnName="userIdcreatedAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="userIdupdatedAt" ColumnName="userIdupdatedAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicioAdquiridoBeneficiariosExequialDelete">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicioAdquiridoBeneficiariosExequialDelete">
+        <MappingFragment StoreEntitySet="servicioAdquiridoBeneficiariosExequialDelete">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="servAdqContratoId" ColumnName="servAdqContratoId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="identificationTypesId" ColumnName="identificationTypesId" />
+          <ScalarProperty Name="nroDocumento" ColumnName="nroDocumento" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicioAuxExequialDelete">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicioAuxExequialDelete">
+        <MappingFragment StoreEntitySet="servicioAuxExequialDelete">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="servicioId" ColumnName="servicioId" />
+          <ScalarProperty Name="servicioAdquiridoId" ColumnName="servicioAdquiridoId" />
+          <ScalarProperty Name="campo1" ColumnName="campo1" />
+          <ScalarProperty Name="campo2" ColumnName="campo2" />
+          <ScalarProperty Name="stateServiceId" ColumnName="stateServiceId" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicioAuxExequialDetalleDelete">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicioAuxExequialDetalleDelete">
+        <MappingFragment StoreEntitySet="servicioAuxExequialDetalleDelete">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="servicioAuxExequialId" ColumnName="servicioAuxExequialId" />
+          <ScalarProperty Name="documentoUrl" ColumnName="documentoUrl" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicioAuxPlanCigueniaDelete">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicioAuxPlanCigueniaDelete">
+        <MappingFragment StoreEntitySet="servicioAuxPlanCigueniaDelete">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="servicioId" ColumnName="servicioId" />
+          <ScalarProperty Name="servicioAdquiridoId" ColumnName="servicioAdquiridoId" />
+          <ScalarProperty Name="campo1" ColumnName="campo1" />
+          <ScalarProperty Name="campo2" ColumnName="campo2" />
+          <ScalarProperty Name="stateServiceId" ColumnName="stateServiceId" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicioAuxPlanCigueniaDetalleDelete">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicioAuxPlanCigueniaDetalleDelete">
+        <MappingFragment StoreEntitySet="servicioAuxPlanCigueniaDetalleDelete">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="servicioAuxPlanCigueniaId" ColumnName="servicioAuxPlanCigueniaId" />
+          <ScalarProperty Name="documentoUrl" ColumnName="documentoUrl" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicioAuxSocialDesempleoDelete">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicioAuxSocialDesempleoDelete">
+        <MappingFragment StoreEntitySet="servicioAuxSocialDesempleoDelete">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="servicioId" ColumnName="servicioId" />
+          <ScalarProperty Name="servicioAdquiridoId" ColumnName="servicioAdquiridoId" />
+          <ScalarProperty Name="campo1" ColumnName="campo1" />
+          <ScalarProperty Name="campo2" ColumnName="campo2" />
+          <ScalarProperty Name="stateServiceId" ColumnName="stateServiceId" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicioAuxSocialDesempleoDetalleDelete">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicioAuxSocialDesempleoDetalleDelete">
+        <MappingFragment StoreEntitySet="servicioAuxSocialDesempleoDetalleDelete">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="servicioAuxSocialDesempleoId" ColumnName="servicioAuxSocialDesempleoId" />
+          <ScalarProperty Name="documentoUrl" ColumnName="documentoUrl" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicioJuridicoDelete">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicioJuridicoDelete">
+        <MappingFragment StoreEntitySet="servicioJuridicoDelete">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="servicioId" ColumnName="servicioId" />
+          <ScalarProperty Name="servicioAdquiridoId" ColumnName="servicioAdquiridoId" />
+          <ScalarProperty Name="campo1" ColumnName="campo1" />
+          <ScalarProperty Name="campo2" ColumnName="campo2" />
+          <ScalarProperty Name="stateServiceId" ColumnName="stateServiceId" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicioJuridicoDetalleDelete">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicioJuridicoDetalleDelete">
+        <MappingFragment StoreEntitySet="servicioJuridicoDetalleDelete">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="servicioJuridicoId" ColumnName="servicioJuridicoId" />
+          <ScalarProperty Name="documentoUrl" ColumnName="documentoUrl" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="servicios">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.servicios">
+        <MappingFragment StoreEntitySet="servicios">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="descripcionCompleta" ColumnName="descripcionCompleta" />
+          <ScalarProperty Name="codServicio" ColumnName="codServicio" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="orderAsc" ColumnName="orderAsc" />
+          <ScalarProperty Name="hasBeneficiarios" ColumnName="hasBeneficiarios" />
+          <ScalarProperty Name="validateCantPeticiones" ColumnName="validateCantPeticiones" />
+          <ScalarProperty Name="cantidadvalidateCantPeticiones" ColumnName="cantidadvalidateCantPeticiones" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="serviciosSolicitados">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.serviciosSolicitados">
+        <MappingFragment StoreEntitySet="serviciosSolicitados">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="gruposId" ColumnName="gruposId" />
+          <ScalarProperty Name="servicioId" ColumnName="servicioId" />
+          <ScalarProperty Name="observation" ColumnName="observation" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="serviciosSolicitadosClasificacionId" ColumnName="serviciosSolicitadosClasificacionId" />
+          <ScalarProperty Name="userIdcreatedAt" ColumnName="userIdcreatedAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="userIdupdateAt" ColumnName="userIdupdateAt" />
+          <ScalarProperty Name="updateAt" ColumnName="updateAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="serviciosSolicitadosClasificacion">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.serviciosSolicitadosClasificacion">
+        <MappingFragment StoreEntitySet="serviciosSolicitadosClasificacion">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="servicioId" ColumnName="servicioId" />
+          <ScalarProperty Name="prioridadId" ColumnName="prioridadId" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="serviciosSolicitadosDocumentos">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.serviciosSolicitadosDocumentos">
+        <MappingFragment StoreEntitySet="serviciosSolicitadosDocumentos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="serviciosSolicitadosId" ColumnName="serviciosSolicitadosId" />
+          <ScalarProperty Name="documentsId" ColumnName="documentsId" />
+          <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+          <ScalarProperty Name="documentsName" ColumnName="documentsName" />
+          <ScalarProperty Name="documentsUrl" ColumnName="documentsUrl" />
+          <ScalarProperty Name="documentsExt" ColumnName="documentsExt" />
+          <ScalarProperty Name="documentsSize" ColumnName="documentsSize" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="userIdcreatedAt" ColumnName="userIdcreatedAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="userIdupdateAt" ColumnName="userIdupdateAt" />
+          <ScalarProperty Name="updateAt" ColumnName="updateAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sliders">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.sliders">
+        <MappingFragment StoreEntitySet="sliders">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stateService">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.stateService">
+        <MappingFragment StoreEntitySet="stateService">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="observacion" ColumnName="observacion" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ubicanos">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.ubicanos">
+        <MappingFragment StoreEntitySet="ubicanos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lng" ColumnName="lng" />
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.users">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="usrEmail" ColumnName="usrEmail" />
+          <ScalarProperty Name="usrEmailAlternative" ColumnName="usrEmailAlternative" />
+          <ScalarProperty Name="usrPassword" ColumnName="usrPassword" />
+          <ScalarProperty Name="usrNames" ColumnName="usrNames" />
+          <ScalarProperty Name="usrLastNames" ColumnName="usrLastNames" />
+          <ScalarProperty Name="identificationTypeId" ColumnName="identificationTypeId" />
+          <ScalarProperty Name="userTypesId" ColumnName="userTypesId" />
+          <ScalarProperty Name="usrCedula" ColumnName="usrCedula" />
+          <ScalarProperty Name="usrNroCelular" ColumnName="usrNroCelular" />
+          <ScalarProperty Name="usrTelefonoFijo" ColumnName="usrTelefonoFijo" />
+          <ScalarProperty Name="usrDireccion" ColumnName="usrDireccion" />
+          <ScalarProperty Name="usrStatus" ColumnName="usrStatus" />
+          <ScalarProperty Name="usrOrigen" ColumnName="usrOrigen" />
+          <ScalarProperty Name="lastLogin" ColumnName="lastLogin" />
+          <ScalarProperty Name="profileId" ColumnName="profileId" />
+          <ScalarProperty Name="hasGeolocation" ColumnName="hasGeolocation" />
+          <ScalarProperty Name="usrLat" ColumnName="usrLat" />
+          <ScalarProperty Name="usrlng" ColumnName="usrlng" />
+          <ScalarProperty Name="usrTerminosCondiciones" ColumnName="usrTerminosCondiciones" />
+          <ScalarProperty Name="lastDateLogin" ColumnName="lastDateLogin" />
+          <ScalarProperty Name="ip" ColumnName="ip" />
+          <ScalarProperty Name="operativeSystem" ColumnName="operativeSystem" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userTypes">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.userTypes">
+        <MappingFragment StoreEntitySet="userTypes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="pin" ColumnName="pin" />
+          <ScalarProperty Name="redirigirAPagoOnline" ColumnName="redirigirAPagoOnline" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userTypesGrupos">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.userTypesGrupos">
+        <MappingFragment StoreEntitySet="userTypesGrupos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userTypeId" ColumnName="userTypeId" />
+          <ScalarProperty Name="grupoId" ColumnName="grupoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contrato">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.contrato">
+        <MappingFragment StoreEntitySet="contrato">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nameEmpresa" ColumnName="nameEmpresa" />
+          <ScalarProperty Name="nameRrptateLegal" ColumnName="nameRrptateLegal" />
+          <ScalarProperty Name="cedulaRrptateLegal" ColumnName="cedulaRrptateLegal" />
+          <ScalarProperty Name="UrlFirmaRrptateLegal" ColumnName="UrlFirmaRrptateLegal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="parametrosGrales">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.parametrosGrales">
+        <MappingFragment StoreEntitySet="parametrosGrales">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prioridades">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.prioridades">
+        <MappingFragment StoreEntitySet="prioridades">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="smtp">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.smtp">
+        <MappingFragment StoreEntitySet="smtp">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="enable_ssl" ColumnName="enable_ssl" />
+          <ScalarProperty Name="host" ColumnName="host" />
+          <ScalarProperty Name="port" ColumnName="port" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pagosOnLine">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.pagosOnLine">
+        <MappingFragment StoreEntitySet="pagosOnLine">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="costoXPeriodoId" ColumnName="costoXPeriodoId" />
+          <ScalarProperty Name="estadoPago" ColumnName="estadoPago" />
+          <ScalarProperty Name="ip" ColumnName="ip" />
+          <ScalarProperty Name="sistemaOperativo" ColumnName="sistemaOperativo" />
+          <ScalarProperty Name="respestaTransaccion" ColumnName="respestaTransaccion" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="initialDate">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.initialDate">
+        <MappingFragment StoreEntitySet="initialDate">
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="parametersPbx">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.parametersPbx">
+        <MappingFragment StoreEntitySet="parametersPbx">
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="uri" ColumnName="uri" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tokenUri">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.tokenUri">
+        <MappingFragment StoreEntitySet="tokenUri">
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="endtdate" ColumnName="endtdate" />
+          <ScalarProperty Name="startdate" ColumnName="startdate" />
+          <ScalarProperty Name="expires_in" ColumnName="expires_in" />
+          <ScalarProperty Name="token_type" ColumnName="token_type" />
+          <ScalarProperty Name="access_token" ColumnName="access_token" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pay">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.pay">
+        <MappingFragment StoreEntitySet="pay">
+          <ScalarProperty Name="updateAt" ColumnName="updateAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="periodo" ColumnName="periodo" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="payDetail">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.payDetail">
+        <MappingFragment StoreEntitySet="payDetail">
+          <ScalarProperty Name="desconocido15" ColumnName="desconocido15" />
+          <ScalarProperty Name="desconocido14" ColumnName="desconocido14" />
+          <ScalarProperty Name="desconocido13" ColumnName="desconocido13" />
+          <ScalarProperty Name="desconocido12" ColumnName="desconocido12" />
+          <ScalarProperty Name="desconocido11" ColumnName="desconocido11" />
+          <ScalarProperty Name="desconocido10" ColumnName="desconocido10" />
+          <ScalarProperty Name="desconocido9" ColumnName="desconocido9" />
+          <ScalarProperty Name="desconocido8" ColumnName="desconocido8" />
+          <ScalarProperty Name="date2" ColumnName="date2" />
+          <ScalarProperty Name="desconocido7" ColumnName="desconocido7" />
+          <ScalarProperty Name="desconocido6" ColumnName="desconocido6" />
+          <ScalarProperty Name="desconocido5" ColumnName="desconocido5" />
+          <ScalarProperty Name="date1" ColumnName="date1" />
+          <ScalarProperty Name="desconocido4" ColumnName="desconocido4" />
+          <ScalarProperty Name="desconocido3" ColumnName="desconocido3" />
+          <ScalarProperty Name="desconocido2" ColumnName="desconocido2" />
+          <ScalarProperty Name="desconocido1" ColumnName="desconocido1" />
+          <ScalarProperty Name="nroDocument" ColumnName="nroDocument" />
+          <ScalarProperty Name="typeDocument" ColumnName="typeDocument" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="urlApiItbx">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.urlApiItbx">
+        <MappingFragment StoreEntitySet="urlApiItbx">
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="observation" ColumnName="observation" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="patch" ColumnName="patch" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="registroPbx">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.registroPbx">
+        <MappingFragment StoreEntitySet="registroPbx">
+          <ScalarProperty Name="nit" ColumnName="nit" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="overflow" ColumnName="overflow" />
+          <ScalarProperty Name="outgoing" ColumnName="outgoing" />
+          <ScalarProperty Name="ingoing" ColumnName="ingoing" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="waittime" ColumnName="waittime" />
+          <ScalarProperty Name="event" ColumnName="event" />
+          <ScalarProperty Name="agent" ColumnName="agent" />
+          <ScalarProperty Name="queue" ColumnName="queue" />
+          <ScalarProperty Name="src" ColumnName="src" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="idPbx" ColumnName="idPbx" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logs">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.logs">
+        <MappingFragment StoreEntitySet="logs">
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="inner" ColumnName="inner" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="serviciosToSave">
+      <EntityTypeMapping TypeName="solucionesIntegrales58Model.serviciosToSave">
+        <MappingFragment StoreEntitySet="serviciosToSave">
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="saveRegisters" ColumnName="saveRegisters" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

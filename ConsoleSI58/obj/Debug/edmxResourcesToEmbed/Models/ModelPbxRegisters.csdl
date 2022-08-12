@@ -1,0 +1,1321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="solucionesIntegrales58Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="documents">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="userIdcreatedAt" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="userIdupdatedAt" Type="Int32" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="serviciosSolicitadosDocumentos" Relationship="Self.FK_serviciosSolicitadosDocumentos_documents" FromRole="documents" ToRole="serviciosSolicitadosDocumentos" />
+  </EntityType>
+  <EntityType Name="features">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="userIdcreatedAt" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="userIdupdatedAt" Type="Int32" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="featureServicio" Relationship="Self.FK_featureServicio_features" FromRole="features" ToRole="featureServicio" />
+  </EntityType>
+  <EntityType Name="access">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="profileId" Type="Int32" Nullable="false" />
+    <Property Name="menuId" Type="Int32" Nullable="false" />
+    <Property Name="create" Type="Byte" Nullable="false" />
+    <Property Name="update" Type="Byte" Nullable="false" />
+    <Property Name="delete" Type="Byte" Nullable="false" />
+    <Property Name="all" Type="Byte" Nullable="false" />
+    <Property Name="list" Type="Byte" Nullable="false" />
+    <Property Name="upload" Type="Byte" Nullable="false" />
+    <Property Name="admin" Type="Byte" Nullable="false" />
+    <Property Name="disabled" Type="Byte" />
+    <Property Name="createdAt" Type="DateTime" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="menus" Relationship="Self.FK_access_menus" FromRole="access" ToRole="menus" />
+    <NavigationProperty Name="profiles" Relationship="Self.FK_access_profiles" FromRole="access" ToRole="profiles" />
+  </EntityType>
+  <EntityType Name="accessSubService">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="servicioId" Type="Int32" Nullable="false" />
+    <Property Name="juridico" Type="Boolean" Nullable="false" />
+    <Property Name="auxilioExequial" Type="Boolean" Nullable="false" />
+    <Property Name="auxSocialDesempleo" Type="Boolean" Nullable="false" />
+    <Property Name="planCiguenia" Type="Boolean" Nullable="false" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="categorys">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="priorityId" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="prioritys" Relationship="Self.FK_categorys_prioritys" FromRole="categorys" ToRole="prioritys" />
+  </EntityType>
+  <EntityType Name="contactanos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="numeroContacto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="type" Type="Int32" Nullable="false" />
+    <Property Name="icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="costoXPeriodo">
+    <Key>
+      <PropertyRef Name="int" />
+    </Key>
+    <Property Name="int" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="month" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="year" Type="Int32" Nullable="false" />
+    <Property Name="cost" Type="Double" Nullable="false" />
+    <Property Name="userCreatedId" Type="Int32" Nullable="false" />
+    <Property Name="userModifyId" Type="Int32" Nullable="false" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="ctasCorriente">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="documentServicio">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="servicioId" Type="Int32" Nullable="false" />
+    <Property Name="documentId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="featureServicio">
+    <Key>
+      <PropertyRef Name="servicioId" />
+      <PropertyRef Name="feaureId" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="servicioId" Type="Int32" Nullable="false" />
+    <Property Name="feaureId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="features" Relationship="Self.FK_featureServicio_features" FromRole="featureServicio" ToRole="features" />
+    <NavigationProperty Name="servicios" Relationship="Self.FK_featureServicio_servicios" FromRole="featureServicio" ToRole="servicios" />
+  </EntityType>
+  <EntityType Name="grupos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userTypesId" Type="Int32" Nullable="false" />
+    <Property Name="valor" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="userIdcreatedAt" Type="Int32" Nullable="false" />
+    <Property Name="userIdupdatedAt" Type="Int32" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="grupoServicio" Relationship="Self.FK_grupoServicio_grupo" FromRole="grupos" ToRole="grupoServicio" />
+    <NavigationProperty Name="servicioAdquirido" Relationship="Self.FK_servicioAdquirido_grupo" FromRole="grupos" ToRole="servicioAdquirido" />
+    <NavigationProperty Name="serviciosSolicitados" Relationship="Self.FK_serviciosSolicitados_grupos" FromRole="grupos" ToRole="serviciosSolicitados" />
+  </EntityType>
+  <EntityType Name="grupoServicio">
+    <Key>
+      <PropertyRef Name="grupoId" />
+      <PropertyRef Name="servicioId" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="grupoId" Type="Int32" Nullable="false" />
+    <Property Name="servicioId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="grupos" Relationship="Self.FK_grupoServicio_grupo" FromRole="grupoServicio" ToRole="grupos" />
+    <NavigationProperty Name="servicios" Relationship="Self.FK_grupoServicio_servicios" FromRole="grupoServicio" ToRole="servicios" />
+  </EntityType>
+  <EntityType Name="identificationTypes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="createdAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+    <Property Name="updatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+    <NavigationProperty Name="users" Relationship="Self.FK__users__identific__3D5E1FD2" FromRole="identificationTypes" ToRole="users" />
+  </EntityType>
+  <EntityType Name="menus">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="url" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="icon" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="menuId" Type="Int32" />
+    <Property Name="order" Type="Byte" />
+    <Property Name="divider" Type="Byte" />
+    <Property Name="status" Type="Byte" />
+    <Property Name="createdAt" Type="DateTime" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="access" Relationship="Self.FK_access_menus" FromRole="menus" ToRole="access" />
+    <NavigationProperty Name="menus1" Relationship="Self.FK_menus_menus" FromRole="menus" ToRole="menus1" />
+    <NavigationProperty Name="menus2" Relationship="Self.FK_menus_menus" FromRole="menus1" ToRole="menus" />
+  </EntityType>
+  <EntityType Name="pagosOnLineEstados">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="parameters">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="showSlider" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="parents">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="prioritys">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="categorys" Relationship="Self.FK_categorys_prioritys" FromRole="prioritys" ToRole="categorys" />
+  </EntityType>
+  <EntityType Name="profiles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="createdAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+    <Property Name="updatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+    <NavigationProperty Name="access" Relationship="Self.FK_access_profiles" FromRole="profiles" ToRole="access" />
+    <NavigationProperty Name="users" Relationship="Self.FK__users__profileId__3E52440B" FromRole="profiles" ToRole="users" />
+  </EntityType>
+  <EntityType Name="servicioAdquirido">
+    <Key>
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="grupoId" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="grupoId" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="urlFirmaTmp" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="urlFirmaFinal" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="contratoUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="terminosCondiciones" Type="Boolean" Nullable="false" />
+    <Property Name="nroContrato" Type="Int64" Nullable="false" />
+    <Property Name="payNomina" Type="Boolean" Nullable="false" />
+    <Property Name="pin" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="beneficiariosTmp" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="userIdcreatedAt" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="userIdupdatedAt" Type="Int32" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="grupos" Relationship="Self.FK_servicioAdquirido_grupo" FromRole="servicioAdquirido" ToRole="grupos" />
+    <NavigationProperty Name="users" Relationship="Self.FK_servicioAdquirido_users" FromRole="servicioAdquirido" ToRole="users" />
+  </EntityType>
+  <EntityType Name="servicioAdquiridoBeneficiarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="parentesco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="completeName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="edad" Type="Int32" Nullable="false" />
+    <Property Name="servicioAdquiridoId" Type="Int32" Nullable="false" />
+    <Property Name="servicioId" Type="Int32" Nullable="false" />
+    <Property Name="userIdcreatedAt" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="userIdupdatedAt" Type="Int32" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="servicios" Relationship="Self.FK_beneficiarioDelServicio_servicios" FromRole="servicioAdquiridoBeneficiarios" ToRole="servicios" />
+  </EntityType>
+  <EntityType Name="servicioAdquiridoBeneficiariosExequialDelete">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="servAdqContratoId" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="identificationTypesId" Type="Int32" Nullable="false" />
+    <Property Name="nroDocumento" Type="Int64" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="servicioAuxExequialDelete">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="servicioId" Type="Int32" Nullable="false" />
+    <Property Name="servicioAdquiridoId" Type="Int32" Nullable="false" />
+    <Property Name="campo1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="campo2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="stateServiceId" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="stateService" Relationship="Self.FK_servicioAuxExequial_stateService" FromRole="servicioAuxExequialDelete" ToRole="stateService" />
+    <NavigationProperty Name="servicioAuxExequialDetalleDelete" Relationship="Self.FK_servicioAuxExequialDetalle_servicioAuxExequial" FromRole="servicioAuxExequialDelete" ToRole="servicioAuxExequialDetalleDelete" />
+  </EntityType>
+  <EntityType Name="servicioAuxExequialDetalleDelete">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="servicioAuxExequialId" Type="Int32" Nullable="false" />
+    <Property Name="documentoUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="servicioAuxExequialDelete" Relationship="Self.FK_servicioAuxExequialDetalle_servicioAuxExequial" FromRole="servicioAuxExequialDetalleDelete" ToRole="servicioAuxExequialDelete" />
+  </EntityType>
+  <EntityType Name="servicioAuxPlanCigueniaDelete">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="servicioId" Type="Int32" Nullable="false" />
+    <Property Name="servicioAdquiridoId" Type="Int32" Nullable="false" />
+    <Property Name="campo1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="campo2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="stateServiceId" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="stateService" Relationship="Self.FK_servicioAuxPlanCiguenia_stateService" FromRole="servicioAuxPlanCigueniaDelete" ToRole="stateService" />
+    <NavigationProperty Name="servicioAuxPlanCigueniaDetalleDelete" Relationship="Self.FK_servicioAuxPlanCigueniaDetalle_servicioAuxPlanCiguenia" FromRole="servicioAuxPlanCigueniaDelete" ToRole="servicioAuxPlanCigueniaDetalleDelete" />
+  </EntityType>
+  <EntityType Name="servicioAuxPlanCigueniaDetalleDelete">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="servicioAuxPlanCigueniaId" Type="Int32" Nullable="false" />
+    <Property Name="documentoUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="servicioAuxPlanCigueniaDelete" Relationship="Self.FK_servicioAuxPlanCigueniaDetalle_servicioAuxPlanCiguenia" FromRole="servicioAuxPlanCigueniaDetalleDelete" ToRole="servicioAuxPlanCigueniaDelete" />
+  </EntityType>
+  <EntityType Name="servicioAuxSocialDesempleoDelete">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="servicioId" Type="Int32" Nullable="false" />
+    <Property Name="servicioAdquiridoId" Type="Int32" Nullable="false" />
+    <Property Name="campo1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="campo2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="stateServiceId" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="stateService" Relationship="Self.FK_servicioAuxSocialDesempleo_stateService" FromRole="servicioAuxSocialDesempleoDelete" ToRole="stateService" />
+    <NavigationProperty Name="servicioAuxSocialDesempleoDetalleDelete" Relationship="Self.FK_servicioAuxSocialDesempleoDetalle_servicioAuxSocialDesempleo" FromRole="servicioAuxSocialDesempleoDelete" ToRole="servicioAuxSocialDesempleoDetalleDelete" />
+  </EntityType>
+  <EntityType Name="servicioAuxSocialDesempleoDetalleDelete">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="servicioAuxSocialDesempleoId" Type="Int32" Nullable="false" />
+    <Property Name="documentoUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="servicioAuxSocialDesempleoDelete" Relationship="Self.FK_servicioAuxSocialDesempleoDetalle_servicioAuxSocialDesempleo" FromRole="servicioAuxSocialDesempleoDetalleDelete" ToRole="servicioAuxSocialDesempleoDelete" />
+  </EntityType>
+  <EntityType Name="servicioJuridicoDelete">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="servicioId" Type="Int32" Nullable="false" />
+    <Property Name="servicioAdquiridoId" Type="Int32" Nullable="false" />
+    <Property Name="campo1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="campo2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="stateServiceId" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="stateService" Relationship="Self.FK_servicioJuridico_stateService" FromRole="servicioJuridicoDelete" ToRole="stateService" />
+    <NavigationProperty Name="servicioJuridicoDetalleDelete" Relationship="Self.FK_servicioJuridicoDetalle_servicioJuridico" FromRole="servicioJuridicoDelete" ToRole="servicioJuridicoDetalleDelete" />
+  </EntityType>
+  <EntityType Name="servicioJuridicoDetalleDelete">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="servicioJuridicoId" Type="Int32" Nullable="false" />
+    <Property Name="documentoUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="servicioJuridicoDelete" Relationship="Self.FK_servicioJuridicoDetalle_servicioJuridico" FromRole="servicioJuridicoDetalleDelete" ToRole="servicioJuridicoDelete" />
+  </EntityType>
+  <EntityType Name="servicios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcionCompleta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="codServicio" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="url" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="icon" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="orderAsc" Type="Int32" Nullable="false" />
+    <Property Name="hasBeneficiarios" Type="Boolean" Nullable="false" />
+    <Property Name="validateCantPeticiones" Type="Boolean" Nullable="false" />
+    <Property Name="cantidadvalidateCantPeticiones" Type="Int32" Nullable="false" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="featureServicio" Relationship="Self.FK_featureServicio_servicios" FromRole="servicios" ToRole="featureServicio" />
+    <NavigationProperty Name="grupoServicio" Relationship="Self.FK_grupoServicio_servicios" FromRole="servicios" ToRole="grupoServicio" />
+    <NavigationProperty Name="servicioAdquiridoBeneficiarios" Relationship="Self.FK_beneficiarioDelServicio_servicios" FromRole="servicios" ToRole="servicioAdquiridoBeneficiarios" />
+    <NavigationProperty Name="serviciosSolicitados" Relationship="Self.FK_serviciosSolicitados_servicios" FromRole="servicios" ToRole="serviciosSolicitados" />
+    <NavigationProperty Name="serviciosSolicitadosClasificacion" Relationship="Self.FK_serviciosSolicitadosClasificacion_servicios" FromRole="servicios" ToRole="serviciosSolicitadosClasificacion" />
+    <NavigationProperty Name="serviciosSolicitadosDocumentos" Relationship="Self.FK_serviciosSolicitadosDocumentos_servicios" FromRole="servicios" ToRole="serviciosSolicitadosDocumentos" />
+  </EntityType>
+  <EntityType Name="serviciosSolicitados">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="gruposId" Type="Int32" Nullable="false" />
+    <Property Name="servicioId" Type="Int32" Nullable="false" />
+    <Property Name="observation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="serviciosSolicitadosClasificacionId" Type="Int32" />
+    <Property Name="userIdcreatedAt" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="userIdupdateAt" Type="Int32" />
+    <Property Name="updateAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="grupos" Relationship="Self.FK_serviciosSolicitados_grupos" FromRole="serviciosSolicitados" ToRole="grupos" />
+    <NavigationProperty Name="servicios" Relationship="Self.FK_serviciosSolicitados_servicios" FromRole="serviciosSolicitados" ToRole="servicios" />
+    <NavigationProperty Name="stateService" Relationship="Self.FK_serviciosSolicitados_stateService" FromRole="serviciosSolicitados" ToRole="stateService" />
+    <NavigationProperty Name="users" Relationship="Self.FK_serviciosSolicitados_users" FromRole="serviciosSolicitados" ToRole="users" />
+    <NavigationProperty Name="serviciosSolicitadosDocumentos" Relationship="Self.FK_serviciosSolicitadosDocumentos_serviciosSolicitados" FromRole="serviciosSolicitados" ToRole="serviciosSolicitadosDocumentos" />
+  </EntityType>
+  <EntityType Name="serviciosSolicitadosClasificacion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="servicioId" Type="Int32" Nullable="false" />
+    <Property Name="prioridadId" Type="Int32" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="servicios" Relationship="Self.FK_serviciosSolicitadosClasificacion_servicios" FromRole="serviciosSolicitadosClasificacion" ToRole="servicios" />
+    <NavigationProperty Name="prioridades" Relationship="Self.FK_serviciosSolicitadosClasificacion_prioridades" FromRole="serviciosSolicitadosClasificacion" ToRole="prioridades" />
+  </EntityType>
+  <EntityType Name="serviciosSolicitadosDocumentos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="serviciosSolicitadosId" Type="Int32" Nullable="false" />
+    <Property Name="documentsId" Type="Int32" Nullable="false" />
+    <Property Name="serviceId" Type="Int32" Nullable="false" />
+    <Property Name="documentsName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="documentsUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="documentsExt" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="documentsSize" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="userIdcreatedAt" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="userIdupdateAt" Type="Int32" />
+    <Property Name="updateAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="documents" Relationship="Self.FK_serviciosSolicitadosDocumentos_documents" FromRole="serviciosSolicitadosDocumentos" ToRole="documents" />
+    <NavigationProperty Name="servicios" Relationship="Self.FK_serviciosSolicitadosDocumentos_servicios" FromRole="serviciosSolicitadosDocumentos" ToRole="servicios" />
+    <NavigationProperty Name="serviciosSolicitados" Relationship="Self.FK_serviciosSolicitadosDocumentos_serviciosSolicitados" FromRole="serviciosSolicitadosDocumentos" ToRole="serviciosSolicitados" />
+  </EntityType>
+  <EntityType Name="sliders">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mensaje" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="imageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="userId" Type="Int32" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="stateService">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="servicioAuxExequialDelete" Relationship="Self.FK_servicioAuxExequial_stateService" FromRole="stateService" ToRole="servicioAuxExequialDelete" />
+    <NavigationProperty Name="servicioAuxPlanCigueniaDelete" Relationship="Self.FK_servicioAuxPlanCiguenia_stateService" FromRole="stateService" ToRole="servicioAuxPlanCigueniaDelete" />
+    <NavigationProperty Name="servicioAuxSocialDesempleoDelete" Relationship="Self.FK_servicioAuxSocialDesempleo_stateService" FromRole="stateService" ToRole="servicioAuxSocialDesempleoDelete" />
+    <NavigationProperty Name="servicioJuridicoDelete" Relationship="Self.FK_servicioJuridico_stateService" FromRole="stateService" ToRole="servicioJuridicoDelete" />
+    <NavigationProperty Name="serviciosSolicitados" Relationship="Self.FK_serviciosSolicitados_stateService" FromRole="stateService" ToRole="serviciosSolicitados" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="ubicanos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lat" Type="Double" Nullable="false" />
+    <Property Name="lng" Type="Double" Nullable="false" />
+    <Property Name="imageUrl" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usrEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="usrEmailAlternative" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="usrPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="usrNames" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="usrLastNames" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="identificationTypeId" Type="Int32" Nullable="false" />
+    <Property Name="userTypesId" Type="Int32" Nullable="false" />
+    <Property Name="usrCedula" Type="Int64" Nullable="false" />
+    <Property Name="usrNroCelular" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="usrTelefonoFijo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="usrDireccion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="usrStatus" Type="Boolean" Nullable="false" />
+    <Property Name="usrOrigen" Type="Int32" Nullable="false" />
+    <Property Name="lastLogin" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="profileId" Type="Int32" Nullable="false" />
+    <Property Name="hasGeolocation" Type="Boolean" Nullable="false" />
+    <Property Name="usrLat" Type="Double" />
+    <Property Name="usrlng" Type="Double" />
+    <Property Name="usrTerminosCondiciones" Type="Boolean" Nullable="false" />
+    <Property Name="lastDateLogin" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="operativeSystem" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="identificationTypes" Relationship="Self.FK__users__identific__3D5E1FD2" FromRole="users" ToRole="identificationTypes" />
+    <NavigationProperty Name="profiles" Relationship="Self.FK__users__profileId__3E52440B" FromRole="users" ToRole="profiles" />
+    <NavigationProperty Name="servicioAdquirido" Relationship="Self.FK_servicioAdquirido_users" FromRole="users" ToRole="servicioAdquirido" />
+    <NavigationProperty Name="serviciosSolicitados" Relationship="Self.FK_serviciosSolicitados_users" FromRole="users" ToRole="serviciosSolicitados" />
+  </EntityType>
+  <EntityType Name="userTypes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pin" Type="Boolean" Nullable="false" />
+    <Property Name="redirigirAPagoOnline" Type="Boolean" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="userTypesGrupos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userTypeId" Type="Int32" Nullable="false" />
+    <Property Name="grupoId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="contrato">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nameEmpresa" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nameRrptateLegal" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cedulaRrptateLegal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UrlFirmaRrptateLegal" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="parametrosGrales">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="userId" Type="Int32" />
+    <Property Name="createdAt" Type="DateTime" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="prioridades">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="estado" Type="Boolean" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="serviciosSolicitadosClasificacion" Relationship="Self.FK_serviciosSolicitadosClasificacion_prioridades" FromRole="prioridades" ToRole="serviciosSolicitadosClasificacion" />
+  </EntityType>
+  <EntityType Name="smtp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="enable_ssl" Type="Boolean" Nullable="false" />
+    <Property Name="host" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="port" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pagosOnLine">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="userId" />
+      <PropertyRef Name="costoXPeriodoId" />
+      <PropertyRef Name="estadoPago" />
+      <PropertyRef Name="createdAt" />
+      <PropertyRef Name="updatedAt" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="costoXPeriodoId" Type="Int32" Nullable="false" />
+    <Property Name="estadoPago" Type="Int32" Nullable="false" />
+    <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sistemaOperativo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="respestaTransaccion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK_serviciosSolicitadosDocumentos_documents">
+    <End Role="documents" Type="Self.documents" Multiplicity="1" />
+    <End Role="serviciosSolicitadosDocumentos" Type="Self.serviciosSolicitadosDocumentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="documents">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="serviciosSolicitadosDocumentos">
+        <PropertyRef Name="documentsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_featureServicio_features">
+    <End Role="features" Type="Self.features" Multiplicity="1" />
+    <End Role="featureServicio" Type="Self.featureServicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="features">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="featureServicio">
+        <PropertyRef Name="feaureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_access_menus">
+    <End Role="menus" Type="Self.menus" Multiplicity="1" />
+    <End Role="access" Type="Self.access" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="menus">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="access">
+        <PropertyRef Name="menuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_access_profiles">
+    <End Role="profiles" Type="Self.profiles" Multiplicity="1" />
+    <End Role="access" Type="Self.access" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="profiles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="access">
+        <PropertyRef Name="profileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_categorys_prioritys">
+    <End Role="prioritys" Type="Self.prioritys" Multiplicity="1" />
+    <End Role="categorys" Type="Self.categorys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="prioritys">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="categorys">
+        <PropertyRef Name="priorityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_featureServicio_servicios">
+    <End Role="servicios" Type="Self.servicios" Multiplicity="1" />
+    <End Role="featureServicio" Type="Self.featureServicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="featureServicio">
+        <PropertyRef Name="servicioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_grupoServicio_grupo">
+    <End Role="grupos" Type="Self.grupos" Multiplicity="1" />
+    <End Role="grupoServicio" Type="Self.grupoServicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grupos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="grupoServicio">
+        <PropertyRef Name="grupoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_servicioAdquirido_grupo">
+    <End Role="grupos" Type="Self.grupos" Multiplicity="1" />
+    <End Role="servicioAdquirido" Type="Self.servicioAdquirido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grupos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicioAdquirido">
+        <PropertyRef Name="grupoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_serviciosSolicitados_grupos">
+    <End Role="grupos" Type="Self.grupos" Multiplicity="1" />
+    <End Role="serviciosSolicitados" Type="Self.serviciosSolicitados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grupos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="serviciosSolicitados">
+        <PropertyRef Name="gruposId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_grupoServicio_servicios">
+    <End Role="servicios" Type="Self.servicios" Multiplicity="1" />
+    <End Role="grupoServicio" Type="Self.grupoServicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="grupoServicio">
+        <PropertyRef Name="servicioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__users__identific__3D5E1FD2">
+    <End Role="identificationTypes" Type="Self.identificationTypes" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="users" Type="Self.users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="identificationTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="identificationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_menus_menus">
+    <End Role="menus" Type="Self.menus" Multiplicity="0..1" />
+    <End Role="menus1" Type="Self.menus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="menus">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="menus1">
+        <PropertyRef Name="menuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__users__profileId__3E52440B">
+    <End Role="profiles" Type="Self.profiles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="users" Type="Self.users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="profiles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="profileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_servicioAdquirido_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="servicioAdquirido" Type="Self.servicioAdquirido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicioAdquirido">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_beneficiarioDelServicio_servicios">
+    <End Role="servicios" Type="Self.servicios" Multiplicity="1" />
+    <End Role="servicioAdquiridoBeneficiarios" Type="Self.servicioAdquiridoBeneficiarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicioAdquiridoBeneficiarios">
+        <PropertyRef Name="servicioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_servicioAuxExequial_stateService">
+    <End Role="stateService" Type="Self.stateService" Multiplicity="1" />
+    <End Role="servicioAuxExequialDelete" Type="Self.servicioAuxExequialDelete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="stateService">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicioAuxExequialDelete">
+        <PropertyRef Name="stateServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_servicioAuxExequialDetalle_servicioAuxExequial">
+    <End Role="servicioAuxExequialDelete" Type="Self.servicioAuxExequialDelete" Multiplicity="1" />
+    <End Role="servicioAuxExequialDetalleDelete" Type="Self.servicioAuxExequialDetalleDelete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicioAuxExequialDelete">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicioAuxExequialDetalleDelete">
+        <PropertyRef Name="servicioAuxExequialId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_servicioAuxPlanCiguenia_stateService">
+    <End Role="stateService" Type="Self.stateService" Multiplicity="1" />
+    <End Role="servicioAuxPlanCigueniaDelete" Type="Self.servicioAuxPlanCigueniaDelete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="stateService">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicioAuxPlanCigueniaDelete">
+        <PropertyRef Name="stateServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_servicioAuxPlanCigueniaDetalle_servicioAuxPlanCiguenia">
+    <End Role="servicioAuxPlanCigueniaDelete" Type="Self.servicioAuxPlanCigueniaDelete" Multiplicity="1" />
+    <End Role="servicioAuxPlanCigueniaDetalleDelete" Type="Self.servicioAuxPlanCigueniaDetalleDelete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicioAuxPlanCigueniaDelete">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicioAuxPlanCigueniaDetalleDelete">
+        <PropertyRef Name="servicioAuxPlanCigueniaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_servicioAuxSocialDesempleo_stateService">
+    <End Role="stateService" Type="Self.stateService" Multiplicity="1" />
+    <End Role="servicioAuxSocialDesempleoDelete" Type="Self.servicioAuxSocialDesempleoDelete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="stateService">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicioAuxSocialDesempleoDelete">
+        <PropertyRef Name="stateServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_servicioAuxSocialDesempleoDetalle_servicioAuxSocialDesempleo">
+    <End Role="servicioAuxSocialDesempleoDelete" Type="Self.servicioAuxSocialDesempleoDelete" Multiplicity="1" />
+    <End Role="servicioAuxSocialDesempleoDetalleDelete" Type="Self.servicioAuxSocialDesempleoDetalleDelete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicioAuxSocialDesempleoDelete">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicioAuxSocialDesempleoDetalleDelete">
+        <PropertyRef Name="servicioAuxSocialDesempleoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_servicioJuridico_stateService">
+    <End Role="stateService" Type="Self.stateService" Multiplicity="1" />
+    <End Role="servicioJuridicoDelete" Type="Self.servicioJuridicoDelete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="stateService">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicioJuridicoDelete">
+        <PropertyRef Name="stateServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_servicioJuridicoDetalle_servicioJuridico">
+    <End Role="servicioJuridicoDelete" Type="Self.servicioJuridicoDelete" Multiplicity="1" />
+    <End Role="servicioJuridicoDetalleDelete" Type="Self.servicioJuridicoDetalleDelete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicioJuridicoDelete">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="servicioJuridicoDetalleDelete">
+        <PropertyRef Name="servicioJuridicoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_serviciosSolicitados_servicios">
+    <End Role="servicios" Type="Self.servicios" Multiplicity="1" />
+    <End Role="serviciosSolicitados" Type="Self.serviciosSolicitados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="serviciosSolicitados">
+        <PropertyRef Name="servicioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_serviciosSolicitadosClasificacion_servicios">
+    <End Role="servicios" Type="Self.servicios" Multiplicity="1" />
+    <End Role="serviciosSolicitadosClasificacion" Type="Self.serviciosSolicitadosClasificacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="serviciosSolicitadosClasificacion">
+        <PropertyRef Name="servicioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_serviciosSolicitadosDocumentos_servicios">
+    <End Role="servicios" Type="Self.servicios" Multiplicity="1" />
+    <End Role="serviciosSolicitadosDocumentos" Type="Self.serviciosSolicitadosDocumentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="serviciosSolicitadosDocumentos">
+        <PropertyRef Name="serviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_serviciosSolicitados_stateService">
+    <End Role="stateService" Type="Self.stateService" Multiplicity="1" />
+    <End Role="serviciosSolicitados" Type="Self.serviciosSolicitados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="stateService">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="serviciosSolicitados">
+        <PropertyRef Name="estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_serviciosSolicitados_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="serviciosSolicitados" Type="Self.serviciosSolicitados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="serviciosSolicitados">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_serviciosSolicitadosDocumentos_serviciosSolicitados">
+    <End Role="serviciosSolicitados" Type="Self.serviciosSolicitados" Multiplicity="1" />
+    <End Role="serviciosSolicitadosDocumentos" Type="Self.serviciosSolicitadosDocumentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="serviciosSolicitados">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="serviciosSolicitadosDocumentos">
+        <PropertyRef Name="serviciosSolicitadosId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_serviciosSolicitadosClasificacion_prioridades">
+    <End Role="prioridades" Type="Self.prioridades" Multiplicity="0..1" />
+    <End Role="serviciosSolicitadosClasificacion" Type="Self.serviciosSolicitadosClasificacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="prioridades">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="serviciosSolicitadosClasificacion">
+        <PropertyRef Name="prioridadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="solucionesIntegrales58Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="documents" EntityType="Self.documents" />
+    <EntitySet Name="features" EntityType="Self.features" />
+    <EntitySet Name="access" EntityType="Self.access" />
+    <EntitySet Name="accessSubService" EntityType="Self.accessSubService" />
+    <EntitySet Name="categorys" EntityType="Self.categorys" />
+    <EntitySet Name="contactanos" EntityType="Self.contactanos" />
+    <EntitySet Name="costoXPeriodo" EntityType="Self.costoXPeriodo" />
+    <EntitySet Name="ctasCorriente" EntityType="Self.ctasCorriente" />
+    <EntitySet Name="documentServicio" EntityType="Self.documentServicio" />
+    <EntitySet Name="featureServicio" EntityType="Self.featureServicio" />
+    <EntitySet Name="grupos" EntityType="Self.grupos" />
+    <EntitySet Name="grupoServicio" EntityType="Self.grupoServicio" />
+    <EntitySet Name="identificationTypes" EntityType="Self.identificationTypes" />
+    <EntitySet Name="menus" EntityType="Self.menus" />
+    <EntitySet Name="pagosOnLineEstados" EntityType="Self.pagosOnLineEstados" />
+    <EntitySet Name="parameters" EntityType="Self.parameters" />
+    <EntitySet Name="parents" EntityType="Self.parents" />
+    <EntitySet Name="prioritys" EntityType="Self.prioritys" />
+    <EntitySet Name="profiles" EntityType="Self.profiles" />
+    <EntitySet Name="servicioAdquirido" EntityType="Self.servicioAdquirido" />
+    <EntitySet Name="servicioAdquiridoBeneficiarios" EntityType="Self.servicioAdquiridoBeneficiarios" />
+    <EntitySet Name="servicioAdquiridoBeneficiariosExequialDelete" EntityType="Self.servicioAdquiridoBeneficiariosExequialDelete" />
+    <EntitySet Name="servicioAuxExequialDelete" EntityType="Self.servicioAuxExequialDelete" />
+    <EntitySet Name="servicioAuxExequialDetalleDelete" EntityType="Self.servicioAuxExequialDetalleDelete" />
+    <EntitySet Name="servicioAuxPlanCigueniaDelete" EntityType="Self.servicioAuxPlanCigueniaDelete" />
+    <EntitySet Name="servicioAuxPlanCigueniaDetalleDelete" EntityType="Self.servicioAuxPlanCigueniaDetalleDelete" />
+    <EntitySet Name="servicioAuxSocialDesempleoDelete" EntityType="Self.servicioAuxSocialDesempleoDelete" />
+    <EntitySet Name="servicioAuxSocialDesempleoDetalleDelete" EntityType="Self.servicioAuxSocialDesempleoDetalleDelete" />
+    <EntitySet Name="servicioJuridicoDelete" EntityType="Self.servicioJuridicoDelete" />
+    <EntitySet Name="servicioJuridicoDetalleDelete" EntityType="Self.servicioJuridicoDetalleDelete" />
+    <EntitySet Name="servicios" EntityType="Self.servicios" />
+    <EntitySet Name="serviciosSolicitados" EntityType="Self.serviciosSolicitados" />
+    <EntitySet Name="serviciosSolicitadosClasificacion" EntityType="Self.serviciosSolicitadosClasificacion" />
+    <EntitySet Name="serviciosSolicitadosDocumentos" EntityType="Self.serviciosSolicitadosDocumentos" />
+    <EntitySet Name="sliders" EntityType="Self.sliders" />
+    <EntitySet Name="stateService" EntityType="Self.stateService" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="ubicanos" EntityType="Self.ubicanos" />
+    <EntitySet Name="users" EntityType="Self.users" />
+    <EntitySet Name="userTypes" EntityType="Self.userTypes" />
+    <EntitySet Name="userTypesGrupos" EntityType="Self.userTypesGrupos" />
+    <EntitySet Name="contrato" EntityType="Self.contrato" />
+    <EntitySet Name="parametrosGrales" EntityType="Self.parametrosGrales" />
+    <EntitySet Name="prioridades" EntityType="Self.prioridades" />
+    <EntitySet Name="smtp" EntityType="Self.smtp" />
+    <EntitySet Name="pagosOnLine" EntityType="Self.pagosOnLine" />
+    <AssociationSet Name="FK_serviciosSolicitadosDocumentos_documents" Association="Self.FK_serviciosSolicitadosDocumentos_documents">
+      <End Role="documents" EntitySet="documents" />
+      <End Role="serviciosSolicitadosDocumentos" EntitySet="serviciosSolicitadosDocumentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_featureServicio_features" Association="Self.FK_featureServicio_features">
+      <End Role="features" EntitySet="features" />
+      <End Role="featureServicio" EntitySet="featureServicio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_access_menus" Association="Self.FK_access_menus">
+      <End Role="menus" EntitySet="menus" />
+      <End Role="access" EntitySet="access" />
+    </AssociationSet>
+    <AssociationSet Name="FK_access_profiles" Association="Self.FK_access_profiles">
+      <End Role="profiles" EntitySet="profiles" />
+      <End Role="access" EntitySet="access" />
+    </AssociationSet>
+    <AssociationSet Name="FK_categorys_prioritys" Association="Self.FK_categorys_prioritys">
+      <End Role="prioritys" EntitySet="prioritys" />
+      <End Role="categorys" EntitySet="categorys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_featureServicio_servicios" Association="Self.FK_featureServicio_servicios">
+      <End Role="servicios" EntitySet="servicios" />
+      <End Role="featureServicio" EntitySet="featureServicio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_grupoServicio_grupo" Association="Self.FK_grupoServicio_grupo">
+      <End Role="grupos" EntitySet="grupos" />
+      <End Role="grupoServicio" EntitySet="grupoServicio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_servicioAdquirido_grupo" Association="Self.FK_servicioAdquirido_grupo">
+      <End Role="grupos" EntitySet="grupos" />
+      <End Role="servicioAdquirido" EntitySet="servicioAdquirido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_serviciosSolicitados_grupos" Association="Self.FK_serviciosSolicitados_grupos">
+      <End Role="grupos" EntitySet="grupos" />
+      <End Role="serviciosSolicitados" EntitySet="serviciosSolicitados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_grupoServicio_servicios" Association="Self.FK_grupoServicio_servicios">
+      <End Role="servicios" EntitySet="servicios" />
+      <End Role="grupoServicio" EntitySet="grupoServicio" />
+    </AssociationSet>
+    <AssociationSet Name="FK__users__identific__3D5E1FD2" Association="Self.FK__users__identific__3D5E1FD2">
+      <End Role="identificationTypes" EntitySet="identificationTypes" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_menus_menus" Association="Self.FK_menus_menus">
+      <End Role="menus" EntitySet="menus" />
+      <End Role="menus1" EntitySet="menus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__users__profileId__3E52440B" Association="Self.FK__users__profileId__3E52440B">
+      <End Role="profiles" EntitySet="profiles" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_servicioAdquirido_users" Association="Self.FK_servicioAdquirido_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="servicioAdquirido" EntitySet="servicioAdquirido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_beneficiarioDelServicio_servicios" Association="Self.FK_beneficiarioDelServicio_servicios">
+      <End Role="servicios" EntitySet="servicios" />
+      <End Role="servicioAdquiridoBeneficiarios" EntitySet="servicioAdquiridoBeneficiarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_servicioAuxExequial_stateService" Association="Self.FK_servicioAuxExequial_stateService">
+      <End Role="stateService" EntitySet="stateService" />
+      <End Role="servicioAuxExequialDelete" EntitySet="servicioAuxExequialDelete" />
+    </AssociationSet>
+    <AssociationSet Name="FK_servicioAuxExequialDetalle_servicioAuxExequial" Association="Self.FK_servicioAuxExequialDetalle_servicioAuxExequial">
+      <End Role="servicioAuxExequialDelete" EntitySet="servicioAuxExequialDelete" />
+      <End Role="servicioAuxExequialDetalleDelete" EntitySet="servicioAuxExequialDetalleDelete" />
+    </AssociationSet>
+    <AssociationSet Name="FK_servicioAuxPlanCiguenia_stateService" Association="Self.FK_servicioAuxPlanCiguenia_stateService">
+      <End Role="stateService" EntitySet="stateService" />
+      <End Role="servicioAuxPlanCigueniaDelete" EntitySet="servicioAuxPlanCigueniaDelete" />
+    </AssociationSet>
+    <AssociationSet Name="FK_servicioAuxPlanCigueniaDetalle_servicioAuxPlanCiguenia" Association="Self.FK_servicioAuxPlanCigueniaDetalle_servicioAuxPlanCiguenia">
+      <End Role="servicioAuxPlanCigueniaDelete" EntitySet="servicioAuxPlanCigueniaDelete" />
+      <End Role="servicioAuxPlanCigueniaDetalleDelete" EntitySet="servicioAuxPlanCigueniaDetalleDelete" />
+    </AssociationSet>
+    <AssociationSet Name="FK_servicioAuxSocialDesempleo_stateService" Association="Self.FK_servicioAuxSocialDesempleo_stateService">
+      <End Role="stateService" EntitySet="stateService" />
+      <End Role="servicioAuxSocialDesempleoDelete" EntitySet="servicioAuxSocialDesempleoDelete" />
+    </AssociationSet>
+    <AssociationSet Name="FK_servicioAuxSocialDesempleoDetalle_servicioAuxSocialDesempleo" Association="Self.FK_servicioAuxSocialDesempleoDetalle_servicioAuxSocialDesempleo">
+      <End Role="servicioAuxSocialDesempleoDelete" EntitySet="servicioAuxSocialDesempleoDelete" />
+      <End Role="servicioAuxSocialDesempleoDetalleDelete" EntitySet="servicioAuxSocialDesempleoDetalleDelete" />
+    </AssociationSet>
+    <AssociationSet Name="FK_servicioJuridico_stateService" Association="Self.FK_servicioJuridico_stateService">
+      <End Role="stateService" EntitySet="stateService" />
+      <End Role="servicioJuridicoDelete" EntitySet="servicioJuridicoDelete" />
+    </AssociationSet>
+    <AssociationSet Name="FK_servicioJuridicoDetalle_servicioJuridico" Association="Self.FK_servicioJuridicoDetalle_servicioJuridico">
+      <End Role="servicioJuridicoDelete" EntitySet="servicioJuridicoDelete" />
+      <End Role="servicioJuridicoDetalleDelete" EntitySet="servicioJuridicoDetalleDelete" />
+    </AssociationSet>
+    <AssociationSet Name="FK_serviciosSolicitados_servicios" Association="Self.FK_serviciosSolicitados_servicios">
+      <End Role="servicios" EntitySet="servicios" />
+      <End Role="serviciosSolicitados" EntitySet="serviciosSolicitados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_serviciosSolicitadosClasificacion_servicios" Association="Self.FK_serviciosSolicitadosClasificacion_servicios">
+      <End Role="servicios" EntitySet="servicios" />
+      <End Role="serviciosSolicitadosClasificacion" EntitySet="serviciosSolicitadosClasificacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_serviciosSolicitadosDocumentos_servicios" Association="Self.FK_serviciosSolicitadosDocumentos_servicios">
+      <End Role="servicios" EntitySet="servicios" />
+      <End Role="serviciosSolicitadosDocumentos" EntitySet="serviciosSolicitadosDocumentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_serviciosSolicitados_stateService" Association="Self.FK_serviciosSolicitados_stateService">
+      <End Role="stateService" EntitySet="stateService" />
+      <End Role="serviciosSolicitados" EntitySet="serviciosSolicitados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_serviciosSolicitados_users" Association="Self.FK_serviciosSolicitados_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="serviciosSolicitados" EntitySet="serviciosSolicitados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_serviciosSolicitadosDocumentos_serviciosSolicitados" Association="Self.FK_serviciosSolicitadosDocumentos_serviciosSolicitados">
+      <End Role="serviciosSolicitados" EntitySet="serviciosSolicitados" />
+      <End Role="serviciosSolicitadosDocumentos" EntitySet="serviciosSolicitadosDocumentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_serviciosSolicitadosClasificacion_prioridades" Association="Self.FK_serviciosSolicitadosClasificacion_prioridades">
+      <End Role="prioridades" EntitySet="prioridades" />
+      <End Role="serviciosSolicitadosClasificacion" EntitySet="serviciosSolicitadosClasificacion" />
+    </AssociationSet>
+    <EntitySet Name="initialDate" EntityType="solucionesIntegrales58Model.initialDate" />
+    <EntitySet Name="parametersPbx" EntityType="solucionesIntegrales58Model.parametersPbx" />
+    <EntitySet Name="tokenUri" EntityType="solucionesIntegrales58Model.tokenUri" />
+    <EntitySet Name="pay" EntityType="solucionesIntegrales58Model.pay" />
+    <EntitySet Name="payDetail" EntityType="solucionesIntegrales58Model.payDetail" />
+    <EntitySet Name="urlApiItbx" EntityType="solucionesIntegrales58Model.urlApiItbx" />
+    <EntitySet Name="registroPbx" EntityType="solucionesIntegrales58Model.registroPbx" />
+    <EntitySet Name="logs" EntityType="solucionesIntegrales58Model.logs" />
+    <EntitySet Name="serviciosToSave" EntityType="solucionesIntegrales58Model.serviciosToSave" />
+  </EntityContainer>
+  <EntityType Name="initialDate">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="startDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="endDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="parametersPbx">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uri" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="estado" Type="Boolean" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tokenUri">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="access_token" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="token_type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="expires_in" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="startdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="endtdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="estado" Type="Boolean" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="pay">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="periodo" Type="Int32" Nullable="false" />
+    <Property Name="anio" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updateAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="payDetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="typeDocument" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="nroDocument" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="desconocido1" Type="Int32" Nullable="false" />
+    <Property Name="desconocido2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="desconocido3" Type="Int32" Nullable="false" />
+    <Property Name="desconocido4" Type="Int32" Nullable="false" />
+    <Property Name="date1" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="desconocido5" Type="Int32" Nullable="false" />
+    <Property Name="desconocido6" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="desconocido7" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="date2" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="desconocido8" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="desconocido9" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="desconocido10" Type="Int32" Nullable="false" />
+    <Property Name="desconocido11" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="desconocido12" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="desconocido13" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="desconocido14" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="desconocido15" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="urlApiItbx">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="patch" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="observation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Boolean" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="registroPbx">
+    <Key>
+      <PropertyRef Name="idPbx" />
+    </Key>
+    <Property Name="idPbx" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="time" Type="DateTime" Precision="3" />
+    <Property Name="src" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="queue" Type="Int32" />
+    <Property Name="agent" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="event" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="waittime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="duration" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ingoing" Type="Int32" />
+    <Property Name="outgoing" Type="Int32" />
+    <Property Name="overflow" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="nit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="logs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="inner" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="serviciosToSave">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="saveRegisters" Type="Boolean" Nullable="false" />
+    <Property Name="codigo" Type="Int32" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+</Schema>
