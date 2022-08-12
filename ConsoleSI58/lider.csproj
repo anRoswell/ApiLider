@@ -77,12 +77,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\access.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\accessSubService.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Accounts.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
@@ -110,9 +104,6 @@
     <Compile Include="Models\camposxtipodoc.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\categorys.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CONSULTAR_DESPACHOS_X_MUNICIPIO_Result.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
@@ -124,18 +115,6 @@
     </Compile>
     <Compile Include="Models\CONSULTAR_EXPEDIENTES_TODOS_Result.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\contactanos.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\contrato.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\costoXPeriodo.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ctasCorriente.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\datos.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
@@ -152,50 +131,20 @@
     <Compile Include="Models\Despachos.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\documents.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\documentServicio.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EQUIVALENCIAS.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\errores.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\features.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\featureServicio.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\grupos.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\grupoServicio.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\identificationTypes.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\imagenes.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\initialDate.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\listas.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\logs.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\lotes.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\menus.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelLider.Context.cs">
       <AutoGen>True</AutoGen>
@@ -212,59 +161,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelLider.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelPbxRegisters.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelPbxRegisters.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelPbxRegisters.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelPbxRegisters.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelPbxRegisters.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\pagosOnLine.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\pagosOnLineEstados.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\parameters.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\parametersPbx.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\parametrosGrales.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\parents.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\pay.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\payDetail.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PERSONAS_NOMINAS.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\prioridades.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\prioritys.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PROCESOS.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\profiles.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RAD_ALIST.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
@@ -272,74 +173,11 @@
     <Compile Include="Models\RefreshToken.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\registroPbx.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\REPORTE_PRODUCCION_Result.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\series.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicioAdquirido.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicioAdquiridoBeneficiarios.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicioAdquiridoBeneficiariosExequialDelete.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicioAuxExequialDelete.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicioAuxExequialDetalleDelete.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicioAuxPlanCigueniaDelete.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicioAuxPlanCigueniaDetalleDelete.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicioAuxSocialDesempleoDelete.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicioAuxSocialDesempleoDetalleDelete.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicioJuridicoDelete.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicioJuridicoDetalleDelete.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\servicios.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\serviciosSolicitados.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\serviciosSolicitadosClasificacion.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\serviciosSolicitadosDocumentos.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\serviciosToSave.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sliders.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\smtp.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\stateService.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tiposdedocumentos.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
@@ -347,29 +185,11 @@
     <Compile Include="Models\TIPOSDELOTES.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tokenUri.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TQM_LOCK.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TQM_LOCK_CALIDAD.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ubicanos.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\urlApiItbx.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\users.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\userTypes.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\userTypesGrupos.cs">
-      <DependentUpon>ModelPbxRegisters.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usuarios.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
@@ -382,19 +202,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="Models\ModelPbxRegisters.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelPbxRegisters.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <EntityDeploy Include="Models\ModelLider.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelLider.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Models\ModelLider.edmx.diagram">
       <DependentUpon>ModelLider.edmx</DependentUpon>
-    </None>
-    <None Include="Models\ModelPbxRegisters.edmx.diagram">
-      <DependentUpon>ModelPbxRegisters.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -408,16 +221,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelLider.edmx</DependentUpon>
       <LastGenOutput>ModelLider.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ModelPbxRegisters.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelPbxRegisters.Context.cs</LastGenOutput>
-      <DependentUpon>ModelPbxRegisters.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\ModelPbxRegisters.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelPbxRegisters.edmx</DependentUpon>
-      <LastGenOutput>ModelPbxRegisters.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

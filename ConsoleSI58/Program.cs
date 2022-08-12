@@ -1,4 +1,5 @@
 ﻿using ConsoleSI58.Models;
+using Lider.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,6 @@ namespace Lider
         public static DateTime StartDate { get; set; }
         public static DateTime EndDate { get; set; }
         public static List<urlApiItbx> UrlApiItbx { get; set; }
-        public static List<serviciosToSave> serviciosToSave { get; set; }
         static HttpClient client = new HttpClient();
         public logs log { get; set; }
 
@@ -27,7 +27,6 @@ namespace Lider
             UrlApiItbx = GeturlApiItbx();
             parameters = GetParameters();
             initialDate = GetInitalDate();
-            serviciosToSave = GetServiciosToSave();
             if (parameters.count == 0)
             {
                 Console.WriteLine("No existen parametros!!! por favor validar.");
@@ -125,7 +124,7 @@ namespace Lider
         {
             if (registers != null)
             {
-                using (solucionesIntegrales58Entities db = new solucionesIntegrales58Entities())
+                using (SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities())
                 {
                     List<registroPbx> result2 = registers.Results.Where(b => serviciosToSave.Any(a => b.queue.Equals(a.codigo))).ToList();
                     if(result2.Count > 0)
@@ -153,7 +152,7 @@ namespace Lider
         /// <returns>Registro obtenido de base de datos</returns>
         static Parametros GetParameters()
         {
-            solucionesIntegrales58Entities db = new solucionesIntegrales58Entities();
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
             var result = (from p in db.parametersPbx
                             where p.estado == true
                             select p).ToList();
@@ -172,7 +171,7 @@ namespace Lider
         /// <returns>Registro obtenido de la base de datos</returns>
         static List<initialDate> GetInitalDate()
         {
-            solucionesIntegrales58Entities db = new solucionesIntegrales58Entities();
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
                 
             var result = (from d in db.initialDate
                             where d.estado == true 
@@ -202,7 +201,7 @@ namespace Lider
         /// <returns>resultado obtenido de la base de datos</returns>
         static List<urlApiItbx> GeturlApiItbx()
         {
-            solucionesIntegrales58Entities db = new solucionesIntegrales58Entities();
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
 
             List<urlApiItbx> result = (from u in db.urlApiItbx
                                         select u).ToList();
@@ -215,26 +214,13 @@ namespace Lider
         /// <param name="logs">Guardamos registro de los logs obtenidos</param>
         static void SaveLogs(logs log)
         {
-            using (solucionesIntegrales58Entities db = new solucionesIntegrales58Entities())
+            using (SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities())
             {
                 db.logs.Add(log);
                 db.SaveChanges();
             }
         }
 
-        /// <summary>
-        /// Obtenemos q registros vamos a guardar en la base de datos
-        /// </summary>
-        /// <returns>Listado de registros obtenidos de la BD</returns>
-        static List<serviciosToSave> GetServiciosToSave()
-        {
-            solucionesIntegrales58Entities db = new solucionesIntegrales58Entities();
-            var result = (from ss in db.serviciosToSave
-                          where ss.estado == true & ss.saveRegisters == true
-                          select ss).ToList();
-
-            return result;
-        }
 
         /*** CLASES ***/
         public class Login
