@@ -4,7 +4,53 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SID_PROTOCOL2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SID_PROTOCOL2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="initialDate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="startDate" Type="datetime" Nullable="false" />
+          <Property Name="endDate" Type="datetime" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="lastConsulta" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SID_PROTOCOL2.api.parametersApi' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="parametersApi">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="urlApi" />
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="createdAt" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="urlApi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="250" />
+          <Property Name="usuario" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="createdAt" Type="datetime" Nullable="false" />
+          <Property Name="updatedAt" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SID_PROTOCOL2.api.urlApiI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="urlApiI">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="description" />
+            <PropertyRef Name="createdAt" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patch" Type="varchar" MaxLength="500" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="observation" Type="text" />
+          <Property Name="estado" Type="bit" />
+          <Property Name="createdAt" Type="datetime" Nullable="false" />
+          <Property Name="updatedAt" Type="datetime" />
+        </EntityType>
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="Id" />
@@ -488,6 +534,20 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
           <Property Name="valorlista_lista_id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="valorlista_valor02" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="log_error">
+          <Key>
+            <PropertyRef Name="log_id" />
+            <PropertyRef Name="log_error" />
+            <PropertyRef Name="date_insert" />
+            <PropertyRef Name="type" />
+          </Key>
+          <Property Name="log_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="log_error" Type="text" Nullable="false" />
+          <Property Name="date_insert" Type="datetime" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_ArchivosZip_lotes">
           <End Role="lotes" Type="Self.lotes" Multiplicity="1" />
           <End Role="ArchivosZip" Type="Self.ArchivosZip" Multiplicity="*" />
@@ -668,6 +728,7 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
           <Parameter Name="MUNICIPIO" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="SID_PROTOCOL2ModelStoreContainer">
+          <EntitySet Name="initialDate" EntityType="Self.initialDate" Schema="api" store:Type="Tables" />
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArchivosZip" EntityType="Self.ArchivosZip" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="auditorias" EntityType="Self.auditorias" Schema="dbo" store:Type="Tables" />
@@ -696,6 +757,29 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
           <EntitySet Name="TQM_LOCK_CALIDAD" EntityType="Self.TQM_LOCK_CALIDAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="valoreslistas" EntityType="Self.valoreslistas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="parametersApi" EntityType="Self.parametersApi" store:Type="Tables" store:Schema="api">
+            <DefiningQuery>SELECT 
+    [parametersApi].[id] AS [id], 
+    [parametersApi].[urlApi] AS [urlApi], 
+    [parametersApi].[descripcion] AS [descripcion], 
+    [parametersApi].[usuario] AS [usuario], 
+    [parametersApi].[password] AS [password], 
+    [parametersApi].[estado] AS [estado], 
+    [parametersApi].[createdAt] AS [createdAt], 
+    [parametersApi].[updatedAt] AS [updatedAt]
+    FROM [api].[parametersApi] AS [parametersApi]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="urlApiI" EntityType="Self.urlApiI" store:Type="Tables" store:Schema="api">
+            <DefiningQuery>SELECT 
+    [urlApiI].[id] AS [id], 
+    [urlApiI].[patch] AS [patch], 
+    [urlApiI].[description] AS [description], 
+    [urlApiI].[observation] AS [observation], 
+    [urlApiI].[estado] AS [estado], 
+    [urlApiI].[createdAt] AS [createdAt], 
+    [urlApiI].[updatedAt] AS [updatedAt]
+    FROM [api].[urlApiI] AS [urlApiI]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="EQUIVALENCIAS" EntityType="Self.EQUIVALENCIAS" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [EQUIVALENCIAS].[ID] AS [ID], 
@@ -713,6 +797,14 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
     [errores].[error_stackTrace] AS [error_stackTrace], 
     [errores].[error_estado] AS [error_estado]
     FROM [dbo].[errores] AS [errores]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="log_error" EntityType="Self.log_error" store:Type="Tables" store:Schema="log">
+            <DefiningQuery>SELECT 
+    [log_error].[log_id] AS [log_id], 
+    [log_error].[log_error] AS [log_error], 
+    [log_error].[date_insert] AS [date_insert], 
+    [log_error].[type] AS [type]
+    FROM [log].[log_error] AS [log_error]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_ArchivosZip_lotes" Association="Self.FK_ArchivosZip_lotes">
             <End Role="lotes" EntitySet="lotes" />
@@ -763,8 +855,7 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
             <End Role="valoreslistas" EntitySet="valoreslistas" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SID_PROTOCOL2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1501,10 +1592,10 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
             <Parameter Name="TIPO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CONSULTAR_DESPACHOS_X_MUNICIPIO" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_DESPACHOS_X_MUNICIPIO_Result)">
-            <Parameter Name="MUNICIPIO" Mode="In" Type="String" />
+          <Parameter Name="MUNICIPIO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CONSULTAR_DOCUMENTOS_EXPEDIENTE" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result)">
-            <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
+          <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CONSULTAR_EXPEDIENTES" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_Result)">
             <Parameter Name="DEMANDANTE" Mode="In" Type="String" />
@@ -1513,7 +1604,7 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
             <Parameter Name="DESPACHO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CONSULTAR_EXPEDIENTES_TODOS" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_TODOS_Result)">
-            <Parameter Name="DESPACHO" Mode="In" Type="String" />
+          <Parameter Name="DESPACHO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CONSULTAR_MUNICIPIOS" ReturnType="Collection(String)" />
           <FunctionImport Name="CONSULTAR_RUTA_ZIP_CD_PLANO" ReturnType="Collection(String)">
@@ -1521,7 +1612,7 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
             <Parameter Name="NOMBRE_ARCHIVO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CONSULTAR_RUTA_ZIP_EXPEDIENTE" ReturnType="Collection(String)">
-            <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
+          <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="REPORTE_PRODUCCION" ReturnType="Collection(SID_PROTOCOL2Model.REPORTE_PRODUCCION_Result)">
             <Parameter Name="FECHAINICIAL" Mode="In" Type="DateTime" />
@@ -1529,6 +1620,10 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
             <Parameter Name="DESPACHO" Mode="In" Type="String" />
             <Parameter Name="MUNICIPIO" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="urlApiI" EntityType="SID_PROTOCOL2Model.urlApiI" />
+          <EntitySet Name="log_error" EntityType="SID_PROTOCOL2Model.log_error" />
+          <EntitySet Name="initialDate" EntityType="SID_PROTOCOL2Model.initialDate" />
+          <EntitySet Name="parametersApi" EntityType="SID_PROTOCOL2Model.parametersApi" />
         </EntityContainer>
         <ComplexType Name="CONSULTAR_DESPACHOS_X_MUNICIPIO_Result">
           <Property Type="String" Name="CODDESPACHO" Nullable="true" MaxLength="100" />
@@ -1566,6 +1661,60 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
           <Property Type="Int32" Name="TOTAL_DOCUMENTOS" Nullable="true" />
           <Property Type="Int32" Name="TOTAL_PAGINAS" Nullable="true" />
         </ComplexType>
+        <EntityType Name="urlApiI">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="description" />
+            <PropertyRef Name="createdAt" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patch" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="observation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="log_error">
+          <Key>
+            <PropertyRef Name="log_id" />
+            <PropertyRef Name="log_error1" />
+            <PropertyRef Name="date_insert" />
+            <PropertyRef Name="type" />
+          </Key>
+          <Property Name="log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="log_error1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date_insert" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="initialDate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="startDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="endDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="lastConsulta" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="parametersApi">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="urlApi" />
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="createdAt" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="urlApi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedAt" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2138,6 +2287,54 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="urlApiI">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.urlApiI">
+              <MappingFragment StoreEntitySet="urlApiI">
+                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="observation" ColumnName="observation" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="patch" ColumnName="patch" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="log_error">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.log_error">
+              <MappingFragment StoreEntitySet="log_error">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="date_insert" ColumnName="date_insert" />
+                <ScalarProperty Name="log_error1" ColumnName="log_error" />
+                <ScalarProperty Name="log_id" ColumnName="log_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="initialDate">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.initialDate">
+              <MappingFragment StoreEntitySet="initialDate">
+                <ScalarProperty Name="lastConsulta" ColumnName="lastConsulta" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parametersApi">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.parametersApi">
+              <MappingFragment StoreEntitySet="parametersApi">
+                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="urlApi" ColumnName="urlApi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

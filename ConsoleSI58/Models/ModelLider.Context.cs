@@ -57,6 +57,10 @@ namespace Lider.Models
         public virtual DbSet<valoreslistas> valoreslistas { get; set; }
         public virtual DbSet<EQUIVALENCIAS> EQUIVALENCIAS { get; set; }
         public virtual DbSet<errores> errores { get; set; }
+        public virtual DbSet<urlApiI> urlApiI { get; set; }
+        public virtual DbSet<log_error> log_error { get; set; }
+        public virtual DbSet<initialDate> initialDate { get; set; }
+        public virtual DbSet<parametersApi> parametersApi { get; set; }
     
         public virtual ObjectResult<string> CONSULTAR_ARCHIVOS_ZIP(Nullable<int> iD_LOTE, string iNSTANCIA, string cUADERNO, string tIPO)
         {

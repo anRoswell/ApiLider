@@ -104,6 +104,7 @@
     <Compile Include="Models\camposxtipodoc.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClassResponseLogin.cs" />
     <Compile Include="Models\CONSULTAR_DESPACHOS_X_MUNICIPIO_Result.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
@@ -140,7 +141,13 @@
     <Compile Include="Models\imagenes.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\initialDate.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\listas.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\log_error.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\lotes.cs">
@@ -160,6 +167,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelLider.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\parametersApi.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PERSONAS_NOMINAS.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
@@ -189,6 +199,9 @@
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TQM_LOCK_CALIDAD.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\urlApiI.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usuarios.cs">

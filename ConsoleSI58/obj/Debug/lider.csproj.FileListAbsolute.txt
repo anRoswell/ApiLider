@@ -1,6 +1,3 @@
-D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\ConsoleSI58.exe.config
-D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\ConsoleSI58.exe
-D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\ConsoleSI58.pdb
 D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\EntityFramework.dll
 D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\EntityFramework.SqlServer.dll
 D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\Newtonsoft.Json.dll
@@ -12,5 +9,8 @@ D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\System.Net.Http.Formatting.xm
 D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\lider.csproj.AssemblyReference.cache
 D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\lider.csproj.CoreCompileInputs.cache
 D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\lider.csproj.CopyComplete
-D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\ConsoleSI58.exe
-D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\ConsoleSI58.pdb
+D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\Lider.exe.config
+D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\Lider.exe
+D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\Lider.pdb
+D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\Lider.exe
+D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\Lider.pdb

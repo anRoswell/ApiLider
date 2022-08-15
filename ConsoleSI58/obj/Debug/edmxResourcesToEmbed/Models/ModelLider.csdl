@@ -761,6 +761,10 @@
       <Parameter Name="DESPACHO" Mode="In" Type="String" />
       <Parameter Name="MUNICIPIO" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="urlApiI" EntityType="SID_PROTOCOL2Model.urlApiI" />
+    <EntitySet Name="log_error" EntityType="SID_PROTOCOL2Model.log_error" />
+    <EntitySet Name="initialDate" EntityType="SID_PROTOCOL2Model.initialDate" />
+    <EntitySet Name="parametersApi" EntityType="SID_PROTOCOL2Model.parametersApi" />
   </EntityContainer>
   <ComplexType Name="CONSULTAR_DESPACHOS_X_MUNICIPIO_Result">
     <Property Type="String" Name="CODDESPACHO" Nullable="true" MaxLength="100" />
@@ -798,4 +802,58 @@
     <Property Type="Int32" Name="TOTAL_DOCUMENTOS" Nullable="true" />
     <Property Type="Int32" Name="TOTAL_PAGINAS" Nullable="true" />
   </ComplexType>
+  <EntityType Name="urlApiI">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="description" />
+      <PropertyRef Name="createdAt" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="patch" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="observation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Boolean" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="log_error">
+    <Key>
+      <PropertyRef Name="log_id" />
+      <PropertyRef Name="log_error1" />
+      <PropertyRef Name="date_insert" />
+      <PropertyRef Name="type" />
+    </Key>
+    <Property Name="log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="log_error1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="date_insert" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="type" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="initialDate">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="startDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="endDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="lastConsulta" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="parametersApi">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="urlApi" />
+      <PropertyRef Name="usuario" />
+      <PropertyRef Name="password" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="createdAt" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="urlApi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

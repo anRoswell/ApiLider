@@ -48,6 +48,12 @@
         <AssociationConnector Association="SID_PROTOCOL2Model.FK_lotes_usuarios_01" ManuallyRouted="false" />
         <AssociationConnector Association="SID_PROTOCOL2Model.FK_errores_usuarios" ManuallyRouted="false" />
       </Diagram>
+      <Diagram DiagramId="b894f157772c4edbb71f5fde9053d735" Name="parametros" >
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.urlApiI" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.log_error" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.initialDate" Width="1.5" PointX="6.625" PointY="0.75" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.parametersApi" Width="1.5" PointX="0.625" PointY="0.75" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

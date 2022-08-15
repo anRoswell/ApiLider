@@ -1,5 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SID_PROTOCOL2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="initialDate">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="startDate" Type="datetime" Nullable="false" />
+    <Property Name="endDate" Type="datetime" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+    <Property Name="lastConsulta" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SID_PROTOCOL2.api.parametersApi' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="parametersApi">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="urlApi" />
+      <PropertyRef Name="usuario" />
+      <PropertyRef Name="password" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="createdAt" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="urlApi" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="250" />
+    <Property Name="usuario" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="estado" Type="bit" Nullable="false" />
+    <Property Name="createdAt" Type="datetime" Nullable="false" />
+    <Property Name="updatedAt" Type="datetime" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SID_PROTOCOL2.api.urlApiI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="urlApiI">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="description" />
+      <PropertyRef Name="createdAt" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="patch" Type="varchar" MaxLength="500" />
+    <Property Name="description" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="observation" Type="text" />
+    <Property Name="estado" Type="bit" />
+    <Property Name="createdAt" Type="datetime" Nullable="false" />
+    <Property Name="updatedAt" Type="datetime" />
+  </EntityType>
   <EntityType Name="Accounts">
     <Key>
       <PropertyRef Name="Id" />
@@ -483,6 +529,20 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
     <Property Name="valorlista_lista_id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="valorlista_valor02" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="log_error">
+    <Key>
+      <PropertyRef Name="log_id" />
+      <PropertyRef Name="log_error" />
+      <PropertyRef Name="date_insert" />
+      <PropertyRef Name="type" />
+    </Key>
+    <Property Name="log_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="log_error" Type="text" Nullable="false" />
+    <Property Name="date_insert" Type="datetime" Nullable="false" />
+    <Property Name="type" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="FK_ArchivosZip_lotes">
     <End Role="lotes" Type="Self.lotes" Multiplicity="1" />
     <End Role="ArchivosZip" Type="Self.ArchivosZip" Multiplicity="*" />
@@ -663,6 +723,7 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
     <Parameter Name="MUNICIPIO" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="SID_PROTOCOL2ModelStoreContainer">
+    <EntitySet Name="initialDate" EntityType="Self.initialDate" Schema="api" store:Type="Tables" />
     <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArchivosZip" EntityType="Self.ArchivosZip" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="auditorias" EntityType="Self.auditorias" Schema="dbo" store:Type="Tables" />
@@ -691,6 +752,29 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
     <EntitySet Name="TQM_LOCK_CALIDAD" EntityType="Self.TQM_LOCK_CALIDAD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="valoreslistas" EntityType="Self.valoreslistas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="parametersApi" EntityType="Self.parametersApi" store:Type="Tables" store:Schema="api">
+      <DefiningQuery>SELECT 
+    [parametersApi].[id] AS [id], 
+    [parametersApi].[urlApi] AS [urlApi], 
+    [parametersApi].[descripcion] AS [descripcion], 
+    [parametersApi].[usuario] AS [usuario], 
+    [parametersApi].[password] AS [password], 
+    [parametersApi].[estado] AS [estado], 
+    [parametersApi].[createdAt] AS [createdAt], 
+    [parametersApi].[updatedAt] AS [updatedAt]
+    FROM [api].[parametersApi] AS [parametersApi]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="urlApiI" EntityType="Self.urlApiI" store:Type="Tables" store:Schema="api">
+      <DefiningQuery>SELECT 
+    [urlApiI].[id] AS [id], 
+    [urlApiI].[patch] AS [patch], 
+    [urlApiI].[description] AS [description], 
+    [urlApiI].[observation] AS [observation], 
+    [urlApiI].[estado] AS [estado], 
+    [urlApiI].[createdAt] AS [createdAt], 
+    [urlApiI].[updatedAt] AS [updatedAt]
+    FROM [api].[urlApiI] AS [urlApiI]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="EQUIVALENCIAS" EntityType="Self.EQUIVALENCIAS" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [EQUIVALENCIAS].[ID] AS [ID], 
@@ -708,6 +792,14 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
     [errores].[error_stackTrace] AS [error_stackTrace], 
     [errores].[error_estado] AS [error_estado]
     FROM [dbo].[errores] AS [errores]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="log_error" EntityType="Self.log_error" store:Type="Tables" store:Schema="log">
+      <DefiningQuery>SELECT 
+    [log_error].[log_id] AS [log_id], 
+    [log_error].[log_error] AS [log_error], 
+    [log_error].[date_insert] AS [date_insert], 
+    [log_error].[type] AS [type]
+    FROM [log].[log_error] AS [log_error]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_ArchivosZip_lotes" Association="Self.FK_ArchivosZip_lotes">
       <End Role="lotes" EntitySet="lotes" />
