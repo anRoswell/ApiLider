@@ -14,3 +14,18 @@ D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\Lider.exe
 D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\Lider.pdb
 D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\Lider.exe
 D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\Lider.pdb
+D:\cursos\lider\ApiLider\ConsoleSI58\obj\Debug\lider.csproj.CoreCompileInputs.cache
+D:\cursos\lider\ApiLider\ConsoleSI58\obj\Debug\Lider.exe
+D:\cursos\lider\ApiLider\ConsoleSI58\obj\Debug\Lider.pdb
+D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\Lider.exe.config
+D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\Lider.exe
+D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\Lider.pdb
+D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\EntityFramework.dll
+D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\EntityFramework.SqlServer.dll
+D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\Newtonsoft.Json.dll
+D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\System.Net.Http.Formatting.dll
+D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\EntityFramework.xml
+D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\EntityFramework.SqlServer.xml
+D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\Newtonsoft.Json.xml
+D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\System.Net.Http.Formatting.xml
+D:\cursos\lider\ApiLider\ConsoleSI58\obj\Debug\lider.csproj.CopyComplete

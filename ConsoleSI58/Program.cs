@@ -233,7 +233,6 @@ namespace Lider
         /// <param name="login">Clase login con los datos de acceso</param>
         /// <returns></returns>
         
-        public class ExpPorCUIResponse
 
         static async Task<ExpPorCUIResponse> ExpPorCUI(LoginResponse login, ParametersCUI parameter)
         {

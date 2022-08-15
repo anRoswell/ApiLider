@@ -112,9 +112,11 @@
     <Compile Include="Models\ClassCuadernoResponse.cs" />
     <Compile Include="Models\ClassCuadernos.cs" />
     <Compile Include="Models\ClassExpPorCUI.cs" />
+    <Compile Include="Models\ClassExpPorCUIResponse.cs" />
     <Compile Include="Models\ClassJsonToSendApi.cs" />
     <Compile Include="Models\ClassResponseLogin.cs" />
     <Compile Include="Models\ClassTRDAreaSerieSubSerie.cs" />
+    <Compile Include="Models\ClassTRDAreaSerieSubSerieResponse.cs" />
     <Compile Include="Models\ClassTrdEmpresaResponse.cs" />
     <Compile Include="Models\ClassTrdPorEmpresa.cs" />
     <Compile Include="Models\ClassUsuarioDeArea.cs" />
