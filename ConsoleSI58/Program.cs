@@ -46,11 +46,7 @@ namespace Lider
             try
             {
                 // Update port # in the following line.
-                string urlApiI = string.Concat(parametersApi.ParametersApi[0].urlApi);
-                client.BaseAddress = new Uri(urlApiI);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                AddHeaders();
                 Login login = new Login
                 {
                     UData = parametersApi.ParametersApi[0].usuario,
@@ -58,14 +54,13 @@ namespace Lider
                 };
 
                 LoginResponse result = await LoginServer(login);
-                
-                //await GetRegistroPBXApiRest(result, result);
+                List<DataToSend> records = GetDataToSendApi();
+                await SaveRegistersAsync(result, records);
+
                 Console.WriteLine("Consulta exitosa, bye!!!");
-                //Console.ReadLine();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 log_error l = new log_error
                 {
                     log_error1 = e.Message                    
@@ -74,6 +69,26 @@ namespace Lider
             }            
         }
 
+        
+
+        #region CONSULTAMOS DATA A BASE DE DATOS
+        /// <summary>
+        /// Consultamos api y obtenemos los registros en el rango de fecha indicado
+        /// </summary>
+        /// <param name="login">Clase login con las variables necesarias para la consulta</param>
+        /// <returns></returns>
+        static List<DataToSend> GetDataToSendApi()
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [api].[GetDataToSendApi] 'consultar'");
+            List<DataToSend> records = db.Database.SqlQuery<DataToSend>(query).ToList();
+
+            // Sino devuelve null
+            return records;
+        }
+        #endregion
+
+        #region CONSULTAMOS A LAS API
         /// <summary>
         /// Realiza login y obtenemos token
         /// </summary>
@@ -91,48 +106,223 @@ namespace Lider
         }
 
         /// <summary>
-        /// Consultamos api y obtenemos los registros en el rango de fecha indicado
-        /// </summary>
-        /// <param name="login">Clase login con las variables necesarias para la consulta</param>
-        /// <returns></returns>
-        static async Task<datos_finales> GetDataToSendApi(LoginResponse login)
-        {
-            
-
-           
-
-            // Sino devuelve null
-            return null;
-        }
-
-        /// <summary>
         /// Realizamos recorrido de los datos obtenidos 
         /// </summary>
         /// <param name="registers">Data obenida de la Api</param>
-        static async Task SaveRegistersAsync(LoginResponse login, datos_finales registers)
+        static async Task SaveRegistersAsync(LoginResponse login, List<DataToSend> records)
         {
             // Aqui llamamos a la Api a enviarle la data
             try
             {
+                CREAREXPEDIENTE expediente = new CREAREXPEDIENTE();
+                expediente.Token = login.Data.Token;
+                expediente.AppKey = parametersApi.ParametersApi[0].password;                
+                expediente.ExecutionObject.Name = "Expedientes";
+                expediente.ExecutionObject.WebServiceMethod.Name = "InsertExpediente";
+                expediente.ExecutionObject.WebServiceMethod.Parameters = records[0];
+
                 string token = login.Data.Token;
-                StartDate = initialDate[0].startDate;
+                //StartDate = initialDate[0].startDate;
                 EndDate = DateTime.Now;
+                string endPoint = EndPointApi[1].patch;
 
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
-                HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+                HttpResponseMessage response = await client.PostAsJsonAsync(endPoint, expediente);
                 response.EnsureSuccessStatusCode();
 
-                JsonToSendApi res = await response.Content.ReadAsAsync<JsonToSendApi>();
-
-                // return URI of the created resource.
-                
+                ResponseExpendiente res = await response.Content.ReadAsAsync<ResponseExpendiente>();
             }
             catch (Exception e)
             {
                 throw;
             }
         }
+
+        /// <summary>
+        /// Realiza login y obtenemos token
+        /// </summary>
+        /// <param name="login">Clase login con los datos de acceso</param>
+        /// <returns></returns>
+        static async Task<TdrEmpresaReponse> TrdPorEmpresa(LoginResponse login, ParametersTrdEmpresa parameter)
+        {
+            TRDPOREMPRESA trdEmpresa = new TRDPOREMPRESA();
+            trdEmpresa.Token = login.Data.Token;
+            trdEmpresa.AppKey = parametersApi.ParametersApi[0].password;
+            trdEmpresa.ExecutionObject.Name = "TRD";
+            trdEmpresa.ExecutionObject.WebServiceMethod.Name = "GetTRDIdAreaEmpresa";
+            trdEmpresa.ExecutionObject.WebServiceMethod.Parameters = parameter;
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            response.EnsureSuccessStatusCode();
+
+            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+
+            return res;
+        }
+
+        /// <summary>
+        /// TrdASS
+        /// </summary>
+        /// <param name="login">Clase login con los datos de acceso</param>
+        /// <returns></returns>
+        static async Task<TdrEmpresaReponse> TrdASS(LoginResponse login, ParametersTrdASS parameter)
+        {
+            TRDAreaSerieSubSerie trdSSS = new TRDAreaSerieSubSerie();
+            trdSSS.Token = login.Data.Token;
+            trdSSS.AppKey = parametersApi.ParametersApi[0].password;
+            trdSSS.ExecutionObject.Name = "TRD";
+            trdSSS.ExecutionObject.WebServiceMethod.Name = "GetTRDFilter";
+            trdSSS.ExecutionObject.WebServiceMethod.Parameters = parameter;
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            response.EnsureSuccessStatusCode();
+
+            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+
+            return res;
+        }
+
+        /// <summary>
+        /// TrdASS
+        /// </summary>
+        /// <param name="login">Clase login con los datos de acceso</param>
+        /// <returns></returns>
+        static async Task<TdrEmpresaReponse> UsuarioDeArea(LoginResponse login, ParametersUDA parameter)
+        {
+            UsuarioDeArea usrDeArea = new UsuarioDeArea();
+            usrDeArea.Token = login.Data.Token;
+            usrDeArea.AppKey = parametersApi.ParametersApi[0].password;
+            usrDeArea.ExecutionObject.Name = "Usuario";
+            usrDeArea.ExecutionObject.WebServiceMethod.Name = "GetUsuarioArea";
+            usrDeArea.ExecutionObject.WebServiceMethod.Parameters = parameter;
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            response.EnsureSuccessStatusCode();
+
+            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+
+            return res;
+        }
+
+        /// <summary>
+        /// TrdASS
+        /// </summary>
+        /// <param name="login">Clase login con los datos de acceso</param>
+        /// <returns></returns>
+        static async Task<TdrEmpresaReponse> CrearDocumento(LoginResponse login, ParametersCD parameter)
+        {
+            CrearDocumento crearDocumento = new CrearDocumento();
+            crearDocumento.Token = login.Data.Token;
+            crearDocumento.AppKey = parametersApi.ParametersApi[0].password;
+            crearDocumento.ExecutionObject.Name = "Documentos";
+            crearDocumento.ExecutionObject.WebServiceMethod.Name = "CrearDocumento";
+            crearDocumento.ExecutionObject.WebServiceMethod.Parameters = parameter;
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            response.EnsureSuccessStatusCode();
+
+            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+
+            return res;
+        }
+
+        /// <summary>
+        /// TrdASS
+        /// </summary>
+        /// <param name="login">Clase login con los datos de acceso</param>
+        /// <returns></returns>
+        static async Task<TdrEmpresaReponse> ExpPorCUI(LoginResponse login, ParametersCUI parameter)
+        {
+            ExpPorCUI expPorCUI = new ExpPorCUI();
+            expPorCUI.Token = login.Data.Token;
+            expPorCUI.AppKey = parametersApi.ParametersApi[0].password;
+            expPorCUI.ExecutionObject.Name = "Documentos";
+            expPorCUI.ExecutionObject.WebServiceMethod.Name = "CrearDocumento";
+            expPorCUI.ExecutionObject.WebServiceMethod.Parameters = parameter;
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            response.EnsureSuccessStatusCode();
+
+            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+
+            return res;
+        }
+
+        /// <summary>
+        /// TrdASS
+        /// </summary>
+        /// <param name="login">Clase login con los datos de acceso</param>
+        /// <returns></returns>
+        static async Task<TdrEmpresaReponse> Carpetas(LoginResponse login, ParametersFolder parameter)
+        {
+            Folder folder = new Folder();
+            folder.Token = login.Data.Token;
+            folder.AppKey = parametersApi.ParametersApi[0].password;
+            folder.ExecutionObject.Name = "Carpetas";
+            folder.ExecutionObject.WebServiceMethod.Name = "GetCarpetas";
+            folder.ExecutionObject.WebServiceMethod.Parameters = parameter;
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            response.EnsureSuccessStatusCode();
+
+            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+
+            return res;
+        }
+
+        /// <summary>
+        /// TrdASS
+        /// </summary>
+        /// <param name="login">Clase login con los datos de acceso</param>
+        /// <returns></returns>
+        static async Task<TdrEmpresaReponse> Cuadernos(LoginResponse login, ParametersCuadernos parameter)
+        {
+            Cuadernos cuadernos = new Cuadernos();
+            cuadernos.Token = login.Data.Token;
+            cuadernos.AppKey = parametersApi.ParametersApi[0].password;
+            cuadernos.ExecutionObject.Name = "Cuaderno";
+            cuadernos.ExecutionObject.WebServiceMethod.Name = "GetCuadernosCUI";
+            cuadernos.ExecutionObject.WebServiceMethod.Parameters = parameter;
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            response.EnsureSuccessStatusCode();
+
+            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+
+            return res;
+        }
+
+        /// <summary>
+        /// TrdASS
+        /// </summary>
+        /// <param name="login">Clase login con los datos de acceso</param>
+        /// <returns></returns>
+        static async Task<CrearCuadernoResponse> CrearCuadernos(LoginResponse login, ParametersCC parameter)
+        {
+            CreacionCuadernos creacionCuadernos = new CreacionCuadernos();
+            creacionCuadernos.Token = login.Data.Token;
+            creacionCuadernos.AppKey = parametersApi.ParametersApi[0].password;
+            creacionCuadernos.ExecutionObject.Name = "Cuaderno";
+            creacionCuadernos.ExecutionObject.WebServiceMethod.Name = "CrearCuaderno";
+            creacionCuadernos.ExecutionObject.WebServiceMethod.Parameters = parameter;
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            response.EnsureSuccessStatusCode();
+
+            CrearCuadernoResponse res = await response.Content.ReadAsAsync<CrearCuadernoResponse>();
+
+            return res;
+        }
+
+        private static void AddHeaders()
+        {
+            string urlApiI = string.Concat(parametersApi.ParametersApi[0].urlApi);
+            client.BaseAddress = new Uri(urlApiI);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+        #endregion
 
         /// <summary>
         /// Obtenemos parametros iniciales

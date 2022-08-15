@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lider.Models
 {
@@ -14,24 +10,24 @@ namespace Lider.Models
         public WebServiceMethod WebServiceMethod { get; set; }
     }
 
-    public class Parameters
+    public class DataToSend
     {
-        public string IdTablaRetencionDocumental { get; set; }
+        [Required]
+        public int IdTablaRetencionDocumental { get; set; }
         public string Nombre { get; set; }
-
         [JsonProperty("IdVersionTablaRetencionDocumental ")]
-        public string IdVersionTablaRetencionDocumental { get; set; }
-        public string IdUsuarioResponsable { get; set; }
+        public int IdVersionTablaRetencionDocumental { get; set; }
+        public int IdUsuarioResponsable { get; set; }
         public string Descripcion { get; set; }
         public string FechaFinal { get; set; }
-        public string VerPublico { get; set; }
+        public int VerPublico { get; set; }
         public string NumeroRadicacionProceso { get; set; }
-        public string IdCiudad { get; set; }
-        public string IdAreaEmpresa { get; set; }
-        public string Metadatos { get; set; }
+        public int IdCiudad { get; set; }
+        public int IdAreaEmpresa { get; set; }
+        public string[] Metadatos { get; set; }
     }
 
-    public class JsonToSendApi
+    public class CREAREXPEDIENTE
     {
         public string Token { get; set; }
         public string AppKey { get; set; }
@@ -41,8 +37,13 @@ namespace Lider.Models
     public class WebServiceMethod
     {
         public string Name { get; set; }
-        public Parameters Parameters { get; set; }
+        public DataToSend Parameters { get; set; }
     }
 
-
+    public class ResponseExpendiente
+    {
+        public bool Ok { get; set; }
+        public string Data { get; set; }
+        public string Error { get; set; }
+    }
 }

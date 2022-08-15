@@ -104,7 +104,17 @@
     <Compile Include="Models\camposxtipodoc.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClassCarpetas.cs" />
+    <Compile Include="Models\ClassCreacionCuadernos.cs" />
+    <Compile Include="Models\ClassCrearDocumentoBase64.cs" />
+    <Compile Include="Models\ClassCuadernos.cs" />
+    <Compile Include="Models\ClassExpPorCUI.cs" />
+    <Compile Include="Models\ClassJsonToSendApi.cs" />
     <Compile Include="Models\ClassResponseLogin.cs" />
+    <Compile Include="Models\ClassTRDAreaSerieSubSerie.cs" />
+    <Compile Include="Models\ClassTrdEmpresaResponse.cs" />
+    <Compile Include="Models\ClassTrdPorEmpresa.cs" />
+    <Compile Include="Models\ClassUsuarioDeArea.cs" />
     <Compile Include="Models\CONSULTAR_DESPACHOS_X_MUNICIPIO_Result.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
