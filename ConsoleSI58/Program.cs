@@ -29,6 +29,7 @@ namespace Lider
 
             if (parametersApi.Count == 0)
             {
+                // Enviar correo informativo
                 Console.WriteLine("No existen parametros!!! por favor validar.");
             }
             else
@@ -53,9 +54,14 @@ namespace Lider
                     AppKey = parametersApi.ParametersApi[0].password
                 };
 
-                LoginResponse result = await LoginServer(login);
+                LoginResponse loginResponse = await LoginServer(login);
                 List<DataToSend> records = GetDataToSendApi();
-                await CrearExpediente(result, records);
+
+                UserPorAreaResponse respUserPorArea = await CallUserPorAreaParametersAsync(loginResponse, 2585);
+                TRDAreaSerieSubSerieResponse tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse);
+                TdrEmpresaReponse tdrEmpresaReponse = await TRDEmpresaParameters(loginResponse);
+
+                await CrearExpediente(loginResponse, records);
 
                 Console.WriteLine("Consulta exitosa, bye!!!");
             }
@@ -69,9 +75,56 @@ namespace Lider
             }            
         }
 
-        
+        #region PUENTE TO CALL API
+        static async Task<UserPorAreaResponse> CallUserPorAreaParametersAsync(LoginResponse loginResponse, int IdArea)
+        {
+            ParametersUDA parameters = new ParametersUDA
+            {
+                IdArea = IdArea
+            };
 
-        #region CONSULTAMOS DATA A BASE DE DATOS
+            UserPorAreaResponse usuarioPorArea = await UsuarioDeArea(loginResponse, parameters);
+            return usuarioPorArea;
+        }
+
+        static async Task<TRDAreaSerieSubSerieResponse> TRDASSParameters(LoginResponse login)
+        {
+            ParametersTrdASS parameters = new ParametersTrdASS
+            {
+                CodigoArea = "01.15",
+                CodigoSerie = "100",
+                CodigoSubSerie = "100-10"
+            };
+
+            TRDAreaSerieSubSerieResponse trdASS = await TrdASS(login, parameters);
+            return trdASS;
+        }
+
+        static async Task<TdrEmpresaReponse> TRDEmpresaParameters(LoginResponse login)
+        {
+            ParametersTrdEmpresa parameters = new ParametersTrdEmpresa
+            {
+                IdAreaEmpresa = "2587"
+            };
+
+            TdrEmpresaReponse trdASS = await TrdPorEmpresa(login, parameters);
+            return trdASS;
+        }
+
+        //static async Task<TdrEmpresaReponse> CrearExpedienteParameters(LoginResponse login)
+        //{
+        //    ParametersTrdEmpresa parameters = new ParametersTrdEmpresa
+        //    {
+        //        IdAreaEmpresa = "2587"
+        //    };
+
+        //    TdrEmpresaReponse trdASS = await CrearExpediente(login, parameters);
+        //    return trdASS;
+        //}
+
+        #endregion
+
+        #region CONSULTAMOS DATA A BASE DE DATOS PARA OBTENER DATA A ENVIAR
         /// <summary>
         /// Consultamos api y obtenemos los registros en el rango de fecha indicado
         /// </summary>
@@ -86,6 +139,7 @@ namespace Lider
             // Sino devuelve null
             return records;
         }
+        
         #endregion
 
         #region CONSULTAMOS A LAS API
@@ -109,7 +163,7 @@ namespace Lider
         /// Realizamos recorrido de los datos obtenidos 
         /// </summary>
         /// <param name="registers">Data obenida de la Api</param>
-        static async Task CrearExpediente(LoginResponse login, List<DataToSend> records)
+        static async Task CrearExpediente(LoginResponse login, List<DataToSend> parameters)
         {
             // Aqui llamamos a la Api a enviarle la data
             try
@@ -119,7 +173,7 @@ namespace Lider
                 expediente.AppKey = parametersApi.ParametersApi[0].password;                
                 expediente.ExecutionObject.Name = "Expedientes";
                 expediente.ExecutionObject.WebServiceMethod.Name = "InsertExpediente";
-                expediente.ExecutionObject.WebServiceMethod.Parameters = records[0];
+                expediente.ExecutionObject.WebServiceMethod.Parameters = parameters[0];
 
                 string token = login.Data.Token;
                 //StartDate = initialDate[0].startDate;
@@ -186,21 +240,21 @@ namespace Lider
         /// <summary>
         /// TrdASS
         /// </summary>
-        /// <param name="login">Clase login con los datos de acceso</param>
+        /// <param name="loginResponse">Clase login con los datos de acceso</param>
         /// <returns></returns>
-        static async Task<UserPorArea> UsuarioDeArea(LoginResponse login, ParametersUDA parameter)
+        static async Task<UserPorAreaResponse> UsuarioDeArea(LoginResponse loginResponse, ParametersUDA parameter)
         {
             UsuarioDeArea usrDeArea = new UsuarioDeArea();
-            usrDeArea.Token = login.Data.Token;
+            usrDeArea.Token = loginResponse.Data.Token;
             usrDeArea.AppKey = parametersApi.ParametersApi[0].password;
             usrDeArea.ExecutionObject.Name = "Usuario";
             usrDeArea.ExecutionObject.WebServiceMethod.Name = "GetUsuarioArea";
             usrDeArea.ExecutionObject.WebServiceMethod.Parameters = parameter;
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, loginResponse);
             response.EnsureSuccessStatusCode();
 
-            UserPorArea res = await response.Content.ReadAsAsync<UserPorArea>();
+            UserPorAreaResponse res = await response.Content.ReadAsAsync<UserPorAreaResponse>();
 
             return res;
         }
@@ -326,6 +380,7 @@ namespace Lider
         }
         #endregion
 
+        #region CONSULTAS PARAMETROS INICIALES
         /// <summary>
         /// Obtenemos parametros iniciales
         /// </summary>
@@ -353,9 +408,9 @@ namespace Lider
         {
             SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
                 
-            var result = (from d in db.initialDate
-                            where d.estado == true 
-                            select d).ToList();
+            List<initialDate> result = (from d in db.initialDate
+                                        where d.estado == true 
+                                        select d).ToList();
 
             return result;
         }
@@ -384,7 +439,7 @@ namespace Lider
             SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
 
             List<urlApiI> result = (from u in db.urlApiI
-                                       select u).ToList();
+                                    select u).ToList();
             return result;
         }
 
@@ -400,7 +455,9 @@ namespace Lider
                 db.SaveChanges();
             }
         }
+        #endregion
 
+        #region CLASES
         /*** CLASES ***/
         public class Login
         {
@@ -413,5 +470,6 @@ namespace Lider
             public List<parametersApi> ParametersApi { get; set; }
             public int Count { get; set; }
         }
+        #endregion
     }
 }

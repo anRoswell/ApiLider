@@ -6,7 +6,6 @@ D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\EntityFramework.xml
 D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\EntityFramework.SqlServer.xml
 D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\Newtonsoft.Json.xml
 D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\System.Net.Http.Formatting.xml
-D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\lider.csproj.AssemblyReference.cache
 D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\lider.csproj.CoreCompileInputs.cache
 D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\lider.csproj.CopyComplete
 D:\Proyecto c#\consola\Lider\ConsoleSI58\bin\Debug\Lider.exe.config

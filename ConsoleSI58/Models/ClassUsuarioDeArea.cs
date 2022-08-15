@@ -15,7 +15,7 @@ namespace Lider.Models
 
     public class ParametersUDA
     {
-        public string IdArea { get; set; }
+        public int IdArea { get; set; }
     }
 
     public class UsuarioDeArea
