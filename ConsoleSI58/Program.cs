@@ -166,7 +166,7 @@ namespace Lider
         /// </summary>
         /// <param name="login">Clase login con los datos de acceso</param>
         /// <returns></returns>
-        static async Task<TdrEmpresaReponse> TrdASS(LoginResponse login, ParametersTrdASS parameter)
+        static async Task<TRDAreaSerieSubSerieResponse> TrdASS(LoginResponse login, ParametersTrdASS parameter)
         {
             TRDAreaSerieSubSerie trdSSS = new TRDAreaSerieSubSerie();
             trdSSS.Token = login.Data.Token;
@@ -178,7 +178,7 @@ namespace Lider
             HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
             response.EnsureSuccessStatusCode();
 
-            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+            TRDAreaSerieSubSerieResponse res = await response.Content.ReadAsAsync<TRDAreaSerieSubSerieResponse>();
 
             return res;
         }
@@ -232,7 +232,8 @@ namespace Lider
         /// </summary>
         /// <param name="login">Clase login con los datos de acceso</param>
         /// <returns></returns>
-        static async Task<TdrEmpresaReponse> ExpPorCUI(LoginResponse login, ParametersCUI parameter)
+    public class ExpPorCUIResponse
+        static async Task<ExpPorCUIResponse> ExpPorCUI(LoginResponse login, ParametersCUI parameter)
         {
             ExpPorCUI expPorCUI = new ExpPorCUI();
             expPorCUI.Token = login.Data.Token;
@@ -244,7 +245,7 @@ namespace Lider
             HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
             response.EnsureSuccessStatusCode();
 
-            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+            ExpPorCUIResponse res = await response.Content.ReadAsAsync<ExpPorCUIResponse>();
 
             return res;
         }
