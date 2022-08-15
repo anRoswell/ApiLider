@@ -55,7 +55,7 @@ namespace Lider
 
                 LoginResponse result = await LoginServer(login);
                 List<DataToSend> records = GetDataToSendApi();
-                await SaveRegistersAsync(result, records);
+                await CrearExpediente(result, records);
 
                 Console.WriteLine("Consulta exitosa, bye!!!");
             }
@@ -109,7 +109,7 @@ namespace Lider
         /// Realizamos recorrido de los datos obtenidos 
         /// </summary>
         /// <param name="registers">Data obenida de la Api</param>
-        static async Task SaveRegistersAsync(LoginResponse login, List<DataToSend> records)
+        static async Task CrearExpediente(LoginResponse login, List<DataToSend> records)
         {
             // Aqui llamamos a la Api a enviarle la data
             try
@@ -188,7 +188,7 @@ namespace Lider
         /// </summary>
         /// <param name="login">Clase login con los datos de acceso</param>
         /// <returns></returns>
-        static async Task<TdrEmpresaReponse> UsuarioDeArea(LoginResponse login, ParametersUDA parameter)
+        static async Task<UserPorArea> UsuarioDeArea(LoginResponse login, ParametersUDA parameter)
         {
             UsuarioDeArea usrDeArea = new UsuarioDeArea();
             usrDeArea.Token = login.Data.Token;
@@ -200,7 +200,7 @@ namespace Lider
             HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
             response.EnsureSuccessStatusCode();
 
-            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+            UserPorArea res = await response.Content.ReadAsAsync<UserPorArea>();
 
             return res;
         }
@@ -254,7 +254,7 @@ namespace Lider
         /// </summary>
         /// <param name="login">Clase login con los datos de acceso</param>
         /// <returns></returns>
-        static async Task<TdrEmpresaReponse> Carpetas(LoginResponse login, ParametersFolder parameter)
+        static async Task<CarpetaResponse> Carpetas(LoginResponse login, ParametersFolder parameter)
         {
             Folder folder = new Folder();
             folder.Token = login.Data.Token;
@@ -266,7 +266,7 @@ namespace Lider
             HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
             response.EnsureSuccessStatusCode();
 
-            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+            CarpetaResponse res = await response.Content.ReadAsAsync<CarpetaResponse>();
 
             return res;
         }
@@ -276,7 +276,7 @@ namespace Lider
         /// </summary>
         /// <param name="login">Clase login con los datos de acceso</param>
         /// <returns></returns>
-        static async Task<TdrEmpresaReponse> Cuadernos(LoginResponse login, ParametersCuadernos parameter)
+        static async Task<CuadernoRespone> Cuadernos(LoginResponse login, ParametersCuadernos parameter)
         {
             Cuadernos cuadernos = new Cuadernos();
             cuadernos.Token = login.Data.Token;
@@ -288,7 +288,7 @@ namespace Lider
             HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
             response.EnsureSuccessStatusCode();
 
-            TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
+            CuadernoRespone res = await response.Content.ReadAsAsync<CuadernoRespone>();
 
             return res;
         }
