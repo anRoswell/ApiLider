@@ -57,9 +57,14 @@ namespace Lider
                 LoginResponse loginResponse = await LoginServer(login);
                 List<DataToSend> records = GetDataToSendApi();
 
+                // LLamamos a los diferentes metodos de la API necesarios para el envío de la información
                 UserPorAreaResponse respUserPorArea = await CallUserPorAreaParametersAsync(loginResponse, 2585);
                 TRDAreaSerieSubSerieResponse tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse);
                 TdrEmpresaReponse tdrEmpresaReponse = await TRDEmpresaParameters(loginResponse);
+                CuadernoRespone cuadernoRespone = await CuadernosParameters(loginResponse);
+                CarpetaResponse carpetaResponse = await CarpetasParameters(loginResponse);
+                ExpPorCUIResponse expPorCUIResponse = await ExpPorCUIParameters(loginResponse);
+                TdrEmpresaReponse tdrEmpresaReponseTemporal = await CrearDocumentoParameters(loginResponse);
 
                 await CrearExpediente(loginResponse, records);
 
@@ -108,6 +113,64 @@ namespace Lider
             };
 
             TdrEmpresaReponse trdASS = await TrdPorEmpresa(login, parameters);
+            return trdASS;
+        }
+
+        static async Task<CuadernoRespone> CuadernosParameters(LoginResponse login)
+        {
+            ParametersCuadernos parameters = new ParametersCuadernos
+            {
+                CUI = "2587"
+            };
+
+            CuadernoRespone trdASS = await Cuadernos(login, parameters);
+            return trdASS;
+        }
+
+        static async Task<CarpetaResponse> CarpetasParameters(LoginResponse login)
+        {
+            ParametersFolder parameters = new ParametersFolder
+            {
+                
+            };
+
+            CarpetaResponse trdASS = await Carpetas(login, parameters);
+            return trdASS;
+        }
+
+        static async Task<ExpPorCUIResponse> ExpPorCUIParameters(LoginResponse login)
+        {
+            ParametersCUI parameters = new ParametersCUI
+            {
+                CUI = "2587"
+            };
+
+            ExpPorCUIResponse trdASS = await ExpPorCUI(login, parameters);
+            return trdASS;
+        }
+
+        static async Task<TdrEmpresaReponse> CrearDocumentoParameters(LoginResponse login)
+        {
+            ParametersCD parameters = new ParametersCD
+            {
+                IdExpediente = string.Empty,
+                IdTipoDocumental = string.Empty,
+                Nombre = string.Empty,
+                Archivo = null,
+                Metadatos = null,
+                FechaCreacionDocumento = string.Empty,
+                IdCarpeta = string.Empty,
+                Autor = string.Empty,
+                FechaTransmicion = string.Empty,
+                FechaRecepcion = string.Empty,
+                Descripcion = string.Empty,
+                Version = string.Empty,
+                IdAreaEmpresa = string.Empty,
+                VerPublico = string.Empty,
+                IdCuaderno = string.Empty
+            };
+
+            TdrEmpresaReponse trdASS = await CrearDocumento(login, parameters);
             return trdASS;
         }
 
