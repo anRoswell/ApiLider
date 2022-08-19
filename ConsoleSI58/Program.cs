@@ -21,6 +21,8 @@ namespace Lider
         static HttpClient client = new HttpClient();
         public log_error log { get; set; }
 
+        public static TRDAreaSerieSubSerieResponse tRDAreaSerieSubSerieResponse = new TRDAreaSerieSubSerieResponse ();
+
         static void Main()
         {
             EndPointApi = GetUrlApi();
@@ -57,18 +59,22 @@ namespace Lider
                 LoginResponse loginResponse = await LoginServer(login);
                 List<DataToSend> records = GetDataToSendApi();
 
+                //
+
                 // LLamamos a los diferentes metodos de la API necesarios para el envío de la información
-                UserPorAreaResponse respUserPorArea = await CallUserPorAreaParametersAsync(loginResponse, 2585);
-                TRDAreaSerieSubSerieResponse tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse);
-                TdrEmpresaReponse tdrEmpresaReponse = await TRDEmpresaParameters(loginResponse);
-                CuadernoRespone cuadernoRespone = await CuadernosParameters(loginResponse);
-                CarpetaResponse carpetaResponse = await CarpetasParameters(loginResponse);
-                ExpPorCUIResponse expPorCUIResponse = await ExpPorCUIParameters(loginResponse);
-                TdrEmpresaReponse tdrEmpresaReponseTemporal = await CrearDocumentoParameters(loginResponse);
+                tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse);
+                ResponseExpendiente resp = await CrearExpedienteParameters(loginResponse, records);
+                Console.WriteLine(resp.Error);
+                
+                //CarpetaResponse carpetaResponse = await CarpetasParameters(loginResponse);
+                //CuadernoRespone cuadernoRespone = await CuadernosParameters(loginResponse);
 
-                await CrearExpediente(loginResponse, records);
+                //UserPorAreaResponse respUserPorArea = await CallUserPorAreaParametersAsync(loginResponse, 2585);
+                //TdrEmpresaReponse tdrEmpresaReponse = await TRDEmpresaParameters(loginResponse);
+                //ExpPorCUIResponse expPorCUIResponse = await ExpPorCUIParameters(loginResponse);
+                //TdrEmpresaReponse tdrEmpresaReponseTemporal = await CrearDocumentoParameters(loginResponse);
 
-                Console.WriteLine("Consulta exitosa, bye!!!");
+                Console.ReadLine();
             }
             catch (Exception e)
             {
@@ -96,9 +102,9 @@ namespace Lider
         {
             ParametersTrdASS parameters = new ParametersTrdASS
             {
-                CodigoArea = "01.15",
-                CodigoSerie = "100",
-                CodigoSubSerie = "100-10"
+                CodigoArea = "500013110001",
+                CodigoSerie = "270",
+                CodigoSubSerie = "270-85"
             };
 
             TRDAreaSerieSubSerieResponse trdASS = await TrdASS(login, parameters);
@@ -149,7 +155,7 @@ namespace Lider
             return trdASS;
         }
 
-        static async Task<TdrEmpresaReponse> CrearDocumentoParameters(LoginResponse login)
+        static async Task<TdrEmpresaReponse> CrearDocumentoParameters(LoginResponse loginResponse)
         {
             ParametersCD parameters = new ParametersCD
             {
@@ -170,8 +176,27 @@ namespace Lider
                 IdCuaderno = string.Empty
             };
 
-            TdrEmpresaReponse trdASS = await CrearDocumento(login, parameters);
+            TdrEmpresaReponse trdASS = await CrearDocumento(loginResponse, parameters);
             return trdASS;
+        }
+        
+        static async Task<ResponseExpendiente> CrearExpedienteParameters(LoginResponse loginResponse, List<DataToSend> records)
+        {
+            ParametersCE parameter = new ParametersCE
+            {
+                IdTablaRetencionDocumental = tRDAreaSerieSubSerieResponse.Data[0].IdTablaRetencionDocumental,
+                IdVersionTablaRetencionDocumental = tRDAreaSerieSubSerieResponse.Data[0].IdVersionTablaDocumental,
+                IdUsuarioResponsable = 407,
+                Nombre = tRDAreaSerieSubSerieResponse.Data[0].CodigoTablaRetencionDocumental,
+                Descripcion = null,
+                FechaFinal = 1,
+                NumeroRadicacionProceso = tRDAreaSerieSubSerieResponse.Data[0].CodigoTablaRetencionDocumental,
+                IdCiudad = tRDAreaSerieSubSerieResponse.Data[0].IdCiudad,
+                IdAreaEmpresa = tRDAreaSerieSubSerieResponse.Data[0].IdAreaEmpresa,
+                Metadatos = new List<object> { }
+            };
+
+            return await CrearExpediente(loginResponse, parameter);
         }
 
         //static async Task<TdrEmpresaReponse> CrearExpedienteParameters(LoginResponse login)
@@ -226,33 +251,44 @@ namespace Lider
         /// Realizamos recorrido de los datos obtenidos 
         /// </summary>
         /// <param name="registers">Data obenida de la Api</param>
-        static async Task CrearExpediente(LoginResponse login, List<DataToSend> parameters)
+        static async Task<ResponseExpendiente> CrearExpediente(LoginResponse login, ParametersCE parameters)
         {
             // Aqui llamamos a la Api a enviarle la data
             try
             {
-                CREAREXPEDIENTE expediente = new CREAREXPEDIENTE();
-                expediente.Token = login.Data.Token;
-                expediente.AppKey = parametersApi.ParametersApi[0].password;                
-                expediente.ExecutionObject.Name = "Expedientes";
-                expediente.ExecutionObject.WebServiceMethod.Name = "InsertExpediente";
-                expediente.ExecutionObject.WebServiceMethod.Parameters = parameters[0];
+                CrearExpediente expediente = new CrearExpediente
+                {
+                    Token = login.Data.Token,
+                    AppKey = parametersApi.ParametersApi[0].password
+                };
 
-                string token = login.Data.Token;
+                ExecutionObjectCE executionObject = new ExecutionObjectCE
+                {
+                    Name = "Expedientes"
+                };
+
+                WebServiceMethodCE webServiceMethod = new WebServiceMethodCE
+                {
+                    Name = "InsertExpediente"
+                };
+                executionObject.WebServiceMethod = webServiceMethod;
+                webServiceMethod.Parameters = parameters;
+                expediente.ExecutionObject = executionObject;
+
                 //StartDate = initialDate[0].startDate;
-                EndDate = DateTime.Now;
-                string endPoint = EndPointApi[1].patch;
-
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                //EndDate = DateTime.Now;
+                string endPoint = EndPointApi[1].patch;                
 
                 HttpResponseMessage response = await client.PostAsJsonAsync(endPoint, expediente);
                 response.EnsureSuccessStatusCode();
 
                 ResponseExpendiente res = await response.Content.ReadAsAsync<ResponseExpendiente>();
+
+                return res;
             }
             catch (Exception e)
             {
-                throw;
+                return null;
             }
         }
 
@@ -285,14 +321,26 @@ namespace Lider
         /// <returns></returns>
         static async Task<TRDAreaSerieSubSerieResponse> TrdASS(LoginResponse login, ParametersTrdASS parameter)
         {
-            TRDAreaSerieSubSerie trdSSS = new TRDAreaSerieSubSerie();
-            trdSSS.Token = login.Data.Token;
-            trdSSS.AppKey = parametersApi.ParametersApi[0].password;
-            trdSSS.ExecutionObject.Name = "TRD";
-            trdSSS.ExecutionObject.WebServiceMethod.Name = "GetTRDFilter";
-            trdSSS.ExecutionObject.WebServiceMethod.Parameters = parameter;
+            TRDAreaSerieSubSerie trdSSS = new TRDAreaSerieSubSerie
+            {
+                Token = login.Data.Token,
+                AppKey = parametersApi.ParametersApi[0].password
+            };
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            ExecutionObjectTrdASS executionObject = new ExecutionObjectTrdASS
+            {
+                Name = "TRD"
+            };
+
+            WebServiceMethodTrdASS webServiceMethod = new WebServiceMethodTrdASS
+            {
+                Name = "GetTRDFilter"
+            };
+            webServiceMethod.Parameters = parameter;
+            executionObject.WebServiceMethod = webServiceMethod;
+            trdSSS.ExecutionObject = executionObject;
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[3].patch, trdSSS);
             response.EnsureSuccessStatusCode();
 
             TRDAreaSerieSubSerieResponse res = await response.Content.ReadAsAsync<TRDAreaSerieSubSerieResponse>();

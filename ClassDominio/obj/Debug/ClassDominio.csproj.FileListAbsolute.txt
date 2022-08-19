@@ -1,0 +1,6 @@
+D:\Proyecto c#\consola\Lider\ClassDominio\bin\Debug\ClassDominio.dll
+D:\Proyecto c#\consola\Lider\ClassDominio\bin\Debug\ClassDominio.pdb
+D:\Proyecto c#\consola\Lider\ClassDominio\obj\Debug\ClassDominio.csproj.AssemblyReference.cache
+D:\Proyecto c#\consola\Lider\ClassDominio\obj\Debug\ClassDominio.csproj.CoreCompileInputs.cache
+D:\Proyecto c#\consola\Lider\ClassDominio\obj\Debug\ClassDominio.dll
+D:\Proyecto c#\consola\Lider\ClassDominio\obj\Debug\ClassDominio.pdb

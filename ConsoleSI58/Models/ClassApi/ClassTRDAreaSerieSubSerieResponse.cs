@@ -63,7 +63,7 @@ namespace Lider.Models
         public int IdSerie { get; set; }
         public int IdSubserie { get; set; }
         public int IdAreaEmpresa { get; set; }
-        public object IdCiudad { get; set; }
+        public int IdCiudad { get; set; }
     }
 
     public class MetadataTRDSSS
@@ -90,6 +90,5 @@ namespace Lider.Models
         public object TrazaError { get; set; }
         public List<DatumTRDSSS> Data { get; set; }
     }
-
 
 }

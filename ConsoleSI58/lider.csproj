@@ -104,23 +104,25 @@
     <Compile Include="Models\camposxtipodoc.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ClassCarpetas.cs" />
-    <Compile Include="Models\ClassCarpetasResponse.cs" />
-    <Compile Include="Models\ClassCreacionCuadernos.cs" />
-    <Compile Include="Models\ClassCreacionCuadernosResponse.cs" />
-    <Compile Include="Models\ClassCrearDocumentoBase64.cs" />
-    <Compile Include="Models\ClassCuadernoResponse.cs" />
-    <Compile Include="Models\ClassCuadernos.cs" />
-    <Compile Include="Models\ClassExpPorCUI.cs" />
-    <Compile Include="Models\ClassExpPorCUIResponse.cs" />
-    <Compile Include="Models\ClassJsonToSendApi.cs" />
-    <Compile Include="Models\ClassResponseLogin.cs" />
-    <Compile Include="Models\ClassTRDAreaSerieSubSerie.cs" />
-    <Compile Include="Models\ClassTRDAreaSerieSubSerieResponse.cs" />
-    <Compile Include="Models\ClassTrdEmpresaResponse.cs" />
-    <Compile Include="Models\ClassTrdPorEmpresa.cs" />
-    <Compile Include="Models\ClassUsuarioDeArea.cs" />
-    <Compile Include="Models\ClassUsuarioPorArea.cs" />
+    <Compile Include="Models\ClassApi\ClassCarpetas.cs" />
+    <Compile Include="Models\ClassApi\ClassCarpetasResponse.cs" />
+    <Compile Include="Models\ClassApi\ClassCreacionCuadernos.cs" />
+    <Compile Include="Models\ClassApi\ClassCreacionCuadernosResponse.cs" />
+    <Compile Include="Models\ClassApi\ClassCrearDocumentoBase64.cs" />
+    <Compile Include="Models\ClassApi\ClassCrearExpediente.cs" />
+    <Compile Include="Models\ClassApi\ClassCuadernoResponse.cs" />
+    <Compile Include="Models\ClassApi\ClassCuadernos.cs" />
+    <Compile Include="Models\ClassApi\ClassExpPorCUI.cs" />
+    <Compile Include="Models\ClassApi\ClassExpPorCUIResponse.cs" />
+    <Compile Include="Models\ClassApi\ClassJsonToSendApi.cs" />
+    <Compile Include="Models\ClassApi\ClassResponseLogin.cs" />
+    <Compile Include="Models\ClassApi\ClassTRDAreaSerieSubSerie.cs" />
+    <Compile Include="Models\ClassApi\ClassTRDAreaSerieSubSerieResponse.cs" />
+    <Compile Include="Models\ClassApi\ClassTrdEmpresaResponse.cs" />
+    <Compile Include="Models\ClassApi\ClassTrdPorEmpresa.cs" />
+    <Compile Include="Models\ClassApi\ClassUsuarioDeArea.cs" />
+    <Compile Include="Models\ClassApi\ClassUsuarioDeAreaResponse.cs" />
+    <Compile Include="Models\ClassApi\ClassUsuarioPorArea.cs" />
     <Compile Include="Models\CONSULTAR_DESPACHOS_X_MUNICIPIO_Result.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
@@ -266,6 +268,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Dto\" />
+    <Folder Include="Models\Interface\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

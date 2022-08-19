@@ -28,3 +28,4 @@ D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\EntityFramework.SqlServer.xml
 D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\Newtonsoft.Json.xml
 D:\cursos\lider\ApiLider\ConsoleSI58\bin\Debug\System.Net.Http.Formatting.xml
 D:\cursos\lider\ApiLider\ConsoleSI58\obj\Debug\lider.csproj.CopyComplete
+D:\Proyecto c#\consola\Lider\ConsoleSI58\obj\Debug\lider.csproj.AssemblyReference.cache
