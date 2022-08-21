@@ -4,30 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lider.Models
+namespace Lider.Models.ClassApi
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-    public class ExecutionObjectFolder
+    public class ExecutionObjectAE
     {
         public string Name { get; set; }
-        public WebServiceMethodFolder WebServiceMethod { get; set; }
+        public WebServiceMethodAE WebServiceMethod { get; set; }
     }
 
-    public class ParametersFolder
+    public class ParametersAE
     {
     }
 
-    public class FolderApi
+    public class AreaEmpresa
     {
         public string Token { get; set; }
         public string AppKey { get; set; }
-        public ExecutionObjectFolder ExecutionObject { get; set; }
+        public ExecutionObjectAE ExecutionObject { get; set; }
     }
 
-    public class WebServiceMethodFolder
+    public class WebServiceMethodAE
     {
         public string Name { get; set; }
-        public ParametersFolder Parameters { get; set; }
+        public ParametersAE Parameters { get; set; }
     }
 
 

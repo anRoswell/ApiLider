@@ -12,8 +12,6 @@ namespace Lider.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class SID_PROTOCOL2Entities : DbContext
     {
@@ -27,6 +25,7 @@ namespace Lider.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<initialDate> initialDate { get; set; }
         public virtual DbSet<Accounts> Accounts { get; set; }
         public virtual DbSet<ArchivosZip> ArchivosZip { get; set; }
         public virtual DbSet<auditorias> auditorias { get; set; }
@@ -55,128 +54,12 @@ namespace Lider.Models
         public virtual DbSet<TQM_LOCK_CALIDAD> TQM_LOCK_CALIDAD { get; set; }
         public virtual DbSet<usuarios> usuarios { get; set; }
         public virtual DbSet<valoreslistas> valoreslistas { get; set; }
+        public virtual DbSet<Folder> Folder { get; set; }
+        public virtual DbSet<parametersApi> parametersApi { get; set; }
+        public virtual DbSet<urlApiI> urlApiI { get; set; }
         public virtual DbSet<EQUIVALENCIAS> EQUIVALENCIAS { get; set; }
         public virtual DbSet<errores> errores { get; set; }
-        public virtual DbSet<urlApiI> urlApiI { get; set; }
+        public virtual DbSet<DB_Errors> DB_Errors { get; set; }
         public virtual DbSet<log_error> log_error { get; set; }
-        public virtual DbSet<initialDate> initialDate { get; set; }
-        public virtual DbSet<parametersApi> parametersApi { get; set; }
-    
-        public virtual ObjectResult<string> CONSULTAR_ARCHIVOS_ZIP(Nullable<int> iD_LOTE, string iNSTANCIA, string cUADERNO, string tIPO)
-        {
-            var iD_LOTEParameter = iD_LOTE.HasValue ?
-                new ObjectParameter("ID_LOTE", iD_LOTE) :
-                new ObjectParameter("ID_LOTE", typeof(int));
-    
-            var iNSTANCIAParameter = iNSTANCIA != null ?
-                new ObjectParameter("INSTANCIA", iNSTANCIA) :
-                new ObjectParameter("INSTANCIA", typeof(string));
-    
-            var cUADERNOParameter = cUADERNO != null ?
-                new ObjectParameter("CUADERNO", cUADERNO) :
-                new ObjectParameter("CUADERNO", typeof(string));
-    
-            var tIPOParameter = tIPO != null ?
-                new ObjectParameter("TIPO", tIPO) :
-                new ObjectParameter("TIPO", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CONSULTAR_ARCHIVOS_ZIP", iD_LOTEParameter, iNSTANCIAParameter, cUADERNOParameter, tIPOParameter);
-        }
-    
-        public virtual ObjectResult<CONSULTAR_DESPACHOS_X_MUNICIPIO_Result> CONSULTAR_DESPACHOS_X_MUNICIPIO(string mUNICIPIO)
-        {
-            var mUNICIPIOParameter = mUNICIPIO != null ?
-                new ObjectParameter("MUNICIPIO", mUNICIPIO) :
-                new ObjectParameter("MUNICIPIO", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CONSULTAR_DESPACHOS_X_MUNICIPIO_Result>("CONSULTAR_DESPACHOS_X_MUNICIPIO", mUNICIPIOParameter);
-        }
-    
-        public virtual ObjectResult<CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result> CONSULTAR_DOCUMENTOS_EXPEDIENTE(Nullable<int> lOTE_ID)
-        {
-            var lOTE_IDParameter = lOTE_ID.HasValue ?
-                new ObjectParameter("LOTE_ID", lOTE_ID) :
-                new ObjectParameter("LOTE_ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result>("CONSULTAR_DOCUMENTOS_EXPEDIENTE", lOTE_IDParameter);
-        }
-    
-        public virtual ObjectResult<CONSULTAR_EXPEDIENTES_Result> CONSULTAR_EXPEDIENTES(string dEMANDANTE, string dEMANDADO, string rADICADO, string dESPACHO)
-        {
-            var dEMANDANTEParameter = dEMANDANTE != null ?
-                new ObjectParameter("DEMANDANTE", dEMANDANTE) :
-                new ObjectParameter("DEMANDANTE", typeof(string));
-    
-            var dEMANDADOParameter = dEMANDADO != null ?
-                new ObjectParameter("DEMANDADO", dEMANDADO) :
-                new ObjectParameter("DEMANDADO", typeof(string));
-    
-            var rADICADOParameter = rADICADO != null ?
-                new ObjectParameter("RADICADO", rADICADO) :
-                new ObjectParameter("RADICADO", typeof(string));
-    
-            var dESPACHOParameter = dESPACHO != null ?
-                new ObjectParameter("DESPACHO", dESPACHO) :
-                new ObjectParameter("DESPACHO", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CONSULTAR_EXPEDIENTES_Result>("CONSULTAR_EXPEDIENTES", dEMANDANTEParameter, dEMANDADOParameter, rADICADOParameter, dESPACHOParameter);
-        }
-    
-        public virtual ObjectResult<CONSULTAR_EXPEDIENTES_TODOS_Result> CONSULTAR_EXPEDIENTES_TODOS(string dESPACHO)
-        {
-            var dESPACHOParameter = dESPACHO != null ?
-                new ObjectParameter("DESPACHO", dESPACHO) :
-                new ObjectParameter("DESPACHO", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CONSULTAR_EXPEDIENTES_TODOS_Result>("CONSULTAR_EXPEDIENTES_TODOS", dESPACHOParameter);
-        }
-    
-        public virtual ObjectResult<string> CONSULTAR_MUNICIPIOS()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CONSULTAR_MUNICIPIOS");
-        }
-    
-        public virtual ObjectResult<string> CONSULTAR_RUTA_ZIP_CD_PLANO(Nullable<int> lOTE_ID, string nOMBRE_ARCHIVO)
-        {
-            var lOTE_IDParameter = lOTE_ID.HasValue ?
-                new ObjectParameter("LOTE_ID", lOTE_ID) :
-                new ObjectParameter("LOTE_ID", typeof(int));
-    
-            var nOMBRE_ARCHIVOParameter = nOMBRE_ARCHIVO != null ?
-                new ObjectParameter("NOMBRE_ARCHIVO", nOMBRE_ARCHIVO) :
-                new ObjectParameter("NOMBRE_ARCHIVO", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CONSULTAR_RUTA_ZIP_CD_PLANO", lOTE_IDParameter, nOMBRE_ARCHIVOParameter);
-        }
-    
-        public virtual ObjectResult<string> CONSULTAR_RUTA_ZIP_EXPEDIENTE(Nullable<int> lOTE_ID)
-        {
-            var lOTE_IDParameter = lOTE_ID.HasValue ?
-                new ObjectParameter("LOTE_ID", lOTE_ID) :
-                new ObjectParameter("LOTE_ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CONSULTAR_RUTA_ZIP_EXPEDIENTE", lOTE_IDParameter);
-        }
-    
-        public virtual ObjectResult<REPORTE_PRODUCCION_Result> REPORTE_PRODUCCION(Nullable<System.DateTime> fECHAINICIAL, Nullable<System.DateTime> fECHAFINAL, string dESPACHO, string mUNICIPIO)
-        {
-            var fECHAINICIALParameter = fECHAINICIAL.HasValue ?
-                new ObjectParameter("FECHAINICIAL", fECHAINICIAL) :
-                new ObjectParameter("FECHAINICIAL", typeof(System.DateTime));
-    
-            var fECHAFINALParameter = fECHAFINAL.HasValue ?
-                new ObjectParameter("FECHAFINAL", fECHAFINAL) :
-                new ObjectParameter("FECHAFINAL", typeof(System.DateTime));
-    
-            var dESPACHOParameter = dESPACHO != null ?
-                new ObjectParameter("DESPACHO", dESPACHO) :
-                new ObjectParameter("DESPACHO", typeof(string));
-    
-            var mUNICIPIOParameter = mUNICIPIO != null ?
-                new ObjectParameter("MUNICIPIO", mUNICIPIO) :
-                new ObjectParameter("MUNICIPIO", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<REPORTE_PRODUCCION_Result>("REPORTE_PRODUCCION", fECHAINICIALParameter, fECHAFINALParameter, dESPACHOParameter, mUNICIPIOParameter);
-        }
     }
 }

@@ -1,6 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="SID_PROTOCOL2ModelStoreContainer" CdmEntityContainer="SID_PROTOCOL2Entities">
+    <EntitySetMapping Name="initialDate">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.initialDate">
+        <MappingFragment StoreEntitySet="initialDate">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="lastConsulta" ColumnName="lastConsulta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Accounts">
       <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Accounts">
         <MappingFragment StoreEntitySet="Accounts">
@@ -485,6 +496,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Folder">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Folder">
+        <MappingFragment StoreEntitySet="Folder">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NombreCarpetaDB" ColumnName="NombreCarpetaDB" />
+          <ScalarProperty Name="IdCarpetaAPI" ColumnName="IdCarpetaAPI" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="parametersApi">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.parametersApi">
+        <MappingFragment StoreEntitySet="parametersApi">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="urlApi" ColumnName="urlApi" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="urlApiI">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.urlApiI">
+        <MappingFragment StoreEntitySet="urlApiI">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="patch" ColumnName="patch" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="observation" ColumnName="observation" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="EQUIVALENCIAS">
       <EntityTypeMapping TypeName="SID_PROTOCOL2Model.EQUIVALENCIAS">
         <MappingFragment StoreEntitySet="EQUIVALENCIAS">
@@ -507,111 +555,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="CONSULTAR_ARCHIVOS_ZIP" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_ARCHIVOS_ZIP" />
-    <FunctionImportMapping FunctionImportName="CONSULTAR_DESPACHOS_X_MUNICIPIO" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_DESPACHOS_X_MUNICIPIO">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_DESPACHOS_X_MUNICIPIO_Result">
-          <ScalarProperty Name="CODDESPACHO" ColumnName="CODDESPACHO" />
-          <ScalarProperty Name="NOMBREDESPACHO" ColumnName="NOMBREDESPACHO" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="CONSULTAR_DOCUMENTOS_EXPEDIENTE" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_DOCUMENTOS_EXPEDIENTE">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result">
-          <ScalarProperty Name="ID_LOTE" ColumnName="ID_LOTE" />
-          <ScalarProperty Name="RADICADO" ColumnName="RADICADO" />
-          <ScalarProperty Name="ESTADO_DOCUMENTO" ColumnName="ESTADO_DOCUMENTO" />
-          <ScalarProperty Name="TIPO_DOCUMENTO" ColumnName="TIPO_DOCUMENTO" />
-          <ScalarProperty Name="RUTA_DOCUMENTO" ColumnName="RUTA_DOCUMENTO" />
-          <ScalarProperty Name="INSTANCIA" ColumnName="INSTANCIA" />
-          <ScalarProperty Name="CUADERNO" ColumnName="CUADERNO" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="CONSULTAR_EXPEDIENTES" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_EXPEDIENTES">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_Result">
-          <ScalarProperty Name="LOTE" ColumnName="LOTE" />
-          <ScalarProperty Name="DEMANDANTE" ColumnName="DEMANDANTE" />
-          <ScalarProperty Name="DEMANDADO" ColumnName="DEMANDADO" />
-          <ScalarProperty Name="TIPO" ColumnName="TIPO" />
-          <ScalarProperty Name="RADICADO_PROCESO" ColumnName="RADICADO_PROCESO" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="CONSULTAR_EXPEDIENTES_TODOS" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_EXPEDIENTES_TODOS">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_TODOS_Result">
-          <ScalarProperty Name="LOTE" ColumnName="LOTE" />
-          <ScalarProperty Name="DEMANDANTE" ColumnName="DEMANDANTE" />
-          <ScalarProperty Name="DEMANDADO" ColumnName="DEMANDADO" />
-          <ScalarProperty Name="TIPO" ColumnName="TIPO" />
-          <ScalarProperty Name="RADICADO_PROCESO" ColumnName="RADICADO_PROCESO" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="CONSULTAR_MUNICIPIOS" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_MUNICIPIOS" />
-    <FunctionImportMapping FunctionImportName="CONSULTAR_RUTA_ZIP_CD_PLANO" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_RUTA_ZIP_CD_PLANO" />
-    <FunctionImportMapping FunctionImportName="CONSULTAR_RUTA_ZIP_EXPEDIENTE" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_RUTA_ZIP_EXPEDIENTE" />
-    <FunctionImportMapping FunctionImportName="REPORTE_PRODUCCION" FunctionName="SID_PROTOCOL2Model.Store.REPORTE_PRODUCCION">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.REPORTE_PRODUCCION_Result">
-          <ScalarProperty Name="MUNICIPIO" ColumnName="MUNICIPIO" />
-          <ScalarProperty Name="COD_DESPACHO" ColumnName="COD_DESPACHO" />
-          <ScalarProperty Name="NOMBRE_DESPACHO" ColumnName="NOMBRE_DESPACHO" />
-          <ScalarProperty Name="RADICADO_LOTE" ColumnName="RADICADO_LOTE" />
-          <ScalarProperty Name="FECHA_PROCESADO_LOTE" ColumnName="FECHA_PROCESADO_LOTE" />
-          <ScalarProperty Name="TOTAL_DOCUMENTOS" ColumnName="TOTAL_DOCUMENTOS" />
-          <ScalarProperty Name="TOTAL_PAGINAS" ColumnName="TOTAL_PAGINAS" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <EntitySetMapping Name="urlApiI">
-      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.urlApiI">
-        <MappingFragment StoreEntitySet="urlApiI">
-          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
-          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
-          <ScalarProperty Name="observation" ColumnName="observation" />
-          <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="patch" ColumnName="patch" />
-          <ScalarProperty Name="id" ColumnName="id" />
+    <EntitySetMapping Name="DB_Errors">
+      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.DB_Errors">
+        <MappingFragment StoreEntitySet="DB_Errors">
+          <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+          <ScalarProperty Name="ErrorDateTime" ColumnName="ErrorDateTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="log_error">
       <EntityTypeMapping TypeName="SID_PROTOCOL2Model.log_error">
         <MappingFragment StoreEntitySet="log_error">
-          <ScalarProperty Name="type" ColumnName="type" />
-          <ScalarProperty Name="date_insert" ColumnName="date_insert" />
-          <ScalarProperty Name="log_error1" ColumnName="log_error" />
           <ScalarProperty Name="log_id" ColumnName="log_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="initialDate">
-      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.initialDate">
-        <MappingFragment StoreEntitySet="initialDate">
-          <ScalarProperty Name="lastConsulta" ColumnName="lastConsulta" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
-          <ScalarProperty Name="endDate" ColumnName="endDate" />
-          <ScalarProperty Name="startDate" ColumnName="startDate" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="parametersApi">
-      <EntityTypeMapping TypeName="SID_PROTOCOL2Model.parametersApi">
-        <MappingFragment StoreEntitySet="parametersApi">
-          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
-          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="usuario" ColumnName="usuario" />
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="urlApi" ColumnName="urlApi" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="date_insert" ColumnName="date_insert" />
+          <ScalarProperty Name="type" ColumnName="type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.32510.428
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lider", "ConsoleSI58\lider.csproj", "{4935B0FE-4307-4622-96D0-EA8833FCF7F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassDominio", "ClassDominio\ClassDominio.csproj", "{E3CDFB8B-F772-4F28-A737-21F5A8E99806}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "ClassDominio\Dominio.csproj", "{E3CDFB8B-F772-4F28-A737-21F5A8E99806}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassInfraestructura", "ClassInfraestructura\ClassInfraestructura.csproj", "{F2902000-02F9-4C8D-9A12-2CF061769B88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructura", "ClassInfraestructura\Infraestructura.csproj", "{F2902000-02F9-4C8D-9A12-2CF061769B88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

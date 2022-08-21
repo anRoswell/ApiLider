@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SID_PROTOCOL2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="initialDate">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="startDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="endDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="lastConsulta" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
   <EntityType Name="Accounts">
     <Key>
       <PropertyRef Name="Id" />
@@ -479,6 +489,50 @@
     <Property Name="valorlista_valor02" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="listas" Relationship="Self.FK_valoreslistas_listas" FromRole="valoreslistas" ToRole="listas" />
   </EntityType>
+  <EntityType Name="Folder">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="NombreCarpetaDB" />
+      <PropertyRef Name="IdCarpetaAPI" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreCarpetaDB" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdCarpetaAPI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="parametersApi">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="urlApi" />
+      <PropertyRef Name="usuario" />
+      <PropertyRef Name="password" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="createdAt" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="urlApi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="Boolean" Nullable="false" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="urlApiI">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="description" />
+      <PropertyRef Name="createdAt" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="patch" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="observation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="Boolean" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
   <EntityType Name="EQUIVALENCIAS">
     <Key>
       <PropertyRef Name="ID" />
@@ -502,6 +556,32 @@
     <Property Name="error_stackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="error_estado" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="usuarios" Relationship="Self.FK_errores_usuarios" FromRole="errores" ToRole="usuarios" />
+  </EntityType>
+  <EntityType Name="DB_Errors">
+    <Key>
+      <PropertyRef Name="ErrorID" />
+    </Key>
+    <Property Name="ErrorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ErrorNumber" Type="Int32" />
+    <Property Name="ErrorState" Type="Int32" />
+    <Property Name="ErrorSeverity" Type="Int32" />
+    <Property Name="ErrorLine" Type="Int32" />
+    <Property Name="ErrorProcedure" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ErrorDateTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="log_error">
+    <Key>
+      <PropertyRef Name="log_id" />
+      <PropertyRef Name="message" />
+      <PropertyRef Name="date_insert" />
+      <PropertyRef Name="type" />
+    </Key>
+    <Property Name="log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="date_insert" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="type" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_RefreshToken_Accounts">
     <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
@@ -648,6 +728,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="SID_PROTOCOL2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="initialDate" EntityType="Self.initialDate" />
     <EntitySet Name="Accounts" EntityType="Self.Accounts" />
     <EntitySet Name="ArchivosZip" EntityType="Self.ArchivosZip" />
     <EntitySet Name="auditorias" EntityType="Self.auditorias" />
@@ -676,8 +757,13 @@
     <EntitySet Name="TQM_LOCK_CALIDAD" EntityType="Self.TQM_LOCK_CALIDAD" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" />
     <EntitySet Name="valoreslistas" EntityType="Self.valoreslistas" />
+    <EntitySet Name="Folder" EntityType="Self.Folder" />
+    <EntitySet Name="parametersApi" EntityType="Self.parametersApi" />
+    <EntitySet Name="urlApiI" EntityType="Self.urlApiI" />
     <EntitySet Name="EQUIVALENCIAS" EntityType="Self.EQUIVALENCIAS" />
     <EntitySet Name="errores" EntityType="Self.errores" />
+    <EntitySet Name="DB_Errors" EntityType="Self.DB_Errors" />
+    <EntitySet Name="log_error" EntityType="Self.log_error" />
     <AssociationSet Name="FK_RefreshToken_Accounts" Association="Self.FK_RefreshToken_Accounts">
       <End Role="Accounts" EntitySet="Accounts" />
       <End Role="RefreshToken" EntitySet="RefreshToken" />
@@ -726,134 +812,5 @@
       <End Role="usuarios" EntitySet="usuarios" />
       <End Role="errores" EntitySet="errores" />
     </AssociationSet>
-    <FunctionImport Name="CONSULTAR_ARCHIVOS_ZIP" ReturnType="Collection(String)">
-      <Parameter Name="ID_LOTE" Mode="In" Type="Int32" />
-      <Parameter Name="INSTANCIA" Mode="In" Type="String" />
-      <Parameter Name="CUADERNO" Mode="In" Type="String" />
-      <Parameter Name="TIPO" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="CONSULTAR_DESPACHOS_X_MUNICIPIO" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_DESPACHOS_X_MUNICIPIO_Result)">
-      <Parameter Name="MUNICIPIO" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="CONSULTAR_DOCUMENTOS_EXPEDIENTE" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result)">
-      <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="CONSULTAR_EXPEDIENTES" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_Result)">
-      <Parameter Name="DEMANDANTE" Mode="In" Type="String" />
-      <Parameter Name="DEMANDADO" Mode="In" Type="String" />
-      <Parameter Name="RADICADO" Mode="In" Type="String" />
-      <Parameter Name="DESPACHO" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="CONSULTAR_EXPEDIENTES_TODOS" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_TODOS_Result)">
-      <Parameter Name="DESPACHO" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="CONSULTAR_MUNICIPIOS" ReturnType="Collection(String)" />
-    <FunctionImport Name="CONSULTAR_RUTA_ZIP_CD_PLANO" ReturnType="Collection(String)">
-      <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
-      <Parameter Name="NOMBRE_ARCHIVO" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="CONSULTAR_RUTA_ZIP_EXPEDIENTE" ReturnType="Collection(String)">
-      <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="REPORTE_PRODUCCION" ReturnType="Collection(SID_PROTOCOL2Model.REPORTE_PRODUCCION_Result)">
-      <Parameter Name="FECHAINICIAL" Mode="In" Type="DateTime" />
-      <Parameter Name="FECHAFINAL" Mode="In" Type="DateTime" />
-      <Parameter Name="DESPACHO" Mode="In" Type="String" />
-      <Parameter Name="MUNICIPIO" Mode="In" Type="String" />
-    </FunctionImport>
-    <EntitySet Name="urlApiI" EntityType="SID_PROTOCOL2Model.urlApiI" />
-    <EntitySet Name="log_error" EntityType="SID_PROTOCOL2Model.log_error" />
-    <EntitySet Name="initialDate" EntityType="SID_PROTOCOL2Model.initialDate" />
-    <EntitySet Name="parametersApi" EntityType="SID_PROTOCOL2Model.parametersApi" />
   </EntityContainer>
-  <ComplexType Name="CONSULTAR_DESPACHOS_X_MUNICIPIO_Result">
-    <Property Type="String" Name="CODDESPACHO" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="NOMBREDESPACHO" Nullable="false" MaxLength="300" />
-  </ComplexType>
-  <ComplexType Name="CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result">
-    <Property Type="Int32" Name="ID_LOTE" Nullable="false" />
-    <Property Type="String" Name="RADICADO" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="ESTADO_DOCUMENTO" Nullable="false" />
-    <Property Type="String" Name="TIPO_DOCUMENTO" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="RUTA_DOCUMENTO" Nullable="true" MaxLength="852" />
-    <Property Type="String" Name="INSTANCIA" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="CUADERNO" Nullable="true" MaxLength="500" />
-  </ComplexType>
-  <ComplexType Name="CONSULTAR_EXPEDIENTES_Result">
-    <Property Type="Int32" Name="LOTE" Nullable="false" />
-    <Property Type="String" Name="DEMANDANTE" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="DEMANDADO" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="TIPO" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="RADICADO_PROCESO" Nullable="true" MaxLength="500" />
-  </ComplexType>
-  <ComplexType Name="CONSULTAR_EXPEDIENTES_TODOS_Result">
-    <Property Type="Int32" Name="LOTE" Nullable="false" />
-    <Property Type="String" Name="DEMANDANTE" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="DEMANDADO" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="TIPO" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="RADICADO_PROCESO" Nullable="true" MaxLength="500" />
-  </ComplexType>
-  <ComplexType Name="REPORTE_PRODUCCION_Result">
-    <Property Type="String" Name="MUNICIPIO" Nullable="false" MaxLength="300" />
-    <Property Type="String" Name="COD_DESPACHO" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="NOMBRE_DESPACHO" Nullable="false" MaxLength="300" />
-    <Property Type="String" Name="RADICADO_LOTE" Nullable="true" MaxLength="500" />
-    <Property Type="DateTime" Name="FECHA_PROCESADO_LOTE" Nullable="true" Precision="16" />
-    <Property Type="Int32" Name="TOTAL_DOCUMENTOS" Nullable="true" />
-    <Property Type="Int32" Name="TOTAL_PAGINAS" Nullable="true" />
-  </ComplexType>
-  <EntityType Name="urlApiI">
-    <Key>
-      <PropertyRef Name="id" />
-      <PropertyRef Name="description" />
-      <PropertyRef Name="createdAt" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="patch" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="observation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="estado" Type="Boolean" />
-    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="updatedAt" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="log_error">
-    <Key>
-      <PropertyRef Name="log_id" />
-      <PropertyRef Name="log_error1" />
-      <PropertyRef Name="date_insert" />
-      <PropertyRef Name="type" />
-    </Key>
-    <Property Name="log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="log_error1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="date_insert" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="type" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="initialDate">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="startDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="endDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="estado" Type="Boolean" Nullable="false" />
-    <Property Name="lastConsulta" Type="DateTime" Nullable="false" Precision="3" />
-  </EntityType>
-  <EntityType Name="parametersApi">
-    <Key>
-      <PropertyRef Name="id" />
-      <PropertyRef Name="urlApi" />
-      <PropertyRef Name="usuario" />
-      <PropertyRef Name="password" />
-      <PropertyRef Name="estado" />
-      <PropertyRef Name="createdAt" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="urlApi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="estado" Type="Boolean" Nullable="false" />
-    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="updatedAt" Type="DateTime" Precision="3" />
-  </EntityType>
 </Schema>

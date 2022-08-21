@@ -10,13 +10,13 @@
 namespace Lider.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class CONSULTAR_EXPEDIENTES_TODOS_Result
+    public partial class Folder
     {
-        public int LOTE { get; set; }
-        public string DEMANDANTE { get; set; }
-        public string DEMANDADO { get; set; }
-        public string TIPO { get; set; }
-        public string RADICADO_PROCESO { get; set; }
+        public int id { get; set; }
+        public string NombreCarpetaDB { get; set; }
+        public string IdCarpetaAPI { get; set; }
+        public bool estado { get; set; }
     }
 }

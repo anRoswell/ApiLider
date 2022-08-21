@@ -12,11 +12,16 @@ namespace Lider.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class log_error
+    public partial class DB_Errors
     {
-        public int log_id { get; set; }
-        public string message { get; set; }
-        public System.DateTime date_insert { get; set; }
-        public int type { get; set; }
+        public int ErrorID { get; set; }
+        public string UserName { get; set; }
+        public Nullable<int> ErrorNumber { get; set; }
+        public Nullable<int> ErrorState { get; set; }
+        public Nullable<int> ErrorSeverity { get; set; }
+        public Nullable<int> ErrorLine { get; set; }
+        public string ErrorProcedure { get; set; }
+        public string ErrorMessage { get; set; }
+        public Nullable<System.DateTime> ErrorDateTime { get; set; }
     }
 }

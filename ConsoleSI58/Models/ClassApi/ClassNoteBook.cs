@@ -4,33 +4,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lider.Models
+namespace Lider.Models.ClassApi
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-    public class ExecutionObjectCC
+    public class ExecutionObjectNB
     {
         public string Name { get; set; }
-        public WebServiceMethodCC WebServiceMethod { get; set; }
+        public WebServiceMethodNB WebServiceMethod { get; set; }
     }
 
-    public class ParametersCC
+    public class ParametersNB
     {
         public string Nombre { get; set; }
         public string Codigo { get; set; }
-        public string IdCarpeta { get; set; }
-        public string IdExpediente { get; set; }
+        public int IdCarpeta { get; set; }
+        public double IdExpediente { get; set; }
     }
 
-    public class CreacionCuadernos
+    public class NoteBook
     {
         public string Token { get; set; }
         public string AppKey { get; set; }
-        public ExecutionObjectCC ExecutionObject { get; set; }
+        public ExecutionObject ExecutionObject { get; set; }
     }
 
-    public class WebServiceMethodCC
+    public class WebServiceMethodNB
     {
         public string Name { get; set; }
-        public ParametersCC Parameters { get; set; }
+        public ParametersNB Parameters { get; set; }
     }
+
+
 }

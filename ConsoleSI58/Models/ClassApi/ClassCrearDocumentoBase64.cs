@@ -10,7 +10,7 @@ namespace Lider.Models
     public class ArchivoCD
     {
         public string DatosArchivo { get; set; }
-        public string EsAdjunto { get; set; }
+        public bool EsAdjunto { get; set; }
         public string Archivo { get; set; }
         public FileField FileField { get; set; }
     }
@@ -45,8 +45,8 @@ namespace Lider.Models
         public string FechaRecepcion { get; set; }
         public string Descripcion { get; set; }
         public string Version { get; set; }
-        public string IdAreaEmpresa { get; set; }
-        public string VerPublico { get; set; }
+        public int IdAreaEmpresa { get; set; }
+        public bool VerPublico { get; set; }
         public string IdCuaderno { get; set; }
     }
 
@@ -62,6 +62,4 @@ namespace Lider.Models
         public string Name { get; set; }
         public ParametersCD Parameters { get; set; }
     }
-
-
 }

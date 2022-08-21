@@ -104,18 +104,30 @@
     <Compile Include="Models\camposxtipodoc.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClassApi\ClassAreaEmpresa.cs" />
+    <Compile Include="Models\ClassApi\ClassAreaEmpresaResponse.cs" />
     <Compile Include="Models\ClassApi\ClassCarpetas.cs" />
     <Compile Include="Models\ClassApi\ClassCarpetasResponse.cs" />
     <Compile Include="Models\ClassApi\ClassCreacionCuadernos.cs" />
     <Compile Include="Models\ClassApi\ClassCreacionCuadernosResponse.cs" />
     <Compile Include="Models\ClassApi\ClassCrearDocumentoBase64.cs" />
     <Compile Include="Models\ClassApi\ClassCrearExpediente.cs" />
+    <Compile Include="Models\ClassApi\ClassCrearExpedienteResponse.cs" />
     <Compile Include="Models\ClassApi\ClassCuadernoResponse.cs" />
     <Compile Include="Models\ClassApi\ClassCuadernos.cs" />
     <Compile Include="Models\ClassApi\ClassExpPorCUI.cs" />
     <Compile Include="Models\ClassApi\ClassExpPorCUIResponse.cs" />
+    <Compile Include="Models\ClassApi\ClassGetCuadernoResponse.cs" />
+    <Compile Include="Models\ClassApi\ClassGetCuadernosCUI.cs" />
+    <Compile Include="Models\ClassApi\ClassGetExpediente.cs" />
+    <Compile Include="Models\ClassApi\ClassGetExpedienteResponse.cs" />
+    <Compile Include="Models\ClassApi\ClassGetFolderSql.cs" />
     <Compile Include="Models\ClassApi\ClassJsonToSendApi.cs" />
+    <Compile Include="Models\ClassApi\ClassNoteBook.cs" />
     <Compile Include="Models\ClassApi\ClassResponseLogin.cs" />
+    <Compile Include="Models\ClassApi\ClassSpFile.cs" />
+    <Compile Include="Models\ClassApi\ClassSpGetNoteBook.cs" />
+    <Compile Include="Models\ClassApi\ClassSpSerieYSubSerie.cs" />
     <Compile Include="Models\ClassApi\ClassTRDAreaSerieSubSerie.cs" />
     <Compile Include="Models\ClassApi\ClassTRDAreaSerieSubSerieResponse.cs" />
     <Compile Include="Models\ClassApi\ClassTrdEmpresaResponse.cs" />
@@ -123,18 +135,6 @@
     <Compile Include="Models\ClassApi\ClassUsuarioDeArea.cs" />
     <Compile Include="Models\ClassApi\ClassUsuarioDeAreaResponse.cs" />
     <Compile Include="Models\ClassApi\ClassUsuarioPorArea.cs" />
-    <Compile Include="Models\CONSULTAR_DESPACHOS_X_MUNICIPIO_Result.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CONSULTAR_EXPEDIENTES_Result.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CONSULTAR_EXPEDIENTES_TODOS_Result.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\datos.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
@@ -147,6 +147,9 @@
     <Compile Include="Models\datos_finales.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB_Errors.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Despachos.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
@@ -154,6 +157,9 @@
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\errores.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Folder.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\imagenes.cs">
@@ -201,9 +207,6 @@
     <Compile Include="Models\RefreshToken.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\REPORTE_PRODUCCION_Result.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\series.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>
@@ -243,18 +246,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\ModelLider.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelLider.edmx</DependentUpon>
-      <LastGenOutput>ModelLider.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ModelLider.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelLider.edmx</DependentUpon>
-      <LastGenOutput>ModelLider.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
@@ -272,6 +263,18 @@
   <ItemGroup>
     <Folder Include="Models\Dto\" />
     <Folder Include="Models\Interface\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\ModelLider.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelLider.edmx</DependentUpon>
+      <LastGenOutput>ModelLider.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelLider.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelLider.edmx</DependentUpon>
+      <LastGenOutput>ModelLider.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,7 +1,9 @@
 ﻿using Lider.Models;
+using Lider.Models.ClassApi;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -14,7 +16,15 @@ namespace Lider
     {
         //Prueba de modificación
         public static Parametros parametersApi = null;
+        public static DatumAE respAreaEmpresaFilter = null;
+        public static ClassGetFolderSql folderSelected = null;
+        public static CrearCuadernoResponse cCResp = null;
+        public static bool filtroAreaEmpresa = true;
+        public static string codigoArea = string.Empty;
+        public static string nombreExpediente = "50001311000112020006300";
         public static List<initialDate> initialDate = null;
+        public static List<TiposDocumentale> tiposDocumentale = null;
+        public static GetExpedienteResponse getExpedienteResponse = null;
         public static DateTime StartDate { get; set; }
         public static DateTime EndDate { get; set; }
         public static List<urlApiI> EndPointApi { get; set; }
@@ -22,21 +32,33 @@ namespace Lider
         public log_error log { get; set; }
 
         public static TRDAreaSerieSubSerieResponse tRDAreaSerieSubSerieResponse = new TRDAreaSerieSubSerieResponse ();
+        public static AreaEmpresaResponse areaEmpresaResponse = new AreaEmpresaResponse();
 
         static void Main()
         {
-            EndPointApi = GetUrlApi();
-            parametersApi = GetParameters();
-            initialDate = GetInitalDate();
+            try
+            {
+                EndPointApi = GetUrlApi();
+                parametersApi = GetParameters();
+                initialDate = GetInitalDate();
 
-            if (parametersApi.Count == 0)
-            {
-                // Enviar correo informativo
-                Console.WriteLine("No existen parametros!!! por favor validar.");
+                if (parametersApi.Count == 0)
+                {
+                    // Enviar correo informativo
+                    Console.WriteLine("No existen parametros!!! por favor validar.");
+                }
+                else
+                {
+                    RunAsync().GetAwaiter().GetResult();
+                }
             }
-            else
+            catch (Exception e)
             {
-                RunAsync().GetAwaiter().GetResult();
+                log_error l = new log_error
+                {
+                    message = e.Message
+                };
+                SaveLogs(l);
             }
         }
 
@@ -46,44 +68,99 @@ namespace Lider
         /// <returns>void</returns>
         static async Task RunAsync()
         {
-            try
+            Console.WriteLine("Ingrese código del área");
+            codigoArea = Console.ReadLine();
+            
+            // Update port # in the following line.
+            AddHeaders();
+            Login login = new Login
             {
-                // Update port # in the following line.
-                AddHeaders();
-                Login login = new Login
-                {
-                    UData = parametersApi.ParametersApi[0].usuario,
-                    AppKey = parametersApi.ParametersApi[0].password
-                };
+                UData = parametersApi.ParametersApi[0].usuario,
+                AppKey = parametersApi.ParametersApi[0].password
+            };
 
-                LoginResponse loginResponse = await LoginServer(login);
-                List<DataToSend> records = GetDataToSendApi();
+            LoginResponse loginResponse = await LoginServer(login);
+            List<DataToSend> records = GetDataToSendApi();
 
-                //
-
+            //
+            foreach (var item in records)
+            {
                 // LLamamos a los diferentes metodos de la API necesarios para el envío de la información
-                tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse);
-                ResponseExpendiente resp = await CrearExpedienteParameters(loginResponse, records);
-                Console.WriteLine(resp.Error);
-                
-                //CarpetaResponse carpetaResponse = await CarpetasParameters(loginResponse);
-                //CuadernoRespone cuadernoRespone = await CuadernosParameters(loginResponse);
+                areaEmpresaResponse = await AreaEmpresaParameters(loginResponse);
 
-                //UserPorAreaResponse respUserPorArea = await CallUserPorAreaParametersAsync(loginResponse, 2585);
-                //TdrEmpresaReponse tdrEmpresaReponse = await TRDEmpresaParameters(loginResponse);
-                //ExpPorCUIResponse expPorCUIResponse = await ExpPorCUIParameters(loginResponse);
-                //TdrEmpresaReponse tdrEmpresaReponseTemporal = await CrearDocumentoParameters(loginResponse);
-
-                Console.ReadLine();
-            }
-            catch (Exception e)
-            {
-                log_error l = new log_error
+                if (filtroAreaEmpresa)
                 {
-                    log_error1 = e.Message                    
-                };
-                SaveLogs(l);
-            }            
+                    respAreaEmpresaFilter = GetFilterAreaEmpresa();
+                    ClassSpSerieYSubSerie respClassSpSerieYSubSerie = GetSerieYSubSerie();
+                    tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse, respClassSpSerieYSubSerie);
+
+                    //Crear u obtener Expediente
+                    CrearExpedienteResponse crearExpResp = await CrearExpedienteParameters(loginResponse, records);
+                    getExpedienteResponse = await ExpedienteParameters(loginResponse, nombreExpediente);
+
+                    List<ClassGetFolderSql> folders = GetFolderId(nombreExpediente);
+                    if (folders.Count>0)
+                    {
+                        foreach (ClassGetFolderSql folder in folders)
+                        {
+                            folderSelected = folder;
+                            List<ClassSpGetNoteBook> noteBooks = GetNotebook(nombreExpediente);
+                            if (noteBooks.Count>0)
+                            {
+                                foreach (var notebook in noteBooks)
+                                {
+                                    cCResp = await NoteBookParameters(loginResponse, notebook, folder);
+
+                                    // Por preguntar como relacionar cuadernos con documentos
+                                    ObtenerCuadernoResponse noteBookList = await NoteBookByCUIParameters(loginResponse);
+
+                                    if (noteBookList.Data.Count > 0)
+                                    {
+                                        foreach (DatumOC nb in noteBookList.Data)
+                                        {
+                                            List<ClassSpFile> spFile = GetFile(nombreExpediente);
+                                            if (spFile.Count > 0)
+                                            {
+                                                foreach (var file in spFile)
+                                                {
+                                                    TdrEmpresaReponse cDocResp = await CrearDocumentoParameters(loginResponse, file, nb);
+                                                    if (!string.IsNullOrEmpty((string)cDocResp.CodeError))
+                                                    {
+                                                        Console.WriteLine(cDocResp.CodeError+" "+ cDocResp.ValidationUI);
+                                                    }
+                                                    else
+                                                    {
+                                                        Console.WriteLine("Se cargo el archivo exitosamente!!!");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }                           
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (DatumAE item2 in areaEmpresaResponse.Data)
+                    {
+                        ClassSpSerieYSubSerie respClassSpSerieYSubSerie =GetSerieYSubSerie();
+                        tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse, respClassSpSerieYSubSerie);
+                        CrearExpedienteResponse resp = await CrearExpedienteParameters(loginResponse, records);
+                    }
+                }
+            }
+
+            Console.ReadLine();
+        }
+
+        static private DatumAE GetFilterAreaEmpresa()
+        {
+            List<DatumAE> data = areaEmpresaResponse.Data;
+            DatumAE resp = data.Find(x => x.Codigo == codigoArea);
+
+            return resp;
         }
 
         #region PUENTE TO CALL API
@@ -98,13 +175,13 @@ namespace Lider
             return usuarioPorArea;
         }
 
-        static async Task<TRDAreaSerieSubSerieResponse> TRDASSParameters(LoginResponse login)
+        static async Task<TRDAreaSerieSubSerieResponse> TRDASSParameters(LoginResponse login, ClassSpSerieYSubSerie respClassSpSerieYSubSerie)
         {
             ParametersTrdASS parameters = new ParametersTrdASS
             {
-                CodigoArea = "500013110001",
-                CodigoSerie = "270",
-                CodigoSubSerie = "270-85"
+                CodigoArea = codigoArea,
+                CodigoSerie = respClassSpSerieYSubSerie.CodigoSerie,
+                CodigoSubSerie = respClassSpSerieYSubSerie.CodigoSubSerie
             };
 
             TRDAreaSerieSubSerieResponse trdASS = await TrdASS(login, parameters);
@@ -122,14 +199,17 @@ namespace Lider
             return trdASS;
         }
 
-        static async Task<CuadernoRespone> CuadernosParameters(LoginResponse login)
+        static async Task<CrearCuadernoResponse> CuadernosParameters(LoginResponse login, ClassSpGetNoteBook notebooke, ClassGetFolderSql folder)
         {
-            ParametersCuadernos parameters = new ParametersCuadernos
+            ParametersCC parameter = new ParametersCC
             {
-                CUI = "2587"
+                Nombre = notebooke.Cuaderno,
+                Codigo = notebooke.CuadernoId,
+                IdCarpeta = folder.IdCarpeta,
+                IdExpediente = getExpedienteResponse.Data[0].IdExpediente
             };
 
-            CuadernoRespone trdASS = await Cuadernos(login, parameters);
+            CrearCuadernoResponse trdASS = await Cuadernos(login, parameter);
             return trdASS;
         }
 
@@ -154,43 +234,18 @@ namespace Lider
             ExpPorCUIResponse trdASS = await ExpPorCUI(login, parameters);
             return trdASS;
         }
-
-        static async Task<TdrEmpresaReponse> CrearDocumentoParameters(LoginResponse loginResponse)
-        {
-            ParametersCD parameters = new ParametersCD
-            {
-                IdExpediente = string.Empty,
-                IdTipoDocumental = string.Empty,
-                Nombre = string.Empty,
-                Archivo = null,
-                Metadatos = null,
-                FechaCreacionDocumento = string.Empty,
-                IdCarpeta = string.Empty,
-                Autor = string.Empty,
-                FechaTransmicion = string.Empty,
-                FechaRecepcion = string.Empty,
-                Descripcion = string.Empty,
-                Version = string.Empty,
-                IdAreaEmpresa = string.Empty,
-                VerPublico = string.Empty,
-                IdCuaderno = string.Empty
-            };
-
-            TdrEmpresaReponse trdASS = await CrearDocumento(loginResponse, parameters);
-            return trdASS;
-        }
         
-        static async Task<ResponseExpendiente> CrearExpedienteParameters(LoginResponse loginResponse, List<DataToSend> records)
+        static async Task<CrearExpedienteResponse> CrearExpedienteParameters(LoginResponse loginResponse, List<DataToSend> records)
         {
             ParametersCE parameter = new ParametersCE
             {
                 IdTablaRetencionDocumental = tRDAreaSerieSubSerieResponse.Data[0].IdTablaRetencionDocumental,
                 IdVersionTablaRetencionDocumental = tRDAreaSerieSubSerieResponse.Data[0].IdVersionTablaDocumental,
-                IdUsuarioResponsable = 407,
-                Nombre = tRDAreaSerieSubSerieResponse.Data[0].CodigoTablaRetencionDocumental,
+                IdUsuarioResponsable = 1704,
+                Nombre = nombreExpediente,
                 Descripcion = null,
                 FechaFinal = 1,
-                NumeroRadicacionProceso = tRDAreaSerieSubSerieResponse.Data[0].CodigoTablaRetencionDocumental,
+                NumeroRadicacionProceso = nombreExpediente,
                 IdCiudad = tRDAreaSerieSubSerieResponse.Data[0].IdCiudad,
                 IdAreaEmpresa = tRDAreaSerieSubSerieResponse.Data[0].IdAreaEmpresa,
                 Metadatos = new List<object> { }
@@ -198,17 +253,80 @@ namespace Lider
 
             return await CrearExpediente(loginResponse, parameter);
         }
+        
+        static async Task<AreaEmpresaResponse> AreaEmpresaParameters(LoginResponse loginResponse)
+        {
+            ParametersAE parameter = new ParametersAE
+            {
+                
+            };
 
-        //static async Task<TdrEmpresaReponse> CrearExpedienteParameters(LoginResponse login)
-        //{
-        //    ParametersTrdEmpresa parameters = new ParametersTrdEmpresa
-        //    {
-        //        IdAreaEmpresa = "2587"
-        //    };
+            return await AreaEmpresa(loginResponse, parameter);
+        }
+        
+        static async Task<GetExpedienteResponse> ExpedienteParameters(LoginResponse loginResponse, string CUI)
+        {
+            ParametersGE parameter = new ParametersGE
+            {
+                CUI = CUI
+            };
 
-        //    TdrEmpresaReponse trdASS = await CrearExpediente(login, parameters);
-        //    return trdASS;
-        //}
+            return await GetExpediente(loginResponse, parameter);
+        }
+        
+        static async Task<CrearCuadernoResponse> NoteBookParameters(LoginResponse loginResponse, ClassSpGetNoteBook notebooke, ClassGetFolderSql folder)
+        {
+            ParametersCC parameter = new ParametersCC
+            {
+                Nombre = notebooke.Cuaderno,
+                Codigo = notebooke.CuadernoId,
+                IdCarpeta = folder.IdCarpeta,
+                IdExpediente = getExpedienteResponse.Data[0].IdExpediente
+            };
+
+            return await Cuadernos(loginResponse, parameter);
+        }
+        
+        static async Task<ObtenerCuadernoResponse> NoteBookByCUIParameters(LoginResponse loginResponse)
+        {
+            ParametersCBC parameter = new ParametersCBC
+            {
+                CUI = nombreExpediente
+            };
+
+            return await ObtenerCuadernos(loginResponse, parameter);
+        }
+
+        static async Task<TdrEmpresaReponse> CrearDocumentoParameters(LoginResponse loginResponse, ClassSpFile file, DatumOC notebook)
+        {
+            string base64 = GetFileToBase64(file.NombreImagen);
+            ArchivoCD archivoCD = CreateArchivoCD(file.NombreImagen, base64);
+            List<ArchivoCD> archivoCDList = new List<ArchivoCD>();
+            archivoCDList.Add(archivoCD);
+            string tipoDocumental = GetTipoDocumental(file.TipoDocumental);
+
+            ParametersCD parameters = new ParametersCD
+            {
+                IdExpediente = getExpedienteResponse.Data[0].IdExpediente,
+                IdTipoDocumental = tipoDocumental,
+                Nombre = file.NombreImagen,
+                Archivo = archivoCDList,
+                Metadatos = null,
+                FechaCreacionDocumento = DateTime.Now.ToString("dd/MM/yyyy"),
+                IdCarpeta = folderSelected.IdCarpeta,
+                Autor = "Siglo21",
+                FechaTransmicion = DateTime.Now.ToString("dd/MM/yyyy"),
+                FechaRecepcion = DateTime.Now.ToString("dd/MM/yyyy"),
+                Descripcion = "Descripcion teste 01",
+                Version = "001",
+                IdAreaEmpresa = tRDAreaSerieSubSerieResponse.Data[0].IdAreaEmpresa,
+                VerPublico = false,
+                IdCuaderno = notebook.IdCuaderno
+            };
+
+            TdrEmpresaReponse trdASS = await CrearDocumento(loginResponse, parameters);
+            return trdASS;
+        }
 
         #endregion
 
@@ -227,7 +345,47 @@ namespace Lider
             // Sino devuelve null
             return records;
         }
+
+        static List<ClassGetFolderSql> GetFolderId(string nombreExpediente)
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [api].[spFolderId] '{nombreExpediente}'");
+            List<ClassGetFolderSql> records = db.Database.SqlQuery<ClassGetFolderSql>(query).ToList();
+
+            // Sino devuelve null
+            return records;
+        }
+
+        static List<ClassSpGetNoteBook> GetNotebook(string nombreExpediente)
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"[api].[SpNoteBook] '{nombreExpediente}'");
+            List<ClassSpGetNoteBook> records = db.Database.SqlQuery<ClassSpGetNoteBook>(query).ToList();
+
+            // Sino devuelve null
+            return records;
+        }
+
+        static List<ClassSpFile> GetFile(string nombreExpediente)
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [api].[SpFiles] '{nombreExpediente}'");
+            List<ClassSpFile> records = db.Database.SqlQuery<ClassSpFile>(query).ToList();
+
+            // Sino devuelve null
+            return records;
+        }
         
+        static List<ClassSpFile> Upd(string nombreExpediente)
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [api].[SpFiles] '{nombreExpediente}'");
+            List<ClassSpFile> records = db.Database.SqlQuery<ClassSpFile>(query).ToList();
+
+            // Sino devuelve null
+            return records;
+        }
+
         #endregion
 
         #region CONSULTAMOS A LAS API
@@ -251,7 +409,7 @@ namespace Lider
         /// Realizamos recorrido de los datos obtenidos 
         /// </summary>
         /// <param name="registers">Data obenida de la Api</param>
-        static async Task<ResponseExpendiente> CrearExpediente(LoginResponse login, ParametersCE parameters)
+        static async Task<CrearExpedienteResponse> CrearExpediente(LoginResponse login, ParametersCE parameters)
         {
             // Aqui llamamos a la Api a enviarle la data
             try
@@ -259,7 +417,7 @@ namespace Lider
                 CrearExpediente expediente = new CrearExpediente
                 {
                     Token = login.Data.Token,
-                    AppKey = parametersApi.ParametersApi[0].password
+                    AppKey = parametersApi.ParametersApi[0].password,
                 };
 
                 ExecutionObjectCE executionObject = new ExecutionObjectCE
@@ -282,7 +440,7 @@ namespace Lider
                 HttpResponseMessage response = await client.PostAsJsonAsync(endPoint, expediente);
                 response.EnsureSuccessStatusCode();
 
-                ResponseExpendiente res = await response.Content.ReadAsAsync<ResponseExpendiente>();
+                CrearExpedienteResponse res = await response.Content.ReadAsAsync<CrearExpedienteResponse>();
 
                 return res;
             }
@@ -377,14 +535,28 @@ namespace Lider
         /// <returns></returns>
         static async Task<TdrEmpresaReponse> CrearDocumento(LoginResponse login, ParametersCD parameter)
         {
-            CrearDocumento crearDocumento = new CrearDocumento();
-            crearDocumento.Token = login.Data.Token;
-            crearDocumento.AppKey = parametersApi.ParametersApi[0].password;
-            crearDocumento.ExecutionObject.Name = "Documentos";
-            crearDocumento.ExecutionObject.WebServiceMethod.Name = "CrearDocumento";
-            crearDocumento.ExecutionObject.WebServiceMethod.Parameters = parameter;
+                   
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            WebServiceMethodCD webServiceMethod = new WebServiceMethodCD
+            {
+                Name = "CrearDocumento",
+                Parameters = parameter
+            };
+
+            ExecutionObjectCD executionObject = new ExecutionObjectCD
+            {
+                Name = "Documentos",
+                WebServiceMethod = webServiceMethod
+            };
+
+            CrearDocumento crearDocumento = new CrearDocumento
+            {
+                Token = login.Data.Token,
+                AppKey = parametersApi.ParametersApi[0].password,
+                ExecutionObject = executionObject
+            };
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[6].patch, crearDocumento);
             response.EnsureSuccessStatusCode();
 
             TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
@@ -392,12 +564,64 @@ namespace Lider
             return res;
         }
 
-        /// <summary>
-        /// TrdASS
-        /// </summary>
-        /// <param name="login">Clase login con los datos de acceso</param>
-        /// <returns></returns>
-        
+        static async Task<AreaEmpresaResponse> AreaEmpresa(LoginResponse login, ParametersAE parameters)
+        {
+            AreaEmpresa areaEmpresa = new AreaEmpresa
+            {
+                Token = login.Data.Token,
+                AppKey = parametersApi.ParametersApi[0].password
+            };
+            ExecutionObjectAE executionObject = new ExecutionObjectAE
+            {
+                Name = "Areas"
+            };
+
+            WebServiceMethodAE webServiceMethod = new WebServiceMethodAE
+            {
+                Name = "GetAreas"
+            };
+            executionObject.WebServiceMethod = webServiceMethod;
+            webServiceMethod.Parameters = parameters;
+            areaEmpresa.ExecutionObject = executionObject;
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[2].patch, areaEmpresa);
+            response.EnsureSuccessStatusCode();
+
+            AreaEmpresaResponse res = await response.Content.ReadAsAsync<AreaEmpresaResponse>();
+
+            return res;
+        }
+
+        static async Task<GetExpedienteResponse> GetExpediente(LoginResponse login, ParametersGE parameters)
+        {
+            GetExpediente getExpediente = new GetExpediente
+            {
+                Token = login.Data.Token,
+                AppKey = parametersApi.ParametersApi[0].password
+            };
+            ExecutionObjectGE executionObject = new ExecutionObjectGE
+            {
+                Name = "Expedientes"
+            };
+
+            WebServiceMethodGE webServiceMethod = new WebServiceMethodGE
+            {
+                Name = "GetExpedienteCUI"
+            };
+            executionObject.WebServiceMethod = webServiceMethod;
+            webServiceMethod.Parameters = parameters;
+            getExpediente.ExecutionObject = executionObject;
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[11].patch, getExpediente);
+            response.EnsureSuccessStatusCode();
+
+            GetExpedienteResponse res = await response.Content.ReadAsAsync<GetExpedienteResponse>();
+
+            //
+            Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(res.Data[0].ConfiguracionTRD);
+            tiposDocumentale = myDeserializedClass.TiposDocumentales;
+            return res;
+        }
 
         static async Task<ExpPorCUIResponse> ExpPorCUI(LoginResponse login, ParametersCUI parameter)
         {
@@ -423,9 +647,11 @@ namespace Lider
         /// <returns></returns>
         static async Task<CarpetaResponse> Carpetas(LoginResponse login, ParametersFolder parameter)
         {
-            Folder folder = new Folder();
-            folder.Token = login.Data.Token;
-            folder.AppKey = parametersApi.ParametersApi[0].password;
+            FolderApi folder = new FolderApi
+            {
+                Token = login.Data.Token,
+                AppKey = parametersApi.ParametersApi[0].password
+            };
             folder.ExecutionObject.Name = "Carpetas";
             folder.ExecutionObject.WebServiceMethod.Name = "GetCarpetas";
             folder.ExecutionObject.WebServiceMethod.Parameters = parameter;
@@ -443,19 +669,31 @@ namespace Lider
         /// </summary>
         /// <param name="login">Clase login con los datos de acceso</param>
         /// <returns></returns>
-        static async Task<CuadernoRespone> Cuadernos(LoginResponse login, ParametersCuadernos parameter)
+        static async Task<CrearCuadernoResponse> Cuadernos(LoginResponse login, ParametersCC parameter)
         {
-            Cuadernos cuadernos = new Cuadernos();
-            cuadernos.Token = login.Data.Token;
-            cuadernos.AppKey = parametersApi.ParametersApi[0].password;
-            cuadernos.ExecutionObject.Name = "Cuaderno";
-            cuadernos.ExecutionObject.WebServiceMethod.Name = "GetCuadernosCUI";
-            cuadernos.ExecutionObject.WebServiceMethod.Parameters = parameter;
+            WebServiceMethodCC webServiceMethod = new WebServiceMethodCC
+            {
+                Name = "CrearCuaderno",
+                Parameters = parameter,
+            };
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            ExecutionObjectCC executionObject = new ExecutionObjectCC
+            {
+                Name = "Cuaderno",
+                WebServiceMethod = webServiceMethod
+            };
+
+            CreacionCuadernos creacionCuadernos = new CreacionCuadernos
+            {
+                Token = login.Data.Token,
+                AppKey = parametersApi.ParametersApi[0].password,
+                ExecutionObject = executionObject
+            };
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[13].patch, creacionCuadernos);
             response.EnsureSuccessStatusCode();
 
-            CuadernoRespone res = await response.Content.ReadAsAsync<CuadernoRespone>();
+            CrearCuadernoResponse res = await response.Content.ReadAsAsync<CrearCuadernoResponse>();
 
             return res;
         }
@@ -465,19 +703,31 @@ namespace Lider
         /// </summary>
         /// <param name="login">Clase login con los datos de acceso</param>
         /// <returns></returns>
-        static async Task<CrearCuadernoResponse> CrearCuadernos(LoginResponse login, ParametersCC parameter)
+        static async Task<ObtenerCuadernoResponse> ObtenerCuadernos(LoginResponse login, ParametersCBC parameter)
         {
-            CreacionCuadernos creacionCuadernos = new CreacionCuadernos();
-            creacionCuadernos.Token = login.Data.Token;
-            creacionCuadernos.AppKey = parametersApi.ParametersApi[0].password;
-            creacionCuadernos.ExecutionObject.Name = "Cuaderno";
-            creacionCuadernos.ExecutionObject.WebServiceMethod.Name = "CrearCuaderno";
-            creacionCuadernos.ExecutionObject.WebServiceMethod.Parameters = parameter;
+            WebServiceMethodCBC webServiceMethod = new WebServiceMethodCBC
+            {
+                Name = "GetCuadernosCUI",
+                Parameters = parameter,
+            };
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            ExecutionObjectCBC executionObject = new ExecutionObjectCBC
+            {
+                Name = "Cuaderno",
+                WebServiceMethod = webServiceMethod
+            };
+
+            CuadernoByCUI creacionCuadernos = new CuadernoByCUI
+            {
+                Token = login.Data.Token,
+                AppKey = parametersApi.ParametersApi[0].password,
+                ExecutionObject = executionObject
+            };
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[12].patch, creacionCuadernos);
             response.EnsureSuccessStatusCode();
 
-            CrearCuadernoResponse res = await response.Content.ReadAsAsync<CrearCuadernoResponse>();
+            ObtenerCuadernoResponse res = await response.Content.ReadAsAsync<ObtenerCuadernoResponse>();
 
             return res;
         }
@@ -566,6 +816,17 @@ namespace Lider
                 db.SaveChanges();
             }
         }
+
+        static ClassSpSerieYSubSerie GetSerieYSubSerie()
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string codigo = respAreaEmpresaFilter.Codigo;
+            string query = string.Concat($"[api].[SpSeries] '{codigo}', '{nombreExpediente}'");
+            ClassSpSerieYSubSerie record = db.Database.SqlQuery<ClassSpSerieYSubSerie>(query).First();
+
+            // Sino devuelve null
+            return record;
+        }
         #endregion
 
         #region CLASES
@@ -581,6 +842,53 @@ namespace Lider
             public List<parametersApi> ParametersApi { get; set; }
             public int Count { get; set; }
         }
+
+
+        #endregion
+
+        #region LINQ
+        static string GetTipoDocumental(string tipoDocumental)
+        {
+            string resp = tiposDocumentale.Find(x => x.Nombre.ToLower().Trim() == tipoDocumental.ToLower().Trim())?.IdTipoDocumental;
+            if (string.IsNullOrEmpty(resp))
+            {
+                // Aqui guardamos en log de TiposDocumentales
+            }
+            return resp;
+        }
+        #endregion
+
+        #region METODOS GENERALES
+        static string GetFileToBase64(string fileName)
+        {
+            string path = Directory.GetCurrentDirectory() + string.Format("{0}", $"/{fileName}");
+            //adjunto.SaveAs(path, true);
+            //datosAdjunto.strExtensionArchivo = adjunto.GetExtension().Replace(".", "");
+            Byte[] bytes = File.ReadAllBytes(path);
+            string strArchivoBase64 = Convert.ToBase64String(bytes);
+            return strArchivoBase64;
+        }
+        
+        static ArchivoCD CreateArchivoCD(string fileName, string base64)
+        {
+            FileField fileField = new FileField
+            {
+                FormatType = "Base64",
+                DestinationFile = new DestinationFile { }
+            };
+
+            ArchivoCD archivoCD = new ArchivoCD()
+            {
+                Archivo = fileName,
+                DatosArchivo = base64,
+                EsAdjunto = false,
+                FileField = fileField
+            };
+
+            return archivoCD;
+        }
+
+
         #endregion
     }
 }
