@@ -16,6 +16,7 @@ namespace Lider.Models
     {
         public int log_id { get; set; }
         public string message { get; set; }
+        public string StackTrace { get; set; }
         public System.DateTime date_insert { get; set; }
         public int type { get; set; }
     }

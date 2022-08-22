@@ -115,6 +115,8 @@
     <Compile Include="Models\ClassApi\ClassCrearExpedienteResponse.cs" />
     <Compile Include="Models\ClassApi\ClassCuadernoResponse.cs" />
     <Compile Include="Models\ClassApi\ClassCuadernos.cs" />
+    <Compile Include="Models\ClassApi\ClassEstadoDocumento.cs" />
+    <Compile Include="Models\ClassApi\ClassExpedienteEstado.cs" />
     <Compile Include="Models\ClassApi\ClassExpPorCUI.cs" />
     <Compile Include="Models\ClassApi\ClassExpPorCUIResponse.cs" />
     <Compile Include="Models\ClassApi\ClassGetCuadernoResponse.cs" />
@@ -123,10 +125,12 @@
     <Compile Include="Models\ClassApi\ClassGetExpedienteResponse.cs" />
     <Compile Include="Models\ClassApi\ClassGetFolderSql.cs" />
     <Compile Include="Models\ClassApi\ClassJsonToSendApi.cs" />
+    <Compile Include="Models\ClassApi\ClassLogErrorApi.cs" />
     <Compile Include="Models\ClassApi\ClassNoteBook.cs" />
     <Compile Include="Models\ClassApi\ClassResponseLogin.cs" />
     <Compile Include="Models\ClassApi\ClassSpFile.cs" />
     <Compile Include="Models\ClassApi\ClassSpGetNoteBook.cs" />
+    <Compile Include="Models\ClassApi\ClassSpLogTd.cs" />
     <Compile Include="Models\ClassApi\ClassSpSerieYSubSerie.cs" />
     <Compile Include="Models\ClassApi\ClassTRDAreaSerieSubSerie.cs" />
     <Compile Include="Models\ClassApi\ClassTRDAreaSerieSubSerieResponse.cs" />
@@ -135,6 +139,7 @@
     <Compile Include="Models\ClassApi\ClassUsuarioDeArea.cs" />
     <Compile Include="Models\ClassApi\ClassUsuarioDeAreaResponse.cs" />
     <Compile Include="Models\ClassApi\ClassUsuarioPorArea.cs" />
+    <Compile Include="Models\ClassApi\ClassValidateExpediente.cs" />
     <Compile Include="Models\datos.cs">
       <DependentUpon>ModelLider.tt</DependentUpon>
     </Compile>

@@ -20,8 +20,8 @@ namespace Lider
         public static ClassGetFolderSql folderSelected = null;
         public static CrearCuadernoResponse cCResp = null;
         public static bool filtroAreaEmpresa = true;
-        public static string codigoArea = string.Empty;
-        public static string nombreExpediente = "50001311000112020006300";
+        public static string codigoArea = "500013110001";
+        public static string nombreExpediente = "50001311000119981795700";
         public static List<initialDate> initialDate = null;
         public static List<TiposDocumentale> tiposDocumentale = null;
         public static GetExpedienteResponse getExpedienteResponse = null;
@@ -54,11 +54,16 @@ namespace Lider
             }
             catch (Exception e)
             {
+                ShowConsole(e.Message, "red");
+                ShowConsole("Por favor presiones enter para salir!!!");
+                Console.Read();
                 log_error l = new log_error
                 {
-                    message = e.Message
+                    message = e.Message,
+                    StackTrace = e.StackTrace,
+                    type = 999
                 };
-                SaveLogs(l);
+                Exception(l);
             }
         }
 
@@ -68,90 +73,147 @@ namespace Lider
         /// <returns>void</returns>
         static async Task RunAsync()
         {
-            Console.WriteLine("Ingrese código del área");
-            codigoArea = Console.ReadLine();
+            Menu();
+            
             
             // Update port # in the following line.
-            AddHeaders();
-            Login login = new Login
-            {
-                UData = parametersApi.ParametersApi[0].usuario,
-                AppKey = parametersApi.ParametersApi[0].password
-            };
 
-            LoginResponse loginResponse = await LoginServer(login);
             List<DataToSend> records = GetDataToSendApi();
-
-            //
-            foreach (var item in records)
+            if (records.Count>0)
             {
-                // LLamamos a los diferentes metodos de la API necesarios para el envío de la información
-                areaEmpresaResponse = await AreaEmpresaParameters(loginResponse);
-
-                if (filtroAreaEmpresa)
+                AddHeaders();
+                Login login = new Login
                 {
-                    respAreaEmpresaFilter = GetFilterAreaEmpresa();
-                    ClassSpSerieYSubSerie respClassSpSerieYSubSerie = GetSerieYSubSerie();
-                    tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse, respClassSpSerieYSubSerie);
+                    UData = parametersApi.ParametersApi[0].usuario,
+                    AppKey = parametersApi.ParametersApi[0].password
+                };
 
-                    //Crear u obtener Expediente
-                    CrearExpedienteResponse crearExpResp = await CrearExpedienteParameters(loginResponse, records);
-                    getExpedienteResponse = await ExpedienteParameters(loginResponse, nombreExpediente);
+                ShowConsole("Obteniendo token!!!");
+                LoginResponse loginResponse = await LoginServer(login);
 
-                    List<ClassGetFolderSql> folders = GetFolderId(nombreExpediente);
-                    if (folders.Count>0)
-                    {
-                        foreach (ClassGetFolderSql folder in folders)
+                if (loginResponse.Ok)
+                {
+                    ShowConsole("Recorriendo expedientes de la BD!!!");
+                    //foreach (var item in records)
+                    //{
+                        // LLamamos a los diferentes metodos de la API necesarios para el envío de la información
+                        ShowConsole("Obteniendo Area de la empresa!!!");
+                        areaEmpresaResponse = await AreaEmpresaParameters(loginResponse);
+
+
+                        if (filtroAreaEmpresa)
                         {
-                            folderSelected = folder;
-                            List<ClassSpGetNoteBook> noteBooks = GetNotebook(nombreExpediente);
-                            if (noteBooks.Count>0)
-                            {
-                                foreach (var notebook in noteBooks)
+                            //Recorremos las diferentes Areas del expediente
+                            //foreach (var ca in areaEmpresaResponse.Data)
+                            //{
+                                
+                                respAreaEmpresaFilter = GetFilterAreaEmpresa();
+
+                                // Esta linea se descomenta cuando no se pida el codigo del area por console
+                                // y se comenta la linea 105
+                                //respAreaEmpresaFilter = ca;
+
+                                ClassSpSerieYSubSerie respClassSpSerieYSubSerie = GetSerieYSubSerie();
+                                ShowConsole("Obteniendo tabla retención documental!!!");
+                                tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse, respClassSpSerieYSubSerie);
+
+                                if (tRDAreaSerieSubSerieResponse.Ok)
                                 {
-                                    cCResp = await NoteBookParameters(loginResponse, notebook, folder);
+                                    //Crear u obtener Expediente
+                                    ShowConsole("Creando expediente Api!!! - {0}", nombreExpediente);
+                                    CrearExpedienteResponse crearExpResp = await CrearExpedienteParameters(loginResponse, records);
 
-                                    // Por preguntar como relacionar cuadernos con documentos
-                                    ObtenerCuadernoResponse noteBookList = await NoteBookByCUIParameters(loginResponse);
+                                    ShowConsole("Obteniendo Id del expediente Api!!!");
+                                    getExpedienteResponse = await ExpedienteParameters(loginResponse, nombreExpediente);
 
-                                    if (noteBookList.Data.Count > 0)
+                                    ShowConsole("Obteniendo folder de la base de datos!!! - {0}", nombreExpediente);
+                                    List<ClassGetFolderSql> folders = GetFolderId(nombreExpediente);
+                                    if (folders.Count > 0)
                                     {
-                                        foreach (DatumOC nb in noteBookList.Data)
+                                        foreach (ClassGetFolderSql folder in folders)
                                         {
-                                            List<ClassSpFile> spFile = GetFile(nombreExpediente);
-                                            if (spFile.Count > 0)
+                                            folderSelected = folder;
+                                            ShowConsole("Obteniendo cuadernos de la base de datos!!! - {0}", nombreExpediente);
+                                            List<ClassSpGetNoteBook> noteBooks = GetNotebook(nombreExpediente);
+                                            if (noteBooks.Count > 0)
                                             {
-                                                foreach (var file in spFile)
+                                                foreach (var notebook in noteBooks)
                                                 {
-                                                    TdrEmpresaReponse cDocResp = await CrearDocumentoParameters(loginResponse, file, nb);
-                                                    if (!string.IsNullOrEmpty((string)cDocResp.CodeError))
+                                                    ShowConsole("Creando cuaderno Api!!! - {0}", notebook.CuadernoId);
+                                                    cCResp = await NoteBookParameters(loginResponse, notebook, folder);
+
+                                                    // Por preguntar como relacionar cuadernos con documentos
+                                                    ShowConsole("Obteniendo Id de Cuadernos Api!!! - {0}", notebook.CuadernoId);
+                                                    ObtenerCuadernoResponse noteBookList = await NoteBookByCUIParameters(loginResponse);
+
+                                                    if (noteBookList.Data.Count > 0)
                                                     {
-                                                        Console.WriteLine(cDocResp.CodeError+" "+ cDocResp.ValidationUI);
+                                                        foreach (DatumOC nb in noteBookList.Data)
+                                                        {
+                                                            ShowConsole("Consultando archivos de la Base de Datos!!! - {0}", nb.Carpeta);
+                                                            List<ClassSpFile> spFile = GetFile(nombreExpediente);
+                                                            if (spFile.Count > 0)
+                                                            {
+                                                                foreach (var file in spFile)
+                                                                {
+                                                                    ShowConsole("Creando documento Api!!!");
+                                                                    TdrEmpresaReponse cDocResp = await CrearDocumentoParameters(loginResponse, file, nb);
+                                                                    if (!cDocResp.Ok)
+                                                                    {
+                                                                        ShowConsole("\n" + cDocResp.CodeError + " " + file.NombreImagen + cDocResp.ValidationUI +" "+ nb.Carpeta, "yellow");
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        ShowConsole("Se cargo el archivo exitosamente!!!", "red");
+                                                                        ClassEstadoDocumento estadoDocumento = new ClassEstadoDocumento
+                                                                        {
+                                                                            IdImagen = file.IdImagen,
+                                                                            Message = "Carga Exitosa!!!",
+                                                                            NombreExpediente = nombreExpediente
+                                                                        };
+
+                                                                        SpImgStatusInRepository(estadoDocumento);
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
                                                     }
-                                                    else
-                                                    {
-                                                        Console.WriteLine("Se cargo el archivo exitosamente!!!");
-                                                    }
+
+                                                    SpShowLogExpediente();
                                                 }
                                             }
                                         }
                                     }
                                 }
-                            }                           
+                            //}                            
                         }
-                    }
+                        else
+                        {
+                            foreach (DatumAE item2 in areaEmpresaResponse.Data)
+                            {
+                                ClassSpSerieYSubSerie respClassSpSerieYSubSerie = GetSerieYSubSerie();
+                                tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse, respClassSpSerieYSubSerie);
+                                CrearExpedienteResponse resp = await CrearExpedienteParameters(loginResponse, records);
+                            }
+                        }
+                    //}
                 }
                 else
                 {
-                    foreach (DatumAE item2 in areaEmpresaResponse.Data)
+                    ClassLogErrorApi logErrorApi = new ClassLogErrorApi
                     {
-                        ClassSpSerieYSubSerie respClassSpSerieYSubSerie =GetSerieYSubSerie();
-                        tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse, respClassSpSerieYSubSerie);
-                        CrearExpedienteResponse resp = await CrearExpedienteParameters(loginResponse, records);
-                    }
+                        CodigoError = null,
+                        CodigoArea = null,
+                        NombreArchivo = null,
+                        NombreCarpeta = null,
+                        NombreExpediente = null,
+                        Message = loginResponse.Error.ToString(),
+                        IdError = 5
+                    };
+                    LogApi(logErrorApi);
+                    Main();
                 }
             }
-
             Console.ReadLine();
         }
 
@@ -303,7 +365,7 @@ namespace Lider
             ArchivoCD archivoCD = CreateArchivoCD(file.NombreImagen, base64);
             List<ArchivoCD> archivoCDList = new List<ArchivoCD>();
             archivoCDList.Add(archivoCD);
-            string tipoDocumental = GetTipoDocumental(file.TipoDocumental);
+            string tipoDocumental = GetTipoDocumental(file);
 
             ParametersCD parameters = new ParametersCD
             {
@@ -330,7 +392,7 @@ namespace Lider
 
         #endregion
 
-        #region CONSULTAMOS DATA A BASE DE DATOS PARA OBTENER DATA A ENVIAR
+        #region CONSULTAMOS A SQL SERVER
         /// <summary>
         /// Consultamos api y obtenemos los registros en el rango de fecha indicado
         /// </summary>
@@ -384,6 +446,64 @@ namespace Lider
 
             // Sino devuelve null
             return records;
+        }
+        
+        static void LogApi(ClassLogErrorApi exception)
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [api].[SpLogApi] 'logapi', '{exception.IdError}', '{exception.Message}', '{exception.CodigoError}', '{exception.NombreArchivo}', '{exception.CodigoArea}', '{exception.NombreExpediente}', '{exception.NombreCarpeta}'");
+            db.Database.ExecuteSqlCommand(query);
+        }
+
+        /// <summary>
+        /// Guardamos registros de logs
+        /// </summary>
+        /// <param name="logs">Guardamos registro de los logs obtenidos</param>
+        static void Exception(log_error log)
+        {
+            try
+            {
+                SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+                string query = string.Concat($"EXEC [api].[SpLogApi] 'excepcion', '0', '{log.message}', '9', '{log.type}', '{log.StackTrace}'");
+                db.Database.ExecuteSqlCommand(query);
+                //List<ClassSpFile> records = db.Database.SqlQuery<ClassSpFile>(query).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }            
+        }
+
+        static void SpImgStatusInRepository(ClassEstadoDocumento estadoDocumento)
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [api].[SpImgStatusInRepository] '{estadoDocumento.IdImagen}', '{nombreExpediente}', '{estadoDocumento.Message}'");
+            db.Database.ExecuteSqlCommand(query);
+            //List<ClassSpFile> records = db.Database.SqlQuery<ClassSpFile>(query).ToList();
+        }
+
+        static List<ClassValidateExpediente> SpValidarNumeroExpediente()
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [api].[SpValidarNumeroExpediente] '{nombreExpediente}'");
+            List<ClassValidateExpediente> records = db.Database.SqlQuery<ClassValidateExpediente>(query).ToList();
+            return records;
+            //List<ClassSpFile> records = db.Database.SqlQuery<ClassSpFile>(query).ToList();
+        }
+        
+        static void SpShowLogExpediente()
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [api].[SpLogTd] '{nombreExpediente}', 'sintd'");
+            List<ClassSpLogTd> records = db.Database.SqlQuery<ClassSpLogTd>(query).ToList();
+
+            ShowConsole("Logs TipoDocumental", "orange");
+            foreach (var log in records)
+            {
+                Console.WriteLine(string.Concat(log.IdImagen, " - ", log.NombreImagen, " - ", log.Expediente, " - ", log.Imagen_repositorio, " - ", log.TipoDocumental));
+
+            }
+            //List<ClassSpFile> records = db.Database.SqlQuery<ClassSpFile>(query).ToList();
         }
 
         #endregion
@@ -804,19 +924,6 @@ namespace Lider
             return result;
         }
 
-        /// <summary>
-        /// Guardamos registros de logs
-        /// </summary>
-        /// <param name="logs">Guardamos registro de los logs obtenidos</param>
-        static void SaveLogs(log_error log)
-        {
-            using (SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities())
-            {
-                db.log_error.Add(log);
-                db.SaveChanges();
-            }
-        }
-
         static ClassSpSerieYSubSerie GetSerieYSubSerie()
         {
             SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
@@ -847,23 +954,43 @@ namespace Lider
         #endregion
 
         #region LINQ
-        static string GetTipoDocumental(string tipoDocumental)
+        static string GetTipoDocumental(ClassSpFile file)
         {
-            string resp = tiposDocumentale.Find(x => x.Nombre.ToLower().Trim() == tipoDocumental.ToLower().Trim())?.IdTipoDocumental;
+            string resp = tiposDocumentale.Find(x => x.Nombre.ToLower().Trim() == file.TipoDocumental.ToLower().Trim())?.IdTipoDocumental;
             if (string.IsNullOrEmpty(resp))
             {
-                // Aqui guardamos en log de TiposDocumentales
+                ShowConsole($"Tipo Documental **{file.TipoDocumental}** no permito", "red");
+                ClassEstadoDocumento estadoDocumento = new ClassEstadoDocumento
+                {
+                    IdImagen = file.IdImagen,
+                    Message = "sintd",
+                    NombreExpediente = nombreExpediente
+                };
+
+                SpImgStatusInRepository(estadoDocumento);
+            }
+            else
+            {
+                ClassEstadoDocumento estadoDocumento = new ClassEstadoDocumento
+                {
+                    IdImagen = file.IdImagen,
+                    Message = "contd",
+                    NombreExpediente = nombreExpediente
+                };
+
+                SpImgStatusInRepository(estadoDocumento);
             }
             return resp;
         }
+
         #endregion
 
         #region METODOS GENERALES
         static string GetFileToBase64(string fileName)
         {
-            string path = Directory.GetCurrentDirectory() + string.Format("{0}", $"/{fileName}");
-            //adjunto.SaveAs(path, true);
-            //datosAdjunto.strExtensionArchivo = adjunto.GetExtension().Replace(".", "");
+            string pathRed = parametersApi.ParametersApi[1].urlApi;
+            //string path = Directory.GetCurrentDirectory() + string.Format("{0} {1}", {pathRed}, $"/{fileName}");
+            string path = string.Concat(pathRed, "/",nombreExpediente,$"/{fileName}");
             Byte[] bytes = File.ReadAllBytes(path);
             string strArchivoBase64 = Convert.ToBase64String(bytes);
             return strArchivoBase64;
@@ -888,7 +1015,78 @@ namespace Lider
             return archivoCD;
         }
 
+        #endregion
 
+        #region CONSOLE
+        static void ShowConsole(string mensaje, string option = "black", string color = "black")
+        {
+            switch (option)
+            {
+                case "black":
+                    Console.Write("\n" + mensaje);
+                    break;
+                case "green":
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("\n" + mensaje);
+                    break;
+                case "red":
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("\n" + mensaje);
+                    break;
+                case "oragen":
+                    Console.Write("\n" + mensaje);
+                    break;
+                case "yellow":
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.Write("\n" + mensaje);
+                    break;
+                case "orange":
+                    Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.Write("\n" + mensaje);
+                    break;
+            }
+            Console.ResetColor();
+        }
+        #endregion
+
+        #region MENU
+        static void Menu()
+        {
+            Console.WriteLine("                   ********************************************");
+            Console.WriteLine("                   |               BIENVENIDO                 |");
+            Console.WriteLine("                   | Por favor ingrese los datos solicitado:  |");
+            Console.WriteLine("                   |                                          |");
+            Console.WriteLine("                   ********************************************");
+            Console.WriteLine("\n");
+
+            List<ClassValidateExpediente> resp;
+            do
+            {
+                Console.WriteLine("Ingrese nombre del expediente:");
+                nombreExpediente = Console.ReadLine();
+                resp = SpValidarNumeroExpediente();
+                if (!resp[0].Estado)
+                {
+                    Console.WriteLine("Expediente invalido, por favor digite nuevamente...\n");
+                }
+            } while (!resp[0].Estado);
+
+            //SpShowLogExpediente();
+
+            //do
+            //{
+            //    Console.WriteLine("Ingrese código del área");
+            //    codigoArea = Console.ReadLine();
+            //} while (codigoArea.Length != 12);
+
+            Console.WriteLine($"Expediente: {nombreExpediente}");
+            Console.WriteLine($"Área: {codigoArea}");
+
+        }
         #endregion
     }
 }
