@@ -12,11 +12,12 @@ namespace Lider.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PERSONAS_NOMINAS
+    public partial class Excepcion
     {
-        public decimal ID { get; set; }
-        public decimal IDENT { get; set; }
-        public string NOMBRES { get; set; }
-        public string APELLIDOS { get; set; }
+        public int log_id { get; set; }
+        public string message { get; set; }
+        public string StackTrace { get; set; }
+        public System.DateTime date_insert { get; set; }
+        public int type { get; set; }
     }
 }

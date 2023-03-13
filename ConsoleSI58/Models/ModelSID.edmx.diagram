@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="013f223370d04136b69ec612ad37afc9" Name="Diagram1">
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.Bitacora" Width="1.5" PointX="9.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.initialDate" Width="1.5" PointX="11.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.Log" Width="1.5" PointX="11.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.Log_Motivos" Width="1.5" PointX="12.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.Accounts" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.ArchivosZip" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.auditorias" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.CALIDAD" Width="1.5" PointX="9.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.CALIDADLOTES" Width="1.5" PointX="11.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.campos" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.CAMPOSPROCESOSTIPOSDEDOCUMENTO" Width="1.5" PointX="13.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.camposxtipodoc" Width="1.5" PointX="7.5" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.datos" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.datos_finales" Width="1.5" PointX="13.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.DATOSRAD" Width="1.5" PointX="13.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.Despachos" Width="1.5" PointX="14.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.imagenes" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.listas" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.lotes" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.PROCESOS" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.RAD_ALIST" Width="1.5" PointX="15.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.RefreshToken" Width="1.5" PointX="10" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.series" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.tiposdedocumentos" Width="1.5" PointX="15.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.TIPOSDELOTES" Width="1.5" PointX="9.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.TQM_LOCK" Width="1.5" PointX="16.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.TQM_LOCK_CALIDAD" Width="1.5" PointX="11.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.usuarios" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.valoreslistas" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.Equivalencias_Carpetas" Width="1.5" PointX="17.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.Equivalencias_Integrador" Width="1.5" PointX="17.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.Equivalencias_TiposDocumentales" Width="1.5" PointX="17.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.Folder" Width="1.5" PointX="17.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.parametersApi" Width="1.5" PointX="17.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.urlApiI" Width="1.5" PointX="19.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.datos_2" Width="1.5" PointX="19.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.EQUIVALENCIAS" Width="1.5" PointX="19.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.errores" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.DB_Errors" Width="1.5" PointX="11.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="SID_PROTOCOL2Model.Excepcion" Width="1.5" PointX="19.75" PointY="13" IsExpanded="true" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_RefreshToken_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_ArchivosZip_lotes" ManuallyRouted="false" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_auditorias_usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_campos_listas" ManuallyRouted="false" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_camposxtipodoc_campos" ManuallyRouted="false" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_datos_campos" ManuallyRouted="false" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_datos_imagenes" ManuallyRouted="false" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_imagenes_lotes" ManuallyRouted="false" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_valoreslistas_listas" ManuallyRouted="false" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_lotes_series" ManuallyRouted="false" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_lotes_usuarios_01" ManuallyRouted="false" />
+        <AssociationConnector Association="SID_PROTOCOL2Model.FK_errores_usuarios" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

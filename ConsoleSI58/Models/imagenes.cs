@@ -41,6 +41,10 @@ namespace Lider.Models
         public Nullable<decimal> imagen_usuarioAuditoria_id { get; set; }
         public string imagen_marcaAuditoria { get; set; }
         public string imagen_obsAuditoria { get; set; }
+        public string imagen_importacion { get; set; }
+        public string imagen_expediente { get; set; }
+        public string imagen_repositorio { get; set; }
+        public Nullable<System.DateTime> createdAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<datos> datos { get; set; }

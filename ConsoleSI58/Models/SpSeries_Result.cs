@@ -10,18 +10,12 @@
 namespace Lider.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class CALIDAD_ANM
+    public partial class SpSeries_Result
     {
-        public decimal ID { get; set; }
-        public decimal CALIDAD_ID { get; set; }
-        public int ITEM { get; set; }
-        public int NA { get; set; }
-        public int CUMPLE { get; set; }
-        public int NOCUMPLE { get; set; }
-        public string OBSERVACIONES { get; set; }
-        public string FECHA { get; set; }
-        public string USUARIO { get; set; }
+        public string NombreSerie { get; set; }
+        public string CodigoSerie { get; set; }
+        public string CodigoSubSerie { get; set; }
+        public string NombreExpediente { get; set; }
     }
 }

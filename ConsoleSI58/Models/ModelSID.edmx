@@ -5,6 +5,35 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="SID_PROTOCOL2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bitacora">
+          <Key>
+            <PropertyRef Name="dato_id" />
+          </Key>
+          <Property Name="dato_id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dato_imagen_id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dato_campo_id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dato_numero" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="dato_texto" Type="nvarchar" MaxLength="500" />
+          <Property Name="dato_memo" Type="ntext" />
+          <Property Name="dato_fecha" Type="nvarchar" MaxLength="8" />
+          <Property Name="dato_lote_id" Type="int" Nullable="false" />
+          <Property Name="dato_indice1" Type="nvarchar" MaxLength="500" />
+          <Property Name="dato_indice2" Type="nvarchar" MaxLength="500" />
+          <Property Name="dato_indice3" Type="nvarchar" MaxLength="500" />
+          <Property Name="dato_indice4" Type="nvarchar" MaxLength="500" />
+          <Property Name="dato_paginas" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="dato_fecha_registro" Type="smalldatetime" />
+          <Property Name="dato_tamano" Type="nvarchar" MaxLength="20" />
+          <Property Name="dato_extension" Type="nvarchar" MaxLength="10" />
+          <Property Name="estado_expediente" Type="bit" />
+          <Property Name="fecha_update_expediente" Type="smalldatetime" />
+          <Property Name="estado_carpeta" Type="bit" />
+          <Property Name="fecha_update_carpeta" Type="smalldatetime" />
+          <Property Name="estado_cuaderno" Type="bit" />
+          <Property Name="fecha_update_cuaderno" Type="smalldatetime" />
+          <Property Name="estado_imagen" Type="bit" />
+          <Property Name="fecha_update_imagen" Type="smalldatetime" />
+        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'SID_PROTOCOL2.api.Folder' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Folder">
@@ -28,6 +57,32 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.api.Folder' no tiene definida 
           <Property Name="endDate" Type="datetime" Nullable="false" />
           <Property Name="estado" Type="bit" Nullable="false" />
           <Property Name="lastConsulta" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdError" Type="int" Nullable="false" />
+          <Property Name="ValidadorUi" Type="nvarchar" MaxLength="100" />
+          <Property Name="CodigoError" Type="nvarchar" MaxLength="100" />
+          <Property Name="NombreArchivo" Type="nvarchar" MaxLength="500" />
+          <Property Name="CodigoArea" Type="nvarchar" MaxLength="100" />
+          <Property Name="NombreExpediente" Type="nvarchar" MaxLength="500" />
+          <Property Name="NombreCarpeta" Type="nvarchar" MaxLength="200" />
+          <Property Name="status" Type="bit" />
+          <Property Name="createdAt" Type="datetime" Nullable="false" />
+          <Property Name="updatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Log_Motivos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="createdAt" Type="datetime" Nullable="false" />
+          <Property Name="updatedAt" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'SID_PROTOCOL2.api.parametersApi' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -118,20 +173,6 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.api.urlApiI' no tiene definida
           <Property Name="calidad_dos" Type="int" />
           <Property Name="calidad_indice0" Type="nvarchar" MaxLength="100" />
           <Property Name="calidad_indice1" Type="nvarchar" MaxLength="2000" />
-        </EntityType>
-        <EntityType Name="CALIDAD_ANM">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CALIDAD_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ITEM" Type="int" Nullable="false" />
-          <Property Name="NA" Type="int" Nullable="false" />
-          <Property Name="CUMPLE" Type="int" Nullable="false" />
-          <Property Name="NOCUMPLE" Type="int" Nullable="false" />
-          <Property Name="OBSERVACIONES" Type="ntext" />
-          <Property Name="FECHA" Type="nvarchar" MaxLength="50" />
-          <Property Name="USUARIO" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="CALIDADLOTES">
           <Key>
@@ -232,11 +273,17 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.api.urlApiI' no tiene definida
           <Property Name="dato_error" Type="int" Nullable="false" />
           <Property Name="dato_descripcionError" Type="nvarchar" MaxLength="3000" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.datos_2' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="datos_2">
           <Key>
             <PropertyRef Name="dato_id" />
+            <PropertyRef Name="dato_imagen_id" />
+            <PropertyRef Name="dato_campo_id" />
+            <PropertyRef Name="dato_Iguales" />
+            <PropertyRef Name="dato_error" />
           </Key>
-          <Property Name="dato_id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dato_id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="dato_imagen_id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="dato_campo_id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="dato_numero" Type="numeric" Precision="18" Scale="0" />
@@ -344,6 +391,10 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
           <Property Name="imagen_usuarioAuditoria_id" Type="numeric" Precision="18" Scale="0" />
           <Property Name="imagen_marcaAuditoria" Type="nvarchar" MaxLength="50" />
           <Property Name="imagen_obsAuditoria" Type="ntext" />
+          <Property Name="imagen_importacion" Type="nvarchar" MaxLength="10" />
+          <Property Name="imagen_expediente" Type="nvarchar" MaxLength="500" />
+          <Property Name="imagen_repositorio" Type="nvarchar" MaxLength="50" />
+          <Property Name="createdAt" Type="datetime" />
         </EntityType>
         <EntityType Name="listas">
           <Key>
@@ -363,15 +414,6 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
           <Property Name="lote_estado" Type="int" Nullable="false" />
           <Property Name="lote_fechaimporta" Type="smalldatetime" Nullable="false" />
           <Property Name="lote_usuarioimporta_id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PERSONAS_NOMINAS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDENT" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="NOMBRES" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="APELLIDOS" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="PROCESOS">
           <Key>
@@ -548,6 +590,36 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.dbo.errores' no tiene definida
           <Property Name="valorlista_lista_id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="valorlista_valor02" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Equivalencias_Carpetas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Equivalencia" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdCarpeta" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Equivalencias_Integrador">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Despacho" Type="nvarchar" MaxLength="100" />
+          <Property Name="Serie_Subserie" Type="nvarchar" MaxLength="300" />
+          <Property Name="IdArea" Type="nvarchar" MaxLength="20" />
+          <Property Name="IdCiudad" Type="nvarchar" MaxLength="20" />
+          <Property Name="IdUsuario" Type="nvarchar" MaxLength="20" />
+          <Property Name="IdTrd" Type="nvarchar" MaxLength="20" />
+          <Property Name="IdVersionTrd" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Equivalencias_TiposDocumentales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Serie_Subserie" Type="nvarchar" MaxLength="300" />
+          <Property Name="ValorLista_Valor" Type="nvarchar" MaxLength="300" />
+          <Property Name="IdTipoDocumental" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.DB_Errors' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="DB_Errors">
@@ -565,8 +637,8 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.DB_Errors' no tiene defini
           <Property Name="ErrorDateTime" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="log_error">
+advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.Excepcion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Excepcion">
           <Key>
             <PropertyRef Name="log_id" />
             <PropertyRef Name="message" />
@@ -574,7 +646,8 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
             <PropertyRef Name="type" />
           </Key>
           <Property Name="log_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="message" Type="text" Nullable="false" />
+          <Property Name="message" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="StackTrace" Type="varchar" MaxLength="2000" />
           <Property Name="date_insert" Type="datetime" Nullable="false" />
           <Property Name="type" Type="int" Nullable="false" />
         </EntityType>
@@ -722,26 +795,117 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GET_GROUP_EXPEDIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="LOTE_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetDataToSendApi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="action" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SpExampleApi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="action" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SpExcepcion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="message" Type="varchar" Mode="In" />
+          <Parameter Name="StackTrace" Type="varchar" Mode="In" />
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SpFiles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="dato_indice4" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SpFindDespacho" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="Despacho" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SpFolderId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="dato_indice4" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SpImgStatusInRepository" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="imagen_id" Type="int" Mode="In" />
+          <Parameter Name="imagen_expediente" Type="varchar" Mode="In" />
+          <Parameter Name="imagen_repositorio" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SpLogApi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="IdError" Type="int" Mode="In" />
+          <Parameter Name="ValidadorUi" Type="nvarchar" Mode="In" />
+          <Parameter Name="CodigoError" Type="nvarchar" Mode="In" />
+          <Parameter Name="NombreArchivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CodigoArea" Type="nvarchar" Mode="In" />
+          <Parameter Name="NombreExpediente" Type="nvarchar" Mode="In" />
+          <Parameter Name="NombreCarpeta" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SpLogTd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="imagen_expediente" Type="varchar" Mode="In" />
+          <Parameter Name="imagen_repositorio" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SpNoteBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="dato_indice4" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SpSeries" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="dato_indice2" Type="varchar" Mode="In" />
+          <Parameter Name="dato_indice4" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SpValidarNumeroExpediente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="api">
+          <Parameter Name="expediente" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CONSULTAR_ARCHIVOS_ZIP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_LOTE" Type="int" Mode="In" />
+          <Parameter Name="INSTANCIA" Type="varchar" Mode="In" />
+          <Parameter Name="CUADERNO" Type="varchar" Mode="In" />
+          <Parameter Name="TIPO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CONSULTAR_DESPACHOS_X_MUNICIPIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MUNICIPIO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CONSULTAR_DOCUMENTOS_EXPEDIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LOTE_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CONSULTAR_EXPEDIENTES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DEMANDANTE" Type="varchar" Mode="In" />
+          <Parameter Name="DEMANDADO" Type="varchar" Mode="In" />
+          <Parameter Name="RADICADO" Type="varchar" Mode="In" />
+          <Parameter Name="DESPACHO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CONSULTAR_EXPEDIENTES_TODOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DESPACHO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CONSULTAR_MUNICIPIOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="CONSULTAR_RUTA_ZIP_CD_PLANO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LOTE_ID" Type="int" Mode="In" />
+          <Parameter Name="NOMBRE_ARCHIVO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CONSULTAR_RUTA_ZIP_EXPEDIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LOTE_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="REPORTE_PRODUCCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FECHAINICIAL" Type="datetime" Mode="In" />
+          <Parameter Name="FECHAFINAL" Type="datetime" Mode="In" />
+          <Parameter Name="DESPACHO" Type="varchar" Mode="In" />
+          <Parameter Name="MUNICIPIO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SpEquivalencia_Integrador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="equ">
+          <Parameter Name="despacho" Type="varchar" Mode="In" />
+          <Parameter Name="Serie" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="SID_PROTOCOL2ModelStoreContainer">
+          <EntitySet Name="Bitacora" EntityType="Self.Bitacora" Schema="api" store:Type="Tables" />
           <EntitySet Name="initialDate" EntityType="Self.initialDate" Schema="api" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="api" store:Type="Tables" />
+          <EntitySet Name="Log_Motivos" EntityType="Self.Log_Motivos" Schema="api" store:Type="Tables" />
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArchivosZip" EntityType="Self.ArchivosZip" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="auditorias" EntityType="Self.auditorias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CALIDAD" EntityType="Self.CALIDAD" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CALIDAD_ANM" EntityType="Self.CALIDAD_ANM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CALIDADLOTES" EntityType="Self.CALIDADLOTES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="campos" EntityType="Self.campos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAMPOSPROCESOSTIPOSDEDOCUMENTO" EntityType="Self.CAMPOSPROCESOSTIPOSDEDOCUMENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="camposxtipodoc" EntityType="Self.camposxtipodoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="datos" EntityType="Self.datos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="datos_2" EntityType="Self.datos_2" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="datos_finales" EntityType="Self.datos_finales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DATOSRAD" EntityType="Self.DATOSRAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Despachos" EntityType="Self.Despachos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imagenes" EntityType="Self.imagenes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="listas" EntityType="Self.listas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lotes" EntityType="Self.lotes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PERSONAS_NOMINAS" EntityType="Self.PERSONAS_NOMINAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROCESOS" EntityType="Self.PROCESOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RAD_ALIST" EntityType="Self.RAD_ALIST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RefreshToken" EntityType="Self.RefreshToken" Schema="dbo" store:Type="Tables" />
@@ -752,6 +916,9 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
           <EntitySet Name="TQM_LOCK_CALIDAD" EntityType="Self.TQM_LOCK_CALIDAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="valoreslistas" EntityType="Self.valoreslistas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equivalencias_Carpetas" EntityType="Self.Equivalencias_Carpetas" Schema="equ" store:Type="Tables" />
+          <EntitySet Name="Equivalencias_Integrador" EntityType="Self.Equivalencias_Integrador" Schema="equ" store:Type="Tables" />
+          <EntitySet Name="Equivalencias_TiposDocumentales" EntityType="Self.Equivalencias_TiposDocumentales" Schema="equ" store:Type="Tables" />
           <EntitySet Name="Folder" EntityType="Self.Folder" store:Type="Tables" store:Schema="api">
             <DefiningQuery>SELECT 
     [Folder].[id] AS [id], 
@@ -782,6 +949,23 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
     [urlApiI].[createdAt] AS [createdAt], 
     [urlApiI].[updatedAt] AS [updatedAt]
     FROM [api].[urlApiI] AS [urlApiI]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="datos_2" EntityType="Self.datos_2" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [datos_2].[dato_id] AS [dato_id], 
+    [datos_2].[dato_imagen_id] AS [dato_imagen_id], 
+    [datos_2].[dato_campo_id] AS [dato_campo_id], 
+    [datos_2].[dato_numero] AS [dato_numero], 
+    [datos_2].[dato_texto] AS [dato_texto], 
+    [datos_2].[dato_memo] AS [dato_memo], 
+    [datos_2].[dato_fecha] AS [dato_fecha], 
+    [datos_2].[dato_Iguales] AS [dato_Iguales], 
+    [datos_2].[dato_digitado1] AS [dato_digitado1], 
+    [datos_2].[dato_digitado2] AS [dato_digitado2], 
+    [datos_2].[dato_nuevoValor] AS [dato_nuevoValor], 
+    [datos_2].[dato_error] AS [dato_error], 
+    [datos_2].[dato_descripcionError] AS [dato_descripcionError]
+    FROM [dbo].[datos_2] AS [datos_2]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="EQUIVALENCIAS" EntityType="Self.EQUIVALENCIAS" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -814,13 +998,14 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
     [DB_Errors].[ErrorDateTime] AS [ErrorDateTime]
     FROM [log].[DB_Errors] AS [DB_Errors]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="log_error" EntityType="Self.log_error" store:Type="Tables" store:Schema="log">
+          <EntitySet Name="Excepcion" EntityType="Self.Excepcion" store:Type="Tables" store:Schema="log">
             <DefiningQuery>SELECT 
-    [log_error].[log_id] AS [log_id], 
-    [log_error].[message] AS [message], 
-    [log_error].[date_insert] AS [date_insert], 
-    [log_error].[type] AS [type]
-    FROM [log].[log_error] AS [log_error]</DefiningQuery>
+    [Excepcion].[log_id] AS [log_id], 
+    [Excepcion].[message] AS [message], 
+    [Excepcion].[StackTrace] AS [StackTrace], 
+    [Excepcion].[date_insert] AS [date_insert], 
+    [Excepcion].[type] AS [type]
+    FROM [log].[Excepcion] AS [Excepcion]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_ArchivosZip_lotes" Association="Self.FK_ArchivosZip_lotes">
             <End Role="lotes" EntitySet="lotes" />
@@ -876,6 +1061,35 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SID_PROTOCOL2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bitacora">
+          <Key>
+            <PropertyRef Name="dato_id" />
+          </Key>
+          <Property Name="dato_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dato_imagen_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dato_campo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dato_numero" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="dato_texto" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="dato_memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dato_fecha" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="dato_lote_id" Type="Int32" Nullable="false" />
+          <Property Name="dato_indice1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="dato_indice2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="dato_indice3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="dato_indice4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="dato_paginas" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="dato_fecha_registro" Type="DateTime" Precision="0" />
+          <Property Name="dato_tamano" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="dato_extension" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="estado_expediente" Type="Boolean" />
+          <Property Name="fecha_update_expediente" Type="DateTime" Precision="0" />
+          <Property Name="estado_carpeta" Type="Boolean" />
+          <Property Name="fecha_update_carpeta" Type="DateTime" Precision="0" />
+          <Property Name="estado_cuaderno" Type="Boolean" />
+          <Property Name="fecha_update_cuaderno" Type="DateTime" Precision="0" />
+          <Property Name="estado_imagen" Type="Boolean" />
+          <Property Name="fecha_update_imagen" Type="DateTime" Precision="0" />
+        </EntityType>
         <EntityType Name="initialDate">
           <Key>
             <PropertyRef Name="id" />
@@ -885,6 +1099,32 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
           <Property Name="endDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <Property Name="lastConsulta" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdError" Type="Int32" Nullable="false" />
+          <Property Name="ValidadorUi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoError" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NombreArchivo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoArea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NombreExpediente" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NombreCarpeta" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Log_Motivos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedAt" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Accounts">
           <Key>
@@ -942,20 +1182,6 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
           <Property Name="calidad_dos" Type="Int32" />
           <Property Name="calidad_indice0" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="calidad_indice1" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="CALIDAD_ANM">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CALIDAD_ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ITEM" Type="Int32" Nullable="false" />
-          <Property Name="NA" Type="Int32" Nullable="false" />
-          <Property Name="CUMPLE" Type="Int32" Nullable="false" />
-          <Property Name="NOCUMPLE" Type="Int32" Nullable="false" />
-          <Property Name="OBSERVACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FECHA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="USUARIO" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CALIDADLOTES">
           <Key>
@@ -1062,24 +1288,6 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
           <NavigationProperty Name="campos" Relationship="Self.FK_datos_campos" FromRole="datos" ToRole="campos" />
           <NavigationProperty Name="imagenes" Relationship="Self.FK_datos_imagenes" FromRole="datos" ToRole="imagenes" />
         </EntityType>
-        <EntityType Name="datos_2">
-          <Key>
-            <PropertyRef Name="dato_id" />
-          </Key>
-          <Property Name="dato_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="dato_imagen_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="dato_campo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="dato_numero" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="dato_texto" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="dato_memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="dato_fecha" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="dato_Iguales" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
-          <Property Name="dato_digitado1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="dato_digitado2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="dato_nuevoValor" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="dato_error" Type="Int32" Nullable="false" />
-          <Property Name="dato_descripcionError" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="datos_finales">
           <Key>
             <PropertyRef Name="dato_id" />
@@ -1147,6 +1355,10 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
           <Property Name="imagen_usuarioAuditoria_id" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="imagen_marcaAuditoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="imagen_obsAuditoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="imagen_importacion" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="imagen_expediente" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="imagen_repositorio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="datos" Relationship="Self.FK_datos_imagenes" FromRole="imagenes" ToRole="datos" />
           <NavigationProperty Name="lotes" Relationship="Self.FK_imagenes_lotes" FromRole="imagenes" ToRole="lotes" />
         </EntityType>
@@ -1174,15 +1386,6 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
           <NavigationProperty Name="imagenes" Relationship="Self.FK_imagenes_lotes" FromRole="lotes" ToRole="imagenes" />
           <NavigationProperty Name="series" Relationship="Self.FK_lotes_series" FromRole="lotes" ToRole="series" />
           <NavigationProperty Name="usuarios" Relationship="Self.FK_lotes_usuarios_01" FromRole="lotes" ToRole="usuarios" />
-        </EntityType>
-        <EntityType Name="PERSONAS_NOMINAS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDENT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="NOMBRES" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="APELLIDOS" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="PROCESOS">
           <Key>
@@ -1365,6 +1568,36 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
           <Property Name="valorlista_valor02" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="listas" Relationship="Self.FK_valoreslistas_listas" FromRole="valoreslistas" ToRole="listas" />
         </EntityType>
+        <EntityType Name="Equivalencias_Carpetas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Equivalencia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdCarpeta" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Equivalencias_Integrador">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Despacho" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Serie_Subserie" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IdArea" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IdCiudad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IdTrd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IdVersionTrd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Equivalencias_TiposDocumentales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Serie_Subserie" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ValorLista_Valor" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IdTipoDocumental" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Folder">
           <Key>
             <PropertyRef Name="id" />
@@ -1409,6 +1642,28 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
           <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="updatedAt" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="datos_2">
+          <Key>
+            <PropertyRef Name="dato_id" />
+            <PropertyRef Name="dato_imagen_id" />
+            <PropertyRef Name="dato_campo_id" />
+            <PropertyRef Name="dato_Iguales" />
+            <PropertyRef Name="dato_error" />
+          </Key>
+          <Property Name="dato_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dato_imagen_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dato_campo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dato_numero" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="dato_texto" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="dato_memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dato_fecha" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="dato_Iguales" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="dato_digitado1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dato_digitado2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dato_nuevoValor" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="dato_error" Type="Int32" Nullable="false" />
+          <Property Name="dato_descripcionError" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="EQUIVALENCIAS">
           <Key>
             <PropertyRef Name="ID" />
@@ -1447,7 +1702,7 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
           <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ErrorDateTime" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="log_error">
+        <EntityType Name="Excepcion">
           <Key>
             <PropertyRef Name="log_id" />
             <PropertyRef Name="message" />
@@ -1455,7 +1710,8 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
             <PropertyRef Name="type" />
           </Key>
           <Property Name="log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StackTrace" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="date_insert" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="type" Type="Int32" Nullable="false" />
         </EntityType>
@@ -1604,25 +1860,25 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SID_PROTOCOL2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bitacora" EntityType="Self.Bitacora" />
           <EntitySet Name="initialDate" EntityType="Self.initialDate" />
+          <EntitySet Name="Log" EntityType="Self.Log" />
+          <EntitySet Name="Log_Motivos" EntityType="Self.Log_Motivos" />
           <EntitySet Name="Accounts" EntityType="Self.Accounts" />
           <EntitySet Name="ArchivosZip" EntityType="Self.ArchivosZip" />
           <EntitySet Name="auditorias" EntityType="Self.auditorias" />
           <EntitySet Name="CALIDAD" EntityType="Self.CALIDAD" />
-          <EntitySet Name="CALIDAD_ANM" EntityType="Self.CALIDAD_ANM" />
           <EntitySet Name="CALIDADLOTES" EntityType="Self.CALIDADLOTES" />
           <EntitySet Name="campos" EntityType="Self.campos" />
           <EntitySet Name="CAMPOSPROCESOSTIPOSDEDOCUMENTO" EntityType="Self.CAMPOSPROCESOSTIPOSDEDOCUMENTO" />
           <EntitySet Name="camposxtipodoc" EntityType="Self.camposxtipodoc" />
           <EntitySet Name="datos" EntityType="Self.datos" />
-          <EntitySet Name="datos_2" EntityType="Self.datos_2" />
           <EntitySet Name="datos_finales" EntityType="Self.datos_finales" />
           <EntitySet Name="DATOSRAD" EntityType="Self.DATOSRAD" />
           <EntitySet Name="Despachos" EntityType="Self.Despachos" />
           <EntitySet Name="imagenes" EntityType="Self.imagenes" />
           <EntitySet Name="listas" EntityType="Self.listas" />
           <EntitySet Name="lotes" EntityType="Self.lotes" />
-          <EntitySet Name="PERSONAS_NOMINAS" EntityType="Self.PERSONAS_NOMINAS" />
           <EntitySet Name="PROCESOS" EntityType="Self.PROCESOS" />
           <EntitySet Name="RAD_ALIST" EntityType="Self.RAD_ALIST" />
           <EntitySet Name="RefreshToken" EntityType="Self.RefreshToken" />
@@ -1633,13 +1889,17 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
           <EntitySet Name="TQM_LOCK_CALIDAD" EntityType="Self.TQM_LOCK_CALIDAD" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" />
           <EntitySet Name="valoreslistas" EntityType="Self.valoreslistas" />
+          <EntitySet Name="Equivalencias_Carpetas" EntityType="Self.Equivalencias_Carpetas" />
+          <EntitySet Name="Equivalencias_Integrador" EntityType="Self.Equivalencias_Integrador" />
+          <EntitySet Name="Equivalencias_TiposDocumentales" EntityType="Self.Equivalencias_TiposDocumentales" />
           <EntitySet Name="Folder" EntityType="Self.Folder" />
           <EntitySet Name="parametersApi" EntityType="Self.parametersApi" />
           <EntitySet Name="urlApiI" EntityType="Self.urlApiI" />
+          <EntitySet Name="datos_2" EntityType="Self.datos_2" />
           <EntitySet Name="EQUIVALENCIAS" EntityType="Self.EQUIVALENCIAS" />
           <EntitySet Name="errores" EntityType="Self.errores" />
           <EntitySet Name="DB_Errors" EntityType="Self.DB_Errors" />
-          <EntitySet Name="log_error" EntityType="Self.log_error" />
+          <EntitySet Name="Excepcion" EntityType="Self.Excepcion" />
           <AssociationSet Name="FK_RefreshToken_Accounts" Association="Self.FK_RefreshToken_Accounts">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="RefreshToken" EntitySet="RefreshToken" />
@@ -1688,13 +1948,234 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
             <End Role="usuarios" EntitySet="usuarios" />
             <End Role="errores" EntitySet="errores" />
           </AssociationSet>
+          <FunctionImport Name="GET_GROUP_EXPEDIENTE" ReturnType="Collection(SID_PROTOCOL2Model.GET_GROUP_EXPEDIENTE_Result)">
+            <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDataToSendApi" ReturnType="Collection(SID_PROTOCOL2Model.GetDataToSendApi_Result)">
+            <Parameter Name="action" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpExampleApi">
+            <Parameter Name="action" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpExcepcion">
+            <Parameter Name="message" Mode="In" Type="String" />
+            <Parameter Name="StackTrace" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SpFiles">
+            <Parameter Name="dato_indice4" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpFindDespacho" ReturnType="Collection(SID_PROTOCOL2Model.SpFindDespacho_Result)">
+            <Parameter Name="Despacho" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpFolderId" ReturnType="Collection(SID_PROTOCOL2Model.SpFolderId_Result)">
+            <Parameter Name="dato_indice4" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpImgStatusInRepository">
+            <Parameter Name="imagen_id" Mode="In" Type="Int32" />
+            <Parameter Name="imagen_expediente" Mode="In" Type="String" />
+            <Parameter Name="imagen_repositorio" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpLogApi">
+            <Parameter Name="IdError" Mode="In" Type="Int32" />
+            <Parameter Name="ValidadorUi" Mode="In" Type="String" />
+            <Parameter Name="CodigoError" Mode="In" Type="String" />
+            <Parameter Name="NombreArchivo" Mode="In" Type="String" />
+            <Parameter Name="CodigoArea" Mode="In" Type="String" />
+            <Parameter Name="NombreExpediente" Mode="In" Type="String" />
+            <Parameter Name="NombreCarpeta" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpLogTd" ReturnType="Collection(SID_PROTOCOL2Model.SpLogTd_Result)">
+            <Parameter Name="imagen_expediente" Mode="In" Type="String" />
+            <Parameter Name="imagen_repositorio" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpNoteBook">
+            <Parameter Name="dato_indice4" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpSeries" ReturnType="Collection(SID_PROTOCOL2Model.SpSeries_Result)">
+            <Parameter Name="dato_indice2" Mode="In" Type="String" />
+            <Parameter Name="dato_indice4" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpValidarNumeroExpediente" ReturnType="Collection(SID_PROTOCOL2Model.SpValidarNumeroExpediente_Result)">
+            <Parameter Name="expediente" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CONSULTAR_ARCHIVOS_ZIP" ReturnType="Collection(String)">
+            <Parameter Name="ID_LOTE" Mode="In" Type="Int32" />
+            <Parameter Name="INSTANCIA" Mode="In" Type="String" />
+            <Parameter Name="CUADERNO" Mode="In" Type="String" />
+            <Parameter Name="TIPO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CONSULTAR_DESPACHOS_X_MUNICIPIO" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_DESPACHOS_X_MUNICIPIO_Result)">
+            <Parameter Name="MUNICIPIO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CONSULTAR_DOCUMENTOS_EXPEDIENTE" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result)">
+            <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CONSULTAR_EXPEDIENTES" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_Result)">
+            <Parameter Name="DEMANDANTE" Mode="In" Type="String" />
+            <Parameter Name="DEMANDADO" Mode="In" Type="String" />
+            <Parameter Name="RADICADO" Mode="In" Type="String" />
+            <Parameter Name="DESPACHO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CONSULTAR_EXPEDIENTES_TODOS" ReturnType="Collection(SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_TODOS_Result)">
+            <Parameter Name="DESPACHO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CONSULTAR_MUNICIPIOS" ReturnType="Collection(String)" />
+          <FunctionImport Name="CONSULTAR_RUTA_ZIP_CD_PLANO" ReturnType="Collection(String)">
+            <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
+            <Parameter Name="NOMBRE_ARCHIVO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CONSULTAR_RUTA_ZIP_EXPEDIENTE" ReturnType="Collection(String)">
+            <Parameter Name="LOTE_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="REPORTE_PRODUCCION" ReturnType="Collection(SID_PROTOCOL2Model.REPORTE_PRODUCCION_Result)">
+            <Parameter Name="FECHAINICIAL" Mode="In" Type="DateTime" />
+            <Parameter Name="FECHAFINAL" Mode="In" Type="DateTime" />
+            <Parameter Name="DESPACHO" Mode="In" Type="String" />
+            <Parameter Name="MUNICIPIO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpEquivalencia_Integrador" ReturnType="Collection(SID_PROTOCOL2Model.SpEquivalencia_Integrador_Result)">
+            <Parameter Name="despacho" Mode="In" Type="String" />
+            <Parameter Name="Serie" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="GET_GROUP_EXPEDIENTE_Result">
+          <Property Type="Int32" Name="ID_LOTE" Nullable="false" />
+          <Property Type="String" Name="RADICADO" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ESTADO_DOCUMENTO" Nullable="false" />
+          <Property Type="String" Name="TIPO_DOCUMENTO" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="RUTA_DOCUMENTO" Nullable="true" MaxLength="852" />
+          <Property Type="String" Name="INSTANCIA" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CUADERNO" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="GetDataToSendApi_Result">
+          <Property Type="Decimal" Name="dato_id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="dato_imagen_id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="imagen_nombre" Nullable="false" MaxLength="500" />
+          <Property Type="Decimal" Name="dato_campo_id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="dato_numero" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="dato_texto" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="dato_memo" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="dato_fecha" Nullable="true" MaxLength="8" />
+          <Property Type="Int32" Name="dato_lote_id" Nullable="false" />
+          <Property Type="String" Name="dato_indice1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CodigoArea" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DescripcionSerie" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CodigoSerieSubSerie" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="dato_paginas" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="dato_fecha_registro" Nullable="true" Precision="16" />
+          <Property Type="String" Name="dato_tamano" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="dato_extension" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="SpFindDespacho_Result">
+          <Property Type="String" Name="serie" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="expediente" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="SpFolderId_Result">
+          <Property Type="String" Name="NombreCarpeta" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="IdCarpeta" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="SpLogTd_Result">
+          <Property Type="String" Name="IdImagen" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreImagen" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Expediente" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="imagen_repositorio" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TipoDocumental" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="SpSeries_Result">
+          <Property Type="String" Name="NombreSerie" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CodigoSerie" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="CodigoSubSerie" Nullable="false" MaxLength="24" />
+          <Property Type="String" Name="NombreExpediente" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="SpValidarNumeroExpediente_Result">
+          <Property Type="Boolean" Name="estado" Nullable="true" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="CONSULTAR_DESPACHOS_X_MUNICIPIO_Result">
+          <Property Type="String" Name="CODDESPACHO" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NOMBREDESPACHO" Nullable="false" MaxLength="300" />
+        </ComplexType>
+        <ComplexType Name="CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result">
+          <Property Type="Int32" Name="ID_LOTE" Nullable="false" />
+          <Property Type="String" Name="RADICADO" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ESTADO_DOCUMENTO" Nullable="false" />
+          <Property Type="String" Name="TIPO_DOCUMENTO" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="RUTA_DOCUMENTO" Nullable="true" MaxLength="852" />
+          <Property Type="String" Name="INSTANCIA" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CUADERNO" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="CONSULTAR_EXPEDIENTES_Result">
+          <Property Type="Int32" Name="LOTE" Nullable="false" />
+          <Property Type="String" Name="DEMANDANTE" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DEMANDADO" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TIPO" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="RADICADO_PROCESO" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="CONSULTAR_EXPEDIENTES_TODOS_Result">
+          <Property Type="Int32" Name="LOTE" Nullable="false" />
+          <Property Type="String" Name="DEMANDANTE" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DEMANDADO" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TIPO" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="RADICADO_PROCESO" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="REPORTE_PRODUCCION_Result">
+          <Property Type="String" Name="MUNICIPIO" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="COD_DESPACHO" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NOMBRE_DESPACHO" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="RADICADO_LOTE" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="FECHA_PROCESADO_LOTE" Nullable="true" Precision="16" />
+          <Property Type="Int32" Name="TOTAL_DOCUMENTOS" Nullable="true" />
+          <Property Type="Int32" Name="TOTAL_PAGINAS" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SpEquivalencia_Integrador_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Despacho" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Serie_Subserie" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="IdArea" Nullable="true" />
+          <Property Type="Int32" Name="IdCiudad" Nullable="true" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+          <Property Type="Int32" Name="IdTrd" Nullable="true" />
+          <Property Type="Int32" Name="IdVersionTrd" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SID_PROTOCOL2ModelStoreContainer" CdmEntityContainer="SID_PROTOCOL2Entities">
+          <EntitySetMapping Name="Bitacora">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Bitacora">
+              <MappingFragment StoreEntitySet="Bitacora">
+                <ScalarProperty Name="dato_id" ColumnName="dato_id" />
+                <ScalarProperty Name="dato_imagen_id" ColumnName="dato_imagen_id" />
+                <ScalarProperty Name="dato_campo_id" ColumnName="dato_campo_id" />
+                <ScalarProperty Name="dato_numero" ColumnName="dato_numero" />
+                <ScalarProperty Name="dato_texto" ColumnName="dato_texto" />
+                <ScalarProperty Name="dato_memo" ColumnName="dato_memo" />
+                <ScalarProperty Name="dato_fecha" ColumnName="dato_fecha" />
+                <ScalarProperty Name="dato_lote_id" ColumnName="dato_lote_id" />
+                <ScalarProperty Name="dato_indice1" ColumnName="dato_indice1" />
+                <ScalarProperty Name="dato_indice2" ColumnName="dato_indice2" />
+                <ScalarProperty Name="dato_indice3" ColumnName="dato_indice3" />
+                <ScalarProperty Name="dato_indice4" ColumnName="dato_indice4" />
+                <ScalarProperty Name="dato_paginas" ColumnName="dato_paginas" />
+                <ScalarProperty Name="dato_fecha_registro" ColumnName="dato_fecha_registro" />
+                <ScalarProperty Name="dato_tamano" ColumnName="dato_tamano" />
+                <ScalarProperty Name="dato_extension" ColumnName="dato_extension" />
+                <ScalarProperty Name="estado_expediente" ColumnName="estado_expediente" />
+                <ScalarProperty Name="fecha_update_expediente" ColumnName="fecha_update_expediente" />
+                <ScalarProperty Name="estado_carpeta" ColumnName="estado_carpeta" />
+                <ScalarProperty Name="fecha_update_carpeta" ColumnName="fecha_update_carpeta" />
+                <ScalarProperty Name="estado_cuaderno" ColumnName="estado_cuaderno" />
+                <ScalarProperty Name="fecha_update_cuaderno" ColumnName="fecha_update_cuaderno" />
+                <ScalarProperty Name="estado_imagen" ColumnName="estado_imagen" />
+                <ScalarProperty Name="fecha_update_imagen" ColumnName="fecha_update_imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="initialDate">
             <EntityTypeMapping TypeName="SID_PROTOCOL2Model.initialDate">
               <MappingFragment StoreEntitySet="initialDate">
@@ -1703,6 +2184,34 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
                 <ScalarProperty Name="endDate" ColumnName="endDate" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="lastConsulta" ColumnName="lastConsulta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="IdError" ColumnName="IdError" />
+                <ScalarProperty Name="ValidadorUi" ColumnName="ValidadorUi" />
+                <ScalarProperty Name="CodigoError" ColumnName="CodigoError" />
+                <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />
+                <ScalarProperty Name="CodigoArea" ColumnName="CodigoArea" />
+                <ScalarProperty Name="NombreExpediente" ColumnName="NombreExpediente" />
+                <ScalarProperty Name="NombreCarpeta" ColumnName="NombreCarpeta" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log_Motivos">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Log_Motivos">
+              <MappingFragment StoreEntitySet="Log_Motivos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1761,21 +2270,6 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
                 <ScalarProperty Name="calidad_dos" ColumnName="calidad_dos" />
                 <ScalarProperty Name="calidad_indice0" ColumnName="calidad_indice0" />
                 <ScalarProperty Name="calidad_indice1" ColumnName="calidad_indice1" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CALIDAD_ANM">
-            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.CALIDAD_ANM">
-              <MappingFragment StoreEntitySet="CALIDAD_ANM">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CALIDAD_ID" ColumnName="CALIDAD_ID" />
-                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
-                <ScalarProperty Name="NA" ColumnName="NA" />
-                <ScalarProperty Name="CUMPLE" ColumnName="CUMPLE" />
-                <ScalarProperty Name="NOCUMPLE" ColumnName="NOCUMPLE" />
-                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1883,25 +2377,6 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="datos_2">
-            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.datos_2">
-              <MappingFragment StoreEntitySet="datos_2">
-                <ScalarProperty Name="dato_id" ColumnName="dato_id" />
-                <ScalarProperty Name="dato_imagen_id" ColumnName="dato_imagen_id" />
-                <ScalarProperty Name="dato_campo_id" ColumnName="dato_campo_id" />
-                <ScalarProperty Name="dato_numero" ColumnName="dato_numero" />
-                <ScalarProperty Name="dato_texto" ColumnName="dato_texto" />
-                <ScalarProperty Name="dato_memo" ColumnName="dato_memo" />
-                <ScalarProperty Name="dato_fecha" ColumnName="dato_fecha" />
-                <ScalarProperty Name="dato_Iguales" ColumnName="dato_Iguales" />
-                <ScalarProperty Name="dato_digitado1" ColumnName="dato_digitado1" />
-                <ScalarProperty Name="dato_digitado2" ColumnName="dato_digitado2" />
-                <ScalarProperty Name="dato_nuevoValor" ColumnName="dato_nuevoValor" />
-                <ScalarProperty Name="dato_error" ColumnName="dato_error" />
-                <ScalarProperty Name="dato_descripcionError" ColumnName="dato_descripcionError" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="datos_finales">
             <EntityTypeMapping TypeName="SID_PROTOCOL2Model.datos_finales">
               <MappingFragment StoreEntitySet="datos_finales">
@@ -1971,6 +2446,10 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
                 <ScalarProperty Name="imagen_usuarioAuditoria_id" ColumnName="imagen_usuarioAuditoria_id" />
                 <ScalarProperty Name="imagen_marcaAuditoria" ColumnName="imagen_marcaAuditoria" />
                 <ScalarProperty Name="imagen_obsAuditoria" ColumnName="imagen_obsAuditoria" />
+                <ScalarProperty Name="imagen_importacion" ColumnName="imagen_importacion" />
+                <ScalarProperty Name="imagen_expediente" ColumnName="imagen_expediente" />
+                <ScalarProperty Name="imagen_repositorio" ColumnName="imagen_repositorio" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1992,16 +2471,6 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
                 <ScalarProperty Name="lote_estado" ColumnName="lote_estado" />
                 <ScalarProperty Name="lote_fechaimporta" ColumnName="lote_fechaimporta" />
                 <ScalarProperty Name="lote_usuarioimporta_id" ColumnName="lote_usuarioimporta_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PERSONAS_NOMINAS">
-            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.PERSONAS_NOMINAS">
-              <MappingFragment StoreEntitySet="PERSONAS_NOMINAS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDENT" ColumnName="IDENT" />
-                <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
-                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2190,6 +2659,39 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Equivalencias_Carpetas">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Equivalencias_Carpetas">
+              <MappingFragment StoreEntitySet="Equivalencias_Carpetas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Equivalencia" ColumnName="Equivalencia" />
+                <ScalarProperty Name="IdCarpeta" ColumnName="IdCarpeta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equivalencias_Integrador">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Equivalencias_Integrador">
+              <MappingFragment StoreEntitySet="Equivalencias_Integrador">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Despacho" ColumnName="Despacho" />
+                <ScalarProperty Name="Serie_Subserie" ColumnName="Serie_Subserie" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdTrd" ColumnName="IdTrd" />
+                <ScalarProperty Name="IdVersionTrd" ColumnName="IdVersionTrd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equivalencias_TiposDocumentales">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Equivalencias_TiposDocumentales">
+              <MappingFragment StoreEntitySet="Equivalencias_TiposDocumentales">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Serie_Subserie" ColumnName="Serie_Subserie" />
+                <ScalarProperty Name="ValorLista_Valor" ColumnName="ValorLista_Valor" />
+                <ScalarProperty Name="IdTipoDocumental" ColumnName="IdTipoDocumental" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Folder">
             <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Folder">
               <MappingFragment StoreEntitySet="Folder">
@@ -2224,6 +2726,25 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="createdAt" ColumnName="createdAt" />
                 <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="datos_2">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.datos_2">
+              <MappingFragment StoreEntitySet="datos_2">
+                <ScalarProperty Name="dato_id" ColumnName="dato_id" />
+                <ScalarProperty Name="dato_imagen_id" ColumnName="dato_imagen_id" />
+                <ScalarProperty Name="dato_campo_id" ColumnName="dato_campo_id" />
+                <ScalarProperty Name="dato_numero" ColumnName="dato_numero" />
+                <ScalarProperty Name="dato_texto" ColumnName="dato_texto" />
+                <ScalarProperty Name="dato_memo" ColumnName="dato_memo" />
+                <ScalarProperty Name="dato_fecha" ColumnName="dato_fecha" />
+                <ScalarProperty Name="dato_Iguales" ColumnName="dato_Iguales" />
+                <ScalarProperty Name="dato_digitado1" ColumnName="dato_digitado1" />
+                <ScalarProperty Name="dato_digitado2" ColumnName="dato_digitado2" />
+                <ScalarProperty Name="dato_nuevoValor" ColumnName="dato_nuevoValor" />
+                <ScalarProperty Name="dato_error" ColumnName="dato_error" />
+                <ScalarProperty Name="dato_descripcionError" ColumnName="dato_descripcionError" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2264,16 +2785,179 @@ advertencia 6002: La tabla o vista 'SID_PROTOCOL2.log.log_error' no tiene defini
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="log_error">
-            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.log_error">
-              <MappingFragment StoreEntitySet="log_error">
+          <EntitySetMapping Name="Excepcion">
+            <EntityTypeMapping TypeName="SID_PROTOCOL2Model.Excepcion">
+              <MappingFragment StoreEntitySet="Excepcion">
                 <ScalarProperty Name="log_id" ColumnName="log_id" />
                 <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
                 <ScalarProperty Name="date_insert" ColumnName="date_insert" />
                 <ScalarProperty Name="type" ColumnName="type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GET_GROUP_EXPEDIENTE" FunctionName="SID_PROTOCOL2Model.Store.GET_GROUP_EXPEDIENTE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.GET_GROUP_EXPEDIENTE_Result">
+                <ScalarProperty Name="ID_LOTE" ColumnName="ID_LOTE" />
+                <ScalarProperty Name="RADICADO" ColumnName="RADICADO" />
+                <ScalarProperty Name="ESTADO_DOCUMENTO" ColumnName="ESTADO_DOCUMENTO" />
+                <ScalarProperty Name="TIPO_DOCUMENTO" ColumnName="TIPO_DOCUMENTO" />
+                <ScalarProperty Name="RUTA_DOCUMENTO" ColumnName="RUTA_DOCUMENTO" />
+                <ScalarProperty Name="INSTANCIA" ColumnName="INSTANCIA" />
+                <ScalarProperty Name="CUADERNO" ColumnName="CUADERNO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDataToSendApi" FunctionName="SID_PROTOCOL2Model.Store.GetDataToSendApi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.GetDataToSendApi_Result">
+                <ScalarProperty Name="dato_id" ColumnName="dato_id" />
+                <ScalarProperty Name="dato_imagen_id" ColumnName="dato_imagen_id" />
+                <ScalarProperty Name="imagen_nombre" ColumnName="imagen_nombre" />
+                <ScalarProperty Name="dato_campo_id" ColumnName="dato_campo_id" />
+                <ScalarProperty Name="dato_numero" ColumnName="dato_numero" />
+                <ScalarProperty Name="dato_texto" ColumnName="dato_texto" />
+                <ScalarProperty Name="dato_memo" ColumnName="dato_memo" />
+                <ScalarProperty Name="dato_fecha" ColumnName="dato_fecha" />
+                <ScalarProperty Name="dato_lote_id" ColumnName="dato_lote_id" />
+                <ScalarProperty Name="dato_indice1" ColumnName="dato_indice1" />
+                <ScalarProperty Name="CodigoArea" ColumnName="CodigoArea" />
+                <ScalarProperty Name="DescripcionSerie" ColumnName="DescripcionSerie" />
+                <ScalarProperty Name="CodigoSerieSubSerie" ColumnName="CodigoSerieSubSerie" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="dato_paginas" ColumnName="dato_paginas" />
+                <ScalarProperty Name="dato_fecha_registro" ColumnName="dato_fecha_registro" />
+                <ScalarProperty Name="dato_tamano" ColumnName="dato_tamano" />
+                <ScalarProperty Name="dato_extension" ColumnName="dato_extension" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpExampleApi" FunctionName="SID_PROTOCOL2Model.Store.SpExampleApi" />
+          <FunctionImportMapping FunctionImportName="SpExcepcion" FunctionName="SID_PROTOCOL2Model.Store.SpExcepcion" />
+          <FunctionImportMapping FunctionImportName="SpFiles" FunctionName="SID_PROTOCOL2Model.Store.SpFiles" />
+          <FunctionImportMapping FunctionImportName="SpFindDespacho" FunctionName="SID_PROTOCOL2Model.Store.SpFindDespacho">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.SpFindDespacho_Result">
+                <ScalarProperty Name="serie" ColumnName="serie" />
+                <ScalarProperty Name="expediente" ColumnName="expediente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpFolderId" FunctionName="SID_PROTOCOL2Model.Store.SpFolderId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.SpFolderId_Result">
+                <ScalarProperty Name="NombreCarpeta" ColumnName="NombreCarpeta" />
+                <ScalarProperty Name="IdCarpeta" ColumnName="IdCarpeta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpImgStatusInRepository" FunctionName="SID_PROTOCOL2Model.Store.SpImgStatusInRepository" />
+          <FunctionImportMapping FunctionImportName="SpLogApi" FunctionName="SID_PROTOCOL2Model.Store.SpLogApi" />
+          <FunctionImportMapping FunctionImportName="SpLogTd" FunctionName="SID_PROTOCOL2Model.Store.SpLogTd">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.SpLogTd_Result">
+                <ScalarProperty Name="IdImagen" ColumnName="IdImagen" />
+                <ScalarProperty Name="NombreImagen" ColumnName="NombreImagen" />
+                <ScalarProperty Name="Expediente" ColumnName="Expediente" />
+                <ScalarProperty Name="imagen_repositorio" ColumnName="imagen_repositorio" />
+                <ScalarProperty Name="TipoDocumental" ColumnName="TipoDocumental" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpNoteBook" FunctionName="SID_PROTOCOL2Model.Store.SpNoteBook" />
+          <FunctionImportMapping FunctionImportName="SpSeries" FunctionName="SID_PROTOCOL2Model.Store.SpSeries">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.SpSeries_Result">
+                <ScalarProperty Name="NombreSerie" ColumnName="NombreSerie" />
+                <ScalarProperty Name="CodigoSerie" ColumnName="CodigoSerie" />
+                <ScalarProperty Name="CodigoSubSerie" ColumnName="CodigoSubSerie" />
+                <ScalarProperty Name="NombreExpediente" ColumnName="NombreExpediente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpValidarNumeroExpediente" FunctionName="SID_PROTOCOL2Model.Store.SpValidarNumeroExpediente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.SpValidarNumeroExpediente_Result">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CONSULTAR_ARCHIVOS_ZIP" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_ARCHIVOS_ZIP" />
+          <FunctionImportMapping FunctionImportName="CONSULTAR_DESPACHOS_X_MUNICIPIO" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_DESPACHOS_X_MUNICIPIO">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_DESPACHOS_X_MUNICIPIO_Result">
+                <ScalarProperty Name="CODDESPACHO" ColumnName="CODDESPACHO" />
+                <ScalarProperty Name="NOMBREDESPACHO" ColumnName="NOMBREDESPACHO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CONSULTAR_DOCUMENTOS_EXPEDIENTE" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_DOCUMENTOS_EXPEDIENTE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result">
+                <ScalarProperty Name="ID_LOTE" ColumnName="ID_LOTE" />
+                <ScalarProperty Name="RADICADO" ColumnName="RADICADO" />
+                <ScalarProperty Name="ESTADO_DOCUMENTO" ColumnName="ESTADO_DOCUMENTO" />
+                <ScalarProperty Name="TIPO_DOCUMENTO" ColumnName="TIPO_DOCUMENTO" />
+                <ScalarProperty Name="RUTA_DOCUMENTO" ColumnName="RUTA_DOCUMENTO" />
+                <ScalarProperty Name="INSTANCIA" ColumnName="INSTANCIA" />
+                <ScalarProperty Name="CUADERNO" ColumnName="CUADERNO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CONSULTAR_EXPEDIENTES" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_EXPEDIENTES">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_Result">
+                <ScalarProperty Name="LOTE" ColumnName="LOTE" />
+                <ScalarProperty Name="DEMANDANTE" ColumnName="DEMANDANTE" />
+                <ScalarProperty Name="DEMANDADO" ColumnName="DEMANDADO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="RADICADO_PROCESO" ColumnName="RADICADO_PROCESO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CONSULTAR_EXPEDIENTES_TODOS" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_EXPEDIENTES_TODOS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.CONSULTAR_EXPEDIENTES_TODOS_Result">
+                <ScalarProperty Name="LOTE" ColumnName="LOTE" />
+                <ScalarProperty Name="DEMANDANTE" ColumnName="DEMANDANTE" />
+                <ScalarProperty Name="DEMANDADO" ColumnName="DEMANDADO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="RADICADO_PROCESO" ColumnName="RADICADO_PROCESO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CONSULTAR_MUNICIPIOS" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_MUNICIPIOS" />
+          <FunctionImportMapping FunctionImportName="CONSULTAR_RUTA_ZIP_CD_PLANO" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_RUTA_ZIP_CD_PLANO" />
+          <FunctionImportMapping FunctionImportName="CONSULTAR_RUTA_ZIP_EXPEDIENTE" FunctionName="SID_PROTOCOL2Model.Store.CONSULTAR_RUTA_ZIP_EXPEDIENTE" />
+          <FunctionImportMapping FunctionImportName="REPORTE_PRODUCCION" FunctionName="SID_PROTOCOL2Model.Store.REPORTE_PRODUCCION">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.REPORTE_PRODUCCION_Result">
+                <ScalarProperty Name="MUNICIPIO" ColumnName="MUNICIPIO" />
+                <ScalarProperty Name="COD_DESPACHO" ColumnName="COD_DESPACHO" />
+                <ScalarProperty Name="NOMBRE_DESPACHO" ColumnName="NOMBRE_DESPACHO" />
+                <ScalarProperty Name="RADICADO_LOTE" ColumnName="RADICADO_LOTE" />
+                <ScalarProperty Name="FECHA_PROCESADO_LOTE" ColumnName="FECHA_PROCESADO_LOTE" />
+                <ScalarProperty Name="TOTAL_DOCUMENTOS" ColumnName="TOTAL_DOCUMENTOS" />
+                <ScalarProperty Name="TOTAL_PAGINAS" ColumnName="TOTAL_PAGINAS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpEquivalencia_Integrador" FunctionName="SID_PROTOCOL2Model.Store.SpEquivalencia_Integrador">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SID_PROTOCOL2Model.SpEquivalencia_Integrador_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Despacho" ColumnName="Despacho" />
+                <ScalarProperty Name="Serie_Subserie" ColumnName="Serie_Subserie" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdTrd" ColumnName="IdTrd" />
+                <ScalarProperty Name="IdVersionTrd" ColumnName="IdVersionTrd" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

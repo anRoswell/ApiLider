@@ -77,32 +77,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogError.cs" />
     <Compile Include="Models\Accounts.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ArchivosZip.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\auditorias.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Bitacora.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CALIDAD.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CALIDADLOTES.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CALIDAD_ANM.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\campos.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CAMPOSPROCESOSTIPOSDEDOCUMENTO.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\camposxtipodoc.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassApi\ClassAreaEmpresa.cs" />
     <Compile Include="Models\ClassApi\ClassAreaEmpresaResponse.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Models\ClassApi\ClassExpedienteEstado.cs" />
     <Compile Include="Models\ClassApi\ClassExpPorCUI.cs" />
     <Compile Include="Models\ClassApi\ClassExpPorCUIResponse.cs" />
+    <Compile Include="Models\ClassApi\ClassFindDespacho.cs" />
     <Compile Include="Models\ClassApi\ClassGetCuadernoResponse.cs" />
     <Compile Include="Models\ClassApi\ClassGetCuadernosCUI.cs" />
     <Compile Include="Models\ClassApi\ClassGetExpediente.cs" />
@@ -140,113 +142,165 @@
     <Compile Include="Models\ClassApi\ClassUsuarioDeAreaResponse.cs" />
     <Compile Include="Models\ClassApi\ClassUsuarioPorArea.cs" />
     <Compile Include="Models\ClassApi\ClassValidateExpediente.cs" />
+    <Compile Include="Models\ClassApi\EquivalenciasIntegrador.cs" />
+    <Compile Include="Models\CONSULTAR_DESPACHOS_X_MUNICIPIO_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CONSULTAR_EXPEDIENTES_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CONSULTAR_EXPEDIENTES_TODOS_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\datos.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DATOSRAD.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\datos_2.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\datos_finales.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB_Errors.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Despachos.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EQUIVALENCIAS.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Equivalencias_Carpetas.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Equivalencias_Integrador.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Equivalencias_TiposDocumentales.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\errores.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Excepcion.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Folder.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetDataToSendApi_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GET_GROUP_EXPEDIENTE_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\imagenes.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\initialDate.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\listas.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\log_error.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+    <Compile Include="Models\Log.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Log_Motivos.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\lotes.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelLider.Context.cs">
+    <Compile Include="Models\ModelSID.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelLider.Context.tt</DependentUpon>
+      <DependentUpon>ModelSID.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelLider.cs">
+    <Compile Include="Models\ModelSID.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelLider.Designer.cs">
+    <Compile Include="Models\ModelSID.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelLider.edmx</DependentUpon>
+      <DependentUpon>ModelSID.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\parametersApi.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PERSONAS_NOMINAS.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PROCESOS.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RAD_ALIST.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RefreshToken.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\REPORTE_PRODUCCION_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\series.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SpEquivalencia_Integrador_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SpFindDespacho_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SpFolderId_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SpLogTd_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SpSeries_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SpValidarNumeroExpediente_Result.cs">
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tiposdedocumentos.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TIPOSDELOTES.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TQM_LOCK.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TQM_LOCK_CALIDAD.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\urlApiI.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usuarios.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\valoreslistas.cs">
-      <DependentUpon>ModelLider.tt</DependentUpon>
+      <DependentUpon>ModelSID.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="Models\ModelLider.edmx">
+    <EntityDeploy Include="Models\ModelSID.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelLider.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelSID.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\ModelLider.edmx.diagram">
-      <DependentUpon>ModelLider.edmx</DependentUpon>
+    <None Include="Models\ModelSID.edmx.diagram">
+      <DependentUpon>ModelSID.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -266,19 +320,20 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DTO\" />
     <Folder Include="Models\Dto\" />
     <Folder Include="Models\Interface\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\ModelLider.Context.tt">
+    <Content Include="Models\ModelSID.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelLider.edmx</DependentUpon>
-      <LastGenOutput>ModelLider.Context.cs</LastGenOutput>
+      <DependentUpon>ModelSID.edmx</DependentUpon>
+      <LastGenOutput>ModelSID.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ModelLider.tt">
+    <Content Include="Models\ModelSID.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelLider.edmx</DependentUpon>
-      <LastGenOutput>ModelLider.cs</LastGenOutput>
+      <DependentUpon>ModelSID.edmx</DependentUpon>
+      <LastGenOutput>ModelSID.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

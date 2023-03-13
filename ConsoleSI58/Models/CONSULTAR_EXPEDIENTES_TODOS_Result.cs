@@ -10,14 +10,13 @@
 namespace Lider.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class log_error
+    public partial class CONSULTAR_EXPEDIENTES_TODOS_Result
     {
-        public int log_id { get; set; }
-        public string message { get; set; }
-        public string StackTrace { get; set; }
-        public System.DateTime date_insert { get; set; }
-        public int type { get; set; }
+        public int LOTE { get; set; }
+        public string DEMANDANTE { get; set; }
+        public string DEMANDADO { get; set; }
+        public string TIPO { get; set; }
+        public string RADICADO_PROCESO { get; set; }
     }
 }
