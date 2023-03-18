@@ -44,3 +44,4 @@ D:\Proyecto c#\consola\ApiLider\ConsoleSI58\obj\Debug\lider.csproj.CoreCompileIn
 D:\Proyecto c#\consola\ApiLider\ConsoleSI58\obj\Debug\lider.csproj.CopyComplete
 D:\Proyecto c#\consola\ApiLider\ConsoleSI58\obj\Debug\Lider.exe
 D:\Proyecto c#\consola\ApiLider\ConsoleSI58\obj\Debug\Lider.pdb
+D:\Proyecto c#\consola\ApiLider\ConsoleSI58\obj\Debug\lider.csproj.AssemblyReference.cache

@@ -14,7 +14,7 @@ public class ExecutionObjectCE
         public int IdUsuarioResponsable { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public int FechaFinal { get; set; }
+        public string FechaFinal { get; set; }
         public bool VerPublico { get; set; }
         public string NumeroRadicacionProceso { get; set; }
         public int IdCiudad { get; set; }

@@ -11,10 +11,10 @@ namespace Lider.Models.ClassApi
         public int Id { get; set; }
         public string Despacho { get; set; }
         public string Serie_Subserie { get; set; }
-        public int IdArea { get; set; }
-        public int IdCiudad { get; set; }
-        public int IdUsuario { get; set; }
-        public int IdTrd { get; set; }
-        public int IdVersionTrd { get; set; }
+        public string IdArea { get; set; }
+        public string IdCiudad { get; set; }
+        public string IdUsuario { get; set; }
+        public string IdTrd { get; set; }
+        public string IdVersionTrd { get; set; }
     }
 }
