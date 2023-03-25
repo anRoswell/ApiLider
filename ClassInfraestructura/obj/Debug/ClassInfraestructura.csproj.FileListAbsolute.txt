@@ -1,6 +1,0 @@
-D:\Proyecto c#\consola\Lider\ClassInfraestructura\bin\Debug\ClassInfraestructura.dll
-D:\Proyecto c#\consola\Lider\ClassInfraestructura\bin\Debug\ClassInfraestructura.pdb
-D:\Proyecto c#\consola\Lider\ClassInfraestructura\obj\Debug\ClassInfraestructura.csproj.AssemblyReference.cache
-D:\Proyecto c#\consola\Lider\ClassInfraestructura\obj\Debug\ClassInfraestructura.csproj.CoreCompileInputs.cache
-D:\Proyecto c#\consola\Lider\ClassInfraestructura\obj\Debug\ClassInfraestructura.dll
-D:\Proyecto c#\consola\Lider\ClassInfraestructura\obj\Debug\ClassInfraestructura.pdb

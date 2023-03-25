@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E08D5B7C-3701-42DE-95C2-C6C36F9A43D7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Infraestructure</RootNamespace>
+    <AssemblyName>Infraestructure</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accounts.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ArchivosZip.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="auditorias.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bitacora.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CALIDAD.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CALIDADLOTES.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="campos.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CAMPOSPROCESOSTIPOSDEDOCUMENTO.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="camposxtipodoc.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONSULTAR_DESPACHOS_X_MUNICIPIO_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONSULTAR_DOCUMENTOS_EXPEDIENTE_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONSULTAR_EXPEDIENTES_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONSULTAR_EXPEDIENTES_TODOS_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="datos.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DATOSRAD.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="datos_2.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="datos_finales.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB_Errors.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Despachos.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EQUIVALENCIAS.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equivalencias_Carpetas.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equivalencias_Integrador.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equivalencias_TiposDocumentales.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="errores.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Excepcion.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Folder.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetDataToSendApi_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GET_GROUP_EXPEDIENTE_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="imagenes.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="initialDate.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="listas.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log1.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Log_Motivos.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="lotes.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLider.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelLider.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLider.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelLider.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelLider.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="parametersApi.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PROCESOS.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RAD_ALIST.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RefreshToken.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="REPORTE_PRODUCCION_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="series.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpFolderId_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpLogTd_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpSeries_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpValidarNumeroExpediente_Result.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tiposdedocumentos.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TIPOSDELOTES.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TQM_LOCK.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TQM_LOCK_CALIDAD.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="urlApiI.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usuarios.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="valoreslistas.cs">
+      <DependentUpon>ModelLider.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="ModelLider.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelLider.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="ModelLider.edmx.diagram">
+      <DependentUpon>ModelLider.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModelLider.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelLider.Context.cs</LastGenOutput>
+      <DependentUpon>ModelLider.edmx</DependentUpon>
+    </Content>
+    <Content Include="ModelLider.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelLider.edmx</DependentUpon>
+      <LastGenOutput>ModelLider.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTO\" />
+    <Folder Include="Interface\" />
+    <Folder Include="Service\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,5 +1,9 @@
-﻿using Lider.Models;
-using Lider.Models.ClassApi;
+﻿using Core.Models;
+using Core.Models.ClassApi;
+using Core.Repository;
+using Core.Service;
+using Core.Utils;
+using Infraestructure;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +11,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Lider
@@ -20,50 +23,67 @@ namespace Lider
         public static ClassGetFolderSql folderSelected = null;
         public static CrearCuadernoResponse cCResp = null;
         public static bool filtroAreaEmpresa = true;
-        public static string codigoArea = "500013110001";
-        public static string nombreExpediente = "50001311000119981795700";
         public static List<initialDate> initialDate = null;
         public static List<TiposDocumentale> tiposDocumentale = null;
         public static GetExpedienteResponse getExpedienteResponse = null;
         public static DateTime StartDate { get; set; }
         public static DateTime EndDate { get; set; }
         public static List<urlApiI> EndPointApi { get; set; }
-        static HttpClient client = new HttpClient();
-        public log_error log { get; set; }
 
-        public static TRDAreaSerieSubSerieResponse tRDAreaSerieSubSerieResponse = new TRDAreaSerieSubSerieResponse ();
+        static HttpResponseMessage httpResponseMessage;
+        public static List<ClassFindDespacho> despachos = null;
+        public static string nombreDespacho = null;
+        public static string nombreExpediente = null;
+        public static string IdTipoDocumental = null;
+        public static string IdArea = null;
+        public static string urlApi = null;
+        public static string IdCiudad = null;
+        public static string IdUsuario = null;
+        public static string IdTrd = null;
+        public static string IdVersionTrd = null;
+        public static string serie = null;
+        public static string password = null;
+        public static int contadorSeriSubSerie = 0;
+        public static int totalSeriSubSerie = 0;
+        public static int contadorFiles = 0;
+        public static int totalFiles = 0;
+        public static int contadorFolders = 0;
+        public static int totalFolders = 0;
+        public static int contadorNoteBooks = 0;
+        public static int totalNoteBooks = 0;
+        public static int contadorNoteBookList = 0;
+        public static int? totalNoteBookList = 0;
+
+        public static Series serieSeleccionada = null;
         public static AreaEmpresaResponse areaEmpresaResponse = new AreaEmpresaResponse();
 
         static void Main()
         {
             try
             {
+                //SplitConsole.DrawScreen();
                 EndPointApi = GetUrlApi();
                 parametersApi = GetParameters();
                 initialDate = GetInitalDate();
 
                 if (parametersApi.Count == 0)
-                {
-                    // Enviar correo informativo
-                    Console.WriteLine("No existen parametros!!! por favor validar.");
-                }
+                    Console.WriteLine("No existen parametros en tablas de parametrización!!! por favor validar ().EndPointApi - parametersApi - initialDate");
                 else
-                {
                     RunAsync().GetAwaiter().GetResult();
-                }
             }
             catch (Exception e)
             {
-                ShowConsole(e.Message, "red");
+                ShowConsole(string.Concat(e.Message, " ", e.InnerException?.Message), "red");
                 ShowConsole("Por favor presiones enter para salir!!!");
-                Console.Read();
-                log_error l = new log_error
+                LogError logError = new LogError
                 {
-                    message = e.Message,
+                    Message = string.Concat(e.Message, " ", e.InnerException?.Message),
                     StackTrace = e.StackTrace,
-                    type = 999
+                    Type = 999
                 };
-                Exception(l);
+                
+                Exception(logError);
+                Console.Read();
             }
         }
 
@@ -71,158 +91,272 @@ namespace Lider
         /// Parametrizamos clase HttpClient para la consulta a la API y llamamos a los diferentes metodos
         /// </summary>
         /// <returns>void</returns>
-        static async Task RunAsync()
+        public static async Task RunAsync()
         {
-            Menu();
-            
-            
+            password = parametersApi.ParametersApi[0].password;
+            urlApi = parametersApi.ParametersApi[0].urlApi;
+            SolicitarDespacho();
+            SeleccionarSerie();
+            //GetExpediente();
+            //GetIdArea();
+
             // Update port # in the following line.
 
             List<DataToSend> records = GetDataToSendApi();
             if (records.Count>0)
             {
-                AddHeaders();
-                Login login = new Login
-                {
-                    UData = parametersApi.ParametersApi[0].usuario,
-                    AppKey = parametersApi.ParametersApi[0].password
-                };
-
+                LoginResponse loginResponse = await LoginAsync();
                 ShowConsole("Obteniendo token!!!");
-                LoginResponse loginResponse = await LoginServer(login);
+                //LoginResponse loginResponse = await LoginServer(login);
 
                 if (loginResponse.Ok)
                 {
-                    ShowConsole("Recorriendo expedientes de la BD!!!");
-                    //foreach (var item in records)
-                    //{
-                        // LLamamos a los diferentes metodos de la API necesarios para el envío de la información
-                        ShowConsole("Obteniendo Area de la empresa!!!");
-                        areaEmpresaResponse = await AreaEmpresaParameters(loginResponse);
+                    ShowConsole($"Consultando los expedientes del despacho {nombreDespacho}", "green");
+                    List<SerieSubSerieExpediente> serieSubserieExpediente = spBuscarExpdientesSerie();
+
+                    if (serieSubserieExpediente.Count == 0)
+                        throw new Exception($"Sin expedientes a procesar, con la serie/subserie {serieSeleccionada.Serie_SubSerie}, Despacho: {nombreDespacho}");
+
+                    EquivalenciasIntegrador equivalencia_Integrador = Equivalencia_Integrador(nombreDespacho, serieSubserieExpediente[0].Serie_SubSerie);
+                    if (equivalencia_Integrador == null)
+                        throw new Exception("Sin registros en equivalencia_Integrador");                    
+
+                    IdArea = equivalencia_Integrador.IdArea;
+                    IdCiudad = equivalencia_Integrador.IdCiudad;
+                    IdUsuario = equivalencia_Integrador.IdUsuario;
+                    IdTrd = equivalencia_Integrador.IdTrd;
+                    IdVersionTrd = equivalencia_Integrador.IdVersionTrd;
+
+                    contadorSeriSubSerie = 0;
+                    totalSeriSubSerie = serieSubserieExpediente.Count;
+                    foreach (SerieSubSerieExpediente expediente in serieSubserieExpediente)
+                    {
+                        contadorSeriSubSerie++;                            
+                        // Obtenemos la data para crear un expediente
+
+                        
+                        string ND = "N/D";
 
 
-                        if (filtroAreaEmpresa)
+                        if (IdArea != ND && IdCiudad != ND &&
+                            IdUsuario != ND && IdTrd != ND &&
+                            IdVersionTrd != ND)
                         {
-                            //Recorremos las diferentes Areas del expediente
-                            //foreach (var ca in areaEmpresaResponse.Data)
-                            //{
-                                
-                                respAreaEmpresaFilter = GetFilterAreaEmpresa();
+                            
+                            nombreExpediente = expediente.Expediente;
 
-                                // Esta linea se descomenta cuando no se pida el codigo del area por console
-                                // y se comenta la linea 105
-                                //respAreaEmpresaFilter = ca;
+                            IdArea = equivalencia_Integrador.IdArea;
+                            #region Crear u obtener Expediente
+                            ShowConsole($"Creando expediente - {nombreExpediente}");
+                            CrearExpedienteResponse crearExpResp = await CrearExpedienteParameters(loginResponse, equivalencia_Integrador);
 
-                                ClassSpSerieYSubSerie respClassSpSerieYSubSerie = GetSerieYSubSerie();
-                                ShowConsole("Obteniendo tabla retención documental!!!");
-                                tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse, respClassSpSerieYSubSerie);
 
-                                if (tRDAreaSerieSubSerieResponse.Ok)
+                            ShowConsole($"Obteniendo Id del expediente {crearExpResp.ValidationUI} !!!");
+                            if (!crearExpResp.Ok)
+                                ShowConsole(crearExpResp.ValidationUI, "yellow", "blue");
+
+                            getExpedienteResponse = await GetExpediente(loginResponse, nombreExpediente);
+                            #endregion
+
+                            ShowConsole($"Obteniendo folder de la base de datos!!! - {nombreExpediente}");
+                            List<ClassGetFolderSql> folders = GetFolderId(nombreExpediente);
+
+                            if (folders.Count > 0)
+                            {
+                                totalFolders = folders.Count;
+                                contadorFolders = 0;
+                                foreach (ClassGetFolderSql folder in folders)
                                 {
-                                    //Crear u obtener Expediente
-                                    ShowConsole("Creando expediente Api!!! - {0}", nombreExpediente);
-                                    CrearExpedienteResponse crearExpResp = await CrearExpedienteParameters(loginResponse, records);
-
-                                    ShowConsole("Obteniendo Id del expediente Api!!!");
-                                    getExpedienteResponse = await ExpedienteParameters(loginResponse, nombreExpediente);
-
-                                    ShowConsole("Obteniendo folder de la base de datos!!! - {0}", nombreExpediente);
-                                    List<ClassGetFolderSql> folders = GetFolderId(nombreExpediente);
-                                    if (folders.Count > 0)
+                                    contadorFolders++;
+                                    folderSelected = folder;
+                                    ShowConsole($"Obteniendo cuadernos de la base de datos!!! - {nombreExpediente}");
+                                    List<ClassSpGetNoteBook> noteBooks = GetNotebook(nombreExpediente);
+                                    if (noteBooks.Count > 0)
                                     {
-                                        foreach (ClassGetFolderSql folder in folders)
+                                        totalNoteBooks = noteBooks.Count;
+                                        contadorNoteBooks = 0;
+                                        foreach (var notebook in noteBooks)
                                         {
-                                            folderSelected = folder;
-                                            ShowConsole("Obteniendo cuadernos de la base de datos!!! - {0}", nombreExpediente);
-                                            List<ClassSpGetNoteBook> noteBooks = GetNotebook(nombreExpediente);
-                                            if (noteBooks.Count > 0)
+                                            contadorNoteBooks++;
+                                            ShowConsole("Creando cuaderno - " + notebook.CuadernoId);
+                                            cCResp = await NoteBookParameters(loginResponse, notebook, folder);
+
+                                            // Por preguntar como relacionar cuadernos con documentos
+                                            ShowConsole($"Obteniendo Id de Cuadernos - {notebook.CuadernoId}");
+                                            ObtenerCuadernoResponse noteBookList = await NoteBookByCUIParameters(loginResponse);
+
+                                            if (noteBookList.Data?.Count > 0)
                                             {
-                                                foreach (var notebook in noteBooks)
+                                                totalNoteBookList = noteBookList.Data?.Count;
+                                                contadorNoteBookList = 0;
+                                                foreach (DatumOC nb in noteBookList.Data)
                                                 {
-                                                    ShowConsole("Creando cuaderno Api!!! - {0}", notebook.CuadernoId);
-                                                    cCResp = await NoteBookParameters(loginResponse, notebook, folder);
-
-                                                    // Por preguntar como relacionar cuadernos con documentos
-                                                    ShowConsole("Obteniendo Id de Cuadernos Api!!! - {0}", notebook.CuadernoId);
-                                                    ObtenerCuadernoResponse noteBookList = await NoteBookByCUIParameters(loginResponse);
-
-                                                    if (noteBookList.Data.Count > 0)
+                                                    contadorNoteBookList++;
+                                                    ShowConsole($"\nConsultando archivos de la Base de Datos!!! - {nb.Nombre}");
+                                                    List<ClassSpFile> spFile = GetFile(nombreExpediente, nb.Nombre);
+                                                    if (spFile.Count > 0)
                                                     {
-                                                        foreach (DatumOC nb in noteBookList.Data)
+                                                        totalFiles = spFile.Count;
+                                                        contadorFiles = 0;
+                                                        foreach (var file in spFile)
                                                         {
-                                                            ShowConsole("Consultando archivos de la Base de Datos!!! - {0}", nb.Carpeta);
-                                                            List<ClassSpFile> spFile = GetFile(nombreExpediente);
-                                                            if (spFile.Count > 0)
+                                                            try
                                                             {
-                                                                foreach (var file in spFile)
+                                                                contadorFiles++;
+                                                                ShowConsole($"\nCreando documento {file.NombreImagen} - Carpeta: {nb.Carpeta}!!!");
+                                                                TdrEmpresaReponse cDocResp = await CrearDocumentoParameters(loginResponse, file, nb);
+                                                                if (!cDocResp.Ok)
                                                                 {
-                                                                    ShowConsole("Creando documento Api!!!");
-                                                                    TdrEmpresaReponse cDocResp = await CrearDocumentoParameters(loginResponse, file, nb);
-                                                                    if (!cDocResp.Ok)
+                                                                    ShowConsole("\n" + cDocResp.CodeError + " " + file.NombreImagen + cDocResp.ValidationUI + " " + nb.Carpeta, "yellow");
+                                                                    Log1 logFallido = new Log1
                                                                     {
-                                                                        ShowConsole("\n" + cDocResp.CodeError + " " + file.NombreImagen + cDocResp.ValidationUI +" "+ nb.Carpeta, "yellow");
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        ShowConsole("Se cargo el archivo exitosamente!!!", "red");
-                                                                        ClassEstadoDocumento estadoDocumento = new ClassEstadoDocumento
-                                                                        {
-                                                                            IdImagen = file.IdImagen,
-                                                                            Message = "Carga Exitosa!!!",
-                                                                            NombreExpediente = nombreExpediente
-                                                                        };
-
-                                                                        SpImgStatusInRepository(estadoDocumento);
-                                                                    }
+                                                                        despacho = nombreDespacho,
+                                                                        idExpediente = nombreExpediente,
+                                                                        cuaderno = string.Concat(notebook.Cuaderno.ToString(), " ", notebook.CuadernoId.ToString()),
+                                                                        instancia = "",
+                                                                        estado = false,
+                                                                        archivo = file.NombreImagen,
+                                                                        observacion = string.Concat("Serie_SubSerie: ", serieSeleccionada.Serie_SubSerie, " ! IdArea: ", IdArea, " ! IdCiudad: ", IdCiudad, " ! IdUsuario: ", IdUsuario, " ! IdTrd: ", IdTrd, " ! NombreImagen: ", file.NombreImagen, " ! Response: ", cDocResp.ValidationUI, " ! Carpeta: ", nb.Carpeta)
+                                                                    };
+                                                                    Repository.SpGuardarLog(logFallido);
                                                                 }
+                                                                else
+                                                                {
+                                                                    ClassEstadoDocumento estadoDocumento = new ClassEstadoDocumento
+                                                                    {
+                                                                        IdImagen = file.IdImagen,
+                                                                        Message = "Carga Exitosa!!!",
+                                                                        NombreExpediente = nombreExpediente
+                                                                    };
+
+                                                                    Log1 logExitoso = new Log1
+                                                                    {
+                                                                        despacho = nombreDespacho,
+                                                                        idExpediente = nombreExpediente,
+                                                                        cuaderno = string.Concat(notebook.Cuaderno.ToString(), " ", notebook.CuadernoId.ToString()),
+                                                                        instancia = "",
+                                                                        estado = true,
+                                                                        archivo = file.NombreImagen
+                                                                    };
+
+
+                                                                    ShowConsole("Se cargo el archivo exitosamente!!!", "green", "blue");
+                                                                    Repository.SpGuardarLog(logExitoso);
+                                                                    SpImgStatusInRepository(estadoDocumento);
+                                                                }
+                                                            }
+                                                            catch (Exception e)
+                                                            {
+                                                                ShowConsole("\n" + string.Concat(e.Message, " ", e.InnerException?.Message) + " " + file.NombreImagen + e.StackTrace + " " + nb.Carpeta, "yellow");
+                                                                //Log(e.Message, e.StackTrace);
+                                                                Log1 logFallido = new Log1
+                                                                {
+                                                                    despacho = nombreDespacho,
+                                                                    idExpediente = nombreExpediente,
+                                                                    cuaderno = string.Concat(notebook.Cuaderno, " ", notebook.CuadernoId),
+                                                                    instancia = nb.Carpeta,
+                                                                    archivo = file.NombreImagen,
+                                                                    estado = false,
+                                                                    observacion = string.Concat(e.Message, " ", e.InnerException?.Message, " ", e.StackTrace)
+                                                                };
+
+                                                                Repository.SpGuardarLog(logFallido);
                                                             }
                                                         }
                                                     }
-
-                                                    SpShowLogExpediente();
                                                 }
                                             }
+                                            else
+                                            {
+                                                ShowConsole("Sin notebook para registrar", "black", "white");
+                                                Log1 logFallido = new Log1
+                                                {
+                                                    despacho = nombreDespacho,
+                                                    idExpediente = nombreExpediente,
+                                                    cuaderno = "Sin notebook para registrar",
+                                                    instancia = null,
+                                                    archivo = null,
+                                                    estado = false,
+                                                    observacion = "Sin notebook para registrar"
+                                                };
+
+                                                Repository.SpGuardarLog(logFallido);
+                                            }
+
+                                            SpShowLogExpediente();
                                         }
                                     }
                                 }
-                            //}                            
+                            }
                         }
                         else
                         {
-                            foreach (DatumAE item2 in areaEmpresaResponse.Data)
+                            ShowConsole("\n Data inconsistente!!!");
+                            Log1 logFallido = new Log1
                             {
-                                ClassSpSerieYSubSerie respClassSpSerieYSubSerie = GetSerieYSubSerie();
-                                tRDAreaSerieSubSerieResponse = await TRDASSParameters(loginResponse, respClassSpSerieYSubSerie);
-                                CrearExpedienteResponse resp = await CrearExpedienteParameters(loginResponse, records);
-                            }
+                                despacho = nombreDespacho,
+                                idExpediente = nombreExpediente,
+                                cuaderno = null,
+                                instancia = null,
+                                archivo = null,
+                                observacion = string.Concat($"Data inconsistente - IdArea {equivalencia_Integrador.IdArea} - IdCiudad {equivalencia_Integrador.IdCiudad} - IdUsuario {equivalencia_Integrador.IdUsuario} - IdTrd {equivalencia_Integrador.IdTrd} - IdVersionTrd {equivalencia_Integrador.IdVersionTrd}")
+                            };
+
+                            Repository.SpGuardarLog(logFallido);
                         }
-                    //}
+                    }
+                    
                 }
-                else
-                {
-                    ClassLogErrorApi logErrorApi = new ClassLogErrorApi
-                    {
-                        CodigoError = null,
-                        CodigoArea = null,
-                        NombreArchivo = null,
-                        NombreCarpeta = null,
-                        NombreExpediente = null,
-                        Message = loginResponse.Error.ToString(),
-                        IdError = 5
-                    };
-                    LogApi(logErrorApi);
-                    Main();
-                }
+                
             }
             Console.ReadLine();
+        }
+
+        static void Log(string Message = "Data inconsistente!!!", string StackTrace = "", int Type = 999)
+        {
+            LogError l = new LogError
+            {
+                Message = Message,
+                StackTrace = StackTrace,
+                Type = Type
+            };
+            //Exception(l);
+        }
+
+        /// <summary>
+        /// Hacemos login y obtenemos login
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<LoginResponse> LoginAsync()
+        { 
+
+            Login login = new Login
+            {
+                UData = parametersApi.ParametersApi[0].usuario,
+                AppKey = parametersApi.ParametersApi[0].password
+            };
+
+            httpResponseMessage = await Http<Login>.Post(login, EndPointApi[0].patch, urlApi);
+            LoginResponse loginResponse = await httpResponseMessage.Content.ReadAsAsync<LoginResponse>();
+            return loginResponse;
         }
 
         static private DatumAE GetFilterAreaEmpresa()
         {
             List<DatumAE> data = areaEmpresaResponse.Data;
-            DatumAE resp = data.Find(x => x.Codigo == codigoArea);
+            DatumAE resp = data.Find(x => x.Codigo == IdArea);
 
             return resp;
+        }
+
+        static EquivalenciasIntegrador Equivalencia_Integrador(string despacho, string Serie)
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [equ].[SpEquivalencia_Integrador] '{despacho}', '{Serie}'");
+            EquivalenciasIntegrador records = db.Database.SqlQuery<EquivalenciasIntegrador>(query).FirstOrDefault();
+
+            // Sino devuelve null
+            return records;
         }
 
         #region PUENTE TO CALL API
@@ -241,7 +375,7 @@ namespace Lider
         {
             ParametersTrdASS parameters = new ParametersTrdASS
             {
-                CodigoArea = codigoArea,
+                CodigoArea = IdArea,
                 CodigoSerie = respClassSpSerieYSubSerie.CodigoSerie,
                 CodigoSubSerie = respClassSpSerieYSubSerie.CodigoSubSerie
             };
@@ -285,55 +419,25 @@ namespace Lider
             CarpetaResponse trdASS = await Carpetas(login, parameters);
             return trdASS;
         }
-
-        static async Task<ExpPorCUIResponse> ExpPorCUIParameters(LoginResponse login)
-        {
-            ParametersCUI parameters = new ParametersCUI
-            {
-                CUI = "2587"
-            };
-
-            ExpPorCUIResponse trdASS = await ExpPorCUI(login, parameters);
-            return trdASS;
-        }
         
-        static async Task<CrearExpedienteResponse> CrearExpedienteParameters(LoginResponse loginResponse, List<DataToSend> records)
+        static async Task<CrearExpedienteResponse> CrearExpedienteParameters(LoginResponse loginResponse, EquivalenciasIntegrador equivalencia)
         {
             ParametersCE parameter = new ParametersCE
             {
-                IdTablaRetencionDocumental = tRDAreaSerieSubSerieResponse.Data[0].IdTablaRetencionDocumental,
-                IdVersionTablaRetencionDocumental = tRDAreaSerieSubSerieResponse.Data[0].IdVersionTablaDocumental,
-                IdUsuarioResponsable = 1704,
+                IdTablaRetencionDocumental = Convert.ToInt32(equivalencia.IdTrd),
+                IdVersionTablaRetencionDocumental = Convert.ToInt32(equivalencia.IdVersionTrd),
+                IdUsuarioResponsable = Convert.ToInt32(equivalencia.IdUsuario),
                 Nombre = nombreExpediente,
-                Descripcion = null,
-                FechaFinal = 1,
+                Descripcion = "Contrato Nro No. C01.PCCNTR.2053505",
+                FechaFinal = "1",
                 NumeroRadicacionProceso = nombreExpediente,
-                IdCiudad = tRDAreaSerieSubSerieResponse.Data[0].IdCiudad,
-                IdAreaEmpresa = tRDAreaSerieSubSerieResponse.Data[0].IdAreaEmpresa,
+                IdCiudad = Convert.ToInt32(equivalencia.IdCiudad),
+                IdAreaEmpresa = Convert.ToInt32(equivalencia.IdArea),
+                VerPublico = true,
                 Metadatos = new List<object> { }
             };
 
             return await CrearExpediente(loginResponse, parameter);
-        }
-        
-        static async Task<AreaEmpresaResponse> AreaEmpresaParameters(LoginResponse loginResponse)
-        {
-            ParametersAE parameter = new ParametersAE
-            {
-                
-            };
-
-            return await AreaEmpresa(loginResponse, parameter);
-        }
-        
-        static async Task<GetExpedienteResponse> ExpedienteParameters(LoginResponse loginResponse, string CUI)
-        {
-            ParametersGE parameter = new ParametersGE
-            {
-                CUI = CUI
-            };
-
-            return await GetExpediente(loginResponse, parameter);
         }
         
         static async Task<CrearCuadernoResponse> NoteBookParameters(LoginResponse loginResponse, ClassSpGetNoteBook notebooke, ClassGetFolderSql folder)
@@ -362,30 +466,9 @@ namespace Lider
         static async Task<TdrEmpresaReponse> CrearDocumentoParameters(LoginResponse loginResponse, ClassSpFile file, DatumOC notebook)
         {
             string base64 = GetFileToBase64(file.NombreImagen);
-            ArchivoCD archivoCD = CreateArchivoCD(file.NombreImagen, base64);
-            List<ArchivoCD> archivoCDList = new List<ArchivoCD>();
-            archivoCDList.Add(archivoCD);
-            string tipoDocumental = GetTipoDocumental(file);
-
-            ParametersCD parameters = new ParametersCD
-            {
-                IdExpediente = getExpedienteResponse.Data[0].IdExpediente,
-                IdTipoDocumental = tipoDocumental,
-                Nombre = file.NombreImagen,
-                Archivo = archivoCDList,
-                Metadatos = null,
-                FechaCreacionDocumento = DateTime.Now.ToString("dd/MM/yyyy"),
-                IdCarpeta = folderSelected.IdCarpeta,
-                Autor = "Siglo21",
-                FechaTransmicion = DateTime.Now.ToString("dd/MM/yyyy"),
-                FechaRecepcion = DateTime.Now.ToString("dd/MM/yyyy"),
-                Descripcion = "Descripcion teste 01",
-                Version = "001",
-                IdAreaEmpresa = tRDAreaSerieSubSerieResponse.Data[0].IdAreaEmpresa,
-                VerPublico = false,
-                IdCuaderno = notebook.IdCuaderno
-            };
-
+            ArchivoCD archivoCD = Api.CreateArchivoCD(file.NombreImagen, base64);
+            List<ArchivoCD> archivoCDList = Api.CreateListArchivoCD(archivoCD);
+            ParametersCD parameters = Api.CrearDocumentoParameters(getExpedienteResponse, file, archivoCDList, notebook, folderSelected, IdArea);
             TdrEmpresaReponse trdASS = await CrearDocumento(loginResponse, parameters);
             return trdASS;
         }
@@ -428,10 +511,10 @@ namespace Lider
             return records;
         }
 
-        static List<ClassSpFile> GetFile(string nombreExpediente)
+        static List<ClassSpFile> GetFile(string nombreExpediente, string nombre)
         {
             SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
-            string query = string.Concat($"EXEC [api].[SpFiles] '{nombreExpediente}'");
+            string query = string.Concat($"EXEC [api].[SpFiles] '{nombreExpediente}', '{nombre}', '{serieSeleccionada.Serie_SubSerie}'"); 
             List<ClassSpFile> records = db.Database.SqlQuery<ClassSpFile>(query).ToList();
 
             // Sino devuelve null
@@ -447,24 +530,17 @@ namespace Lider
             // Sino devuelve null
             return records;
         }
-        
-        static void LogApi(ClassLogErrorApi exception)
-        {
-            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
-            string query = string.Concat($"EXEC [api].[SpLogApi] 'logapi', '{exception.IdError}', '{exception.Message}', '{exception.CodigoError}', '{exception.NombreArchivo}', '{exception.CodigoArea}', '{exception.NombreExpediente}', '{exception.NombreCarpeta}'");
-            db.Database.ExecuteSqlCommand(query);
-        }
 
         /// <summary>
         /// Guardamos registros de logs
         /// </summary>
         /// <param name="logs">Guardamos registro de los logs obtenidos</param>
-        static void Exception(log_error log)
+        static void Exception(LogError log)
         {
             try
             {
                 SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
-                string query = string.Concat($"EXEC [api].[SpLogApi] 'excepcion', '0', '{log.message}', '9', '{log.type}', '{log.StackTrace}'");
+                string query = string.Concat($"EXEC [api].[SpLogException] '{log.Message}', '{log.StackTrace}'");
                 db.Database.ExecuteSqlCommand(query);
                 //List<ClassSpFile> records = db.Database.SqlQuery<ClassSpFile>(query).ToList();
             }
@@ -516,7 +592,8 @@ namespace Lider
         /// <returns></returns>
         static async Task<LoginResponse> LoginServer(Login login)
         {
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            //HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            HttpResponseMessage response = await Http<Login>.Post(login, EndPointApi[0].patch, urlApi);
             response.EnsureSuccessStatusCode();
 
             LoginResponse res = await response.Content.ReadAsAsync<LoginResponse>();
@@ -557,7 +634,8 @@ namespace Lider
                 //EndDate = DateTime.Now;
                 string endPoint = EndPointApi[1].patch;                
 
-                HttpResponseMessage response = await client.PostAsJsonAsync(endPoint, expediente);
+                //HttpResponseMessage response = await client.PostAsJsonAsync(endPoint, expediente);
+                HttpResponseMessage response = await Http<CrearExpediente>.Post(expediente, EndPointApi[1].patch, urlApi);
                 response.EnsureSuccessStatusCode();
 
                 CrearExpedienteResponse res = await response.Content.ReadAsAsync<CrearExpedienteResponse>();
@@ -577,14 +655,17 @@ namespace Lider
         /// <returns></returns>
         static async Task<TdrEmpresaReponse> TrdPorEmpresa(LoginResponse login, ParametersTrdEmpresa parameter)
         {
-            TRDPOREMPRESA trdEmpresa = new TRDPOREMPRESA();
-            trdEmpresa.Token = login.Data.Token;
-            trdEmpresa.AppKey = parametersApi.ParametersApi[0].password;
+            TRDPOREMPRESA trdEmpresa = new TRDPOREMPRESA
+            {
+                Token = login.Data.Token,
+                AppKey = parametersApi.ParametersApi[0].password
+            };
             trdEmpresa.ExecutionObject.Name = "TRD";
             trdEmpresa.ExecutionObject.WebServiceMethod.Name = "GetTRDIdAreaEmpresa";
             trdEmpresa.ExecutionObject.WebServiceMethod.Parameters = parameter;
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            //HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            HttpResponseMessage response = await Http<LoginResponse>.Post(login, EndPointApi[0].patch, urlApi);
             response.EnsureSuccessStatusCode();
 
             TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
@@ -618,7 +699,8 @@ namespace Lider
             executionObject.WebServiceMethod = webServiceMethod;
             trdSSS.ExecutionObject = executionObject;
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[3].patch, trdSSS);
+            //HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[3].patch, trdSSS);
+            HttpResponseMessage response = await Http<TRDAreaSerieSubSerie>.Post(trdSSS, EndPointApi[3].patch, urlApi);
             response.EnsureSuccessStatusCode();
 
             TRDAreaSerieSubSerieResponse res = await response.Content.ReadAsAsync<TRDAreaSerieSubSerieResponse>();
@@ -633,14 +715,17 @@ namespace Lider
         /// <returns></returns>
         static async Task<UserPorAreaResponse> UsuarioDeArea(LoginResponse loginResponse, ParametersUDA parameter)
         {
-            UsuarioDeArea usrDeArea = new UsuarioDeArea();
-            usrDeArea.Token = loginResponse.Data.Token;
-            usrDeArea.AppKey = parametersApi.ParametersApi[0].password;
+            UsuarioDeArea usrDeArea = new UsuarioDeArea
+            {
+                Token = loginResponse.Data.Token,
+                AppKey = parametersApi.ParametersApi[0].password
+            };
             usrDeArea.ExecutionObject.Name = "Usuario";
             usrDeArea.ExecutionObject.WebServiceMethod.Name = "GetUsuarioArea";
             usrDeArea.ExecutionObject.WebServiceMethod.Parameters = parameter;
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, loginResponse);
+            //HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, loginResponse);
+            HttpResponseMessage response = await Http<LoginResponse>.Post(loginResponse, EndPointApi[0].patch, urlApi);
             response.EnsureSuccessStatusCode();
 
             UserPorAreaResponse res = await response.Content.ReadAsAsync<UserPorAreaResponse>();
@@ -676,7 +761,8 @@ namespace Lider
                 ExecutionObject = executionObject
             };
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[6].patch, crearDocumento);
+            //HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[6].patch, crearDocumento);
+            HttpResponseMessage response = await Http<CrearDocumento>.Post(crearDocumento, EndPointApi[6].patch, urlApi);
             response.EnsureSuccessStatusCode();
 
             TdrEmpresaReponse res = await response.Content.ReadAsAsync<TdrEmpresaReponse>();
@@ -684,60 +770,20 @@ namespace Lider
             return res;
         }
 
-        static async Task<AreaEmpresaResponse> AreaEmpresa(LoginResponse login, ParametersAE parameters)
+        static async Task<GetExpedienteResponse> GetExpediente(LoginResponse login, string CUI)
         {
-            AreaEmpresa areaEmpresa = new AreaEmpresa
-            {
-                Token = login.Data.Token,
-                AppKey = parametersApi.ParametersApi[0].password
-            };
-            ExecutionObjectAE executionObject = new ExecutionObjectAE
-            {
-                Name = "Areas"
-            };
+            ParametersGE parameters = Api.ExpedienteParameters(login, CUI);
+            GetExpediente getExpediente = Api.GetExpedienteApi(login, parameters, password);
 
-            WebServiceMethodAE webServiceMethod = new WebServiceMethodAE
-            {
-                Name = "GetAreas"
-            };
-            executionObject.WebServiceMethod = webServiceMethod;
-            webServiceMethod.Parameters = parameters;
-            areaEmpresa.ExecutionObject = executionObject;
-
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[2].patch, areaEmpresa);
-            response.EnsureSuccessStatusCode();
-
-            AreaEmpresaResponse res = await response.Content.ReadAsAsync<AreaEmpresaResponse>();
-
-            return res;
-        }
-
-        static async Task<GetExpedienteResponse> GetExpediente(LoginResponse login, ParametersGE parameters)
-        {
-            GetExpediente getExpediente = new GetExpediente
-            {
-                Token = login.Data.Token,
-                AppKey = parametersApi.ParametersApi[0].password
-            };
-            ExecutionObjectGE executionObject = new ExecutionObjectGE
-            {
-                Name = "Expedientes"
-            };
-
-            WebServiceMethodGE webServiceMethod = new WebServiceMethodGE
-            {
-                Name = "GetExpedienteCUI"
-            };
-            executionObject.WebServiceMethod = webServiceMethod;
-            webServiceMethod.Parameters = parameters;
-            getExpediente.ExecutionObject = executionObject;
-
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[11].patch, getExpediente);
+            //HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[11].patch, getExpediente);
+            HttpResponseMessage response = await Http<GetExpediente>.Post(getExpediente, EndPointApi[11].patch, urlApi);
             response.EnsureSuccessStatusCode();
 
             GetExpedienteResponse res = await response.Content.ReadAsAsync<GetExpedienteResponse>();
 
-            //
+            if (res.Data.Count == 0)
+                throw new Exception($"No se encontro ConfiguracionTRD!!! - Name: GetExpedienteCUI - CUI: {getExpediente.ExecutionObject.WebServiceMethod.Parameters.CUI} - patch {EndPointApi[11].patch} - urlApi: {urlApi}");
+            
             Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(res.Data[0].ConfiguracionTRD);
             tiposDocumentale = myDeserializedClass.TiposDocumentales;
             return res;
@@ -745,14 +791,17 @@ namespace Lider
 
         static async Task<ExpPorCUIResponse> ExpPorCUI(LoginResponse login, ParametersCUI parameter)
         {
-            ExpPorCUI expPorCUI = new ExpPorCUI();
-            expPorCUI.Token = login.Data.Token;
-            expPorCUI.AppKey = parametersApi.ParametersApi[0].password;
+            ExpPorCUI expPorCUI = new ExpPorCUI
+            {
+                Token = login.Data.Token,
+                AppKey = parametersApi.ParametersApi[0].password
+            };
             expPorCUI.ExecutionObject.Name = "Documentos";
             expPorCUI.ExecutionObject.WebServiceMethod.Name = "CrearDocumento";
             expPorCUI.ExecutionObject.WebServiceMethod.Parameters = parameter;
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            //HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            HttpResponseMessage response = await Http<LoginResponse>.Post(login, EndPointApi[0].patch, urlApi);
             response.EnsureSuccessStatusCode();
 
             ExpPorCUIResponse res = await response.Content.ReadAsAsync<ExpPorCUIResponse>();
@@ -776,7 +825,8 @@ namespace Lider
             folder.ExecutionObject.WebServiceMethod.Name = "GetCarpetas";
             folder.ExecutionObject.WebServiceMethod.Parameters = parameter;
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            //HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[0].patch, login);
+            HttpResponseMessage response = await Http<LoginResponse>.Post(login, EndPointApi[0].patch, urlApi);
             response.EnsureSuccessStatusCode();
 
             CarpetaResponse res = await response.Content.ReadAsAsync<CarpetaResponse>();
@@ -810,7 +860,8 @@ namespace Lider
                 ExecutionObject = executionObject
             };
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[13].patch, creacionCuadernos);
+            //HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[13].patch, creacionCuadernos);
+            HttpResponseMessage response = await Http<CreacionCuadernos>.Post(creacionCuadernos, EndPointApi[13].patch, urlApi);
             response.EnsureSuccessStatusCode();
 
             CrearCuadernoResponse res = await response.Content.ReadAsAsync<CrearCuadernoResponse>();
@@ -844,21 +895,19 @@ namespace Lider
                 ExecutionObject = executionObject
             };
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[12].patch, creacionCuadernos);
-            response.EnsureSuccessStatusCode();
-
+            //HttpResponseMessage response = await client.PostAsJsonAsync(EndPointApi[12].patch, creacionCuadernos);
+            HttpResponseMessage response = await Http<CuadernoByCUI>.Post(creacionCuadernos, EndPointApi[12].patch, urlApi);
             ObtenerCuadernoResponse res = await response.Content.ReadAsAsync<ObtenerCuadernoResponse>();
-
             return res;
         }
 
-        private static void AddHeaders()
-        {
-            string urlApiI = string.Concat(parametersApi.ParametersApi[0].urlApi);
-            client.BaseAddress = new Uri(urlApiI);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
+        //private static void AddHeaders()
+        //{
+        //    string urlApiI = string.Concat(parametersApi.ParametersApi[0].urlApi);
+        //    client.BaseAddress = new Uri(urlApiI);
+        //    client.DefaultRequestHeaders.Accept.Clear();
+        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //}
         #endregion
 
         #region CONSULTAS PARAMETROS INICIALES
@@ -879,6 +928,26 @@ namespace Lider
                 Count = result.Count()
             };
             return param;                
+        }
+
+        static List<ClassFindDespacho> FindDespacho(string despacho)
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [api].[SpFindDespacho] '{despacho}'");
+            List<ClassFindDespacho> records = db.Database.SqlQuery<ClassFindDespacho>(query).ToList();
+
+            // Sino devuelve null
+            return records;
+        }
+
+        static List<Series> SpBuscarSeries(string despacho)
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [api].[SpBuscarSeries] '{despacho}'");
+            List<Series> records = db.Database.SqlQuery<Series>(query).ToList();
+
+            // Sino devuelve null
+            return records;
         }
 
         /// <summary>
@@ -934,24 +1003,18 @@ namespace Lider
             // Sino devuelve null
             return record;
         }
+
+        static List<SerieSubSerieExpediente> spBuscarExpdientesSerie()
+        {
+            SID_PROTOCOL2Entities db = new SID_PROTOCOL2Entities();
+            string query = string.Concat($"EXEC [api].[spBuscarExpedientesSeries] '{nombreDespacho}', '{serieSeleccionada.Serie_SubSerie}'");
+            List<SerieSubSerieExpediente> record = db.Database.SqlQuery<SerieSubSerieExpediente>(query).ToList();
+
+            // Sino devuelve null
+            return record;
+        }
         #endregion
 
-        #region CLASES
-        /*** CLASES ***/
-        public class Login
-        {
-            public string UData { get; set; }
-            public string AppKey { get; set; }
-        }
-
-        public class Parametros
-        {
-            public List<parametersApi> ParametersApi { get; set; }
-            public int Count { get; set; }
-        }
-
-
-        #endregion
 
         #region LINQ
         static string GetTipoDocumental(ClassSpFile file)
@@ -995,31 +1058,24 @@ namespace Lider
             string strArchivoBase64 = Convert.ToBase64String(bytes);
             return strArchivoBase64;
         }
-        
-        static ArchivoCD CreateArchivoCD(string fileName, string base64)
-        {
-            FileField fileField = new FileField
-            {
-                FormatType = "Base64",
-                DestinationFile = new DestinationFile { }
-            };
-
-            ArchivoCD archivoCD = new ArchivoCD()
-            {
-                Archivo = fileName,
-                DatosArchivo = base64,
-                EsAdjunto = false,
-                FileField = fileField
-            };
-
-            return archivoCD;
-        }
 
         #endregion
 
         #region CONSOLE
-        static void ShowConsole(string mensaje, string option = "black", string color = "black")
+        static void ShowConsole(string mensaje, string option = "black", string color = "white")
         {
+            Console.Clear();
+            Consola.ShowEquivalenciaIntegrador(nombreDespacho, serieSeleccionada.Serie_SubSerie, IdArea, IdCiudad, IdUsuario, IdTrd, IdVersionTrd);
+            Consola.ShowMostrarExpediente(nombreExpediente);
+            Consola.ShowSeriSubSerie(contadorSeriSubSerie, totalSeriSubSerie);
+            Consola.ShowFolders(contadorFolders, totalFolders);
+            Consola.ShowNoteBooks(contadorNoteBooks, totalNoteBooks);
+            Consola.ShowNoteBookList(contadorNoteBookList, totalNoteBookList);
+            Consola.ShowFiles(contadorFiles, totalFiles);
+
+            Consola.ShowFiles(contadorFiles, totalFiles);
+
+            Console.SetCursorPosition(0, 17);
             switch (option)
             {
                 case "black":
@@ -1035,7 +1091,9 @@ namespace Lider
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("\n" + mensaje);
                     break;
-                case "oragen":
+                case "DarkMagenta":
+                    Console.BackgroundColor = ConsoleColor.DarkMagenta;
+                    Console.ForegroundColor = ConsoleColor.Black;
                     Console.Write("\n" + mensaje);
                     break;
                 case "yellow":
@@ -1043,7 +1101,7 @@ namespace Lider
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.Write("\n" + mensaje);
                     break;
-                case "orange":
+                case "gray":
                     Console.BackgroundColor = ConsoleColor.Gray;
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.Write("\n" + mensaje);
@@ -1054,38 +1112,58 @@ namespace Lider
         #endregion
 
         #region MENU
-        static void Menu()
+        static void SolicitarDespacho()
         {
-            Console.WriteLine("                   ********************************************");
-            Console.WriteLine("                   |               BIENVENIDO                 |");
-            Console.WriteLine("                   | Por favor ingrese los datos solicitado:  |");
-            Console.WriteLine("                   |                                          |");
-            Console.WriteLine("                   ********************************************");
-            Console.WriteLine("\n");
-
-            List<ClassValidateExpediente> resp;
+            string nombreDespachoDigitado = string.Empty;
             do
             {
-                Console.WriteLine("Ingrese nombre del expediente:");
-                nombreExpediente = Console.ReadLine();
-                resp = SpValidarNumeroExpediente();
-                if (!resp[0].Estado)
-                {
+                nombreDespachoDigitado = Menu.MenuSolicitarDespacho();
+                despachos = FindDespacho(nombreDespachoDigitado);
+                if (despachos.Count <= 0)
                     Console.WriteLine("Expediente invalido, por favor digite nuevamente...\n");
-                }
-            } while (!resp[0].Estado);
+            } while (despachos.Count == 0);
+            nombreDespacho = nombreDespachoDigitado;
+        }
 
-            //SpShowLogExpediente();
+        static void SeleccionarSerie()
+        {
+            List<Series> series = SpBuscarSeries(nombreDespacho);
+            if (despachos.Count <= 0)
+                throw new Exception("Serie no encontrada!!!");
+            
+            do
+            {
+                string serie = Menu.MenuSeleccionarSerie(series);
+                serieSeleccionada = series.Find(x => x.Codigo == Convert.ToInt32(serie));
+            } while (serieSeleccionada == null);
+        }
 
-            //do
-            //{
-            //    Console.WriteLine("Ingrese código del área");
-            //    codigoArea = Console.ReadLine();
-            //} while (codigoArea.Length != 12);
+        static void GetExpediente()
+        {
+            do
+            {
+                nombreExpediente = Menu.MenuExpediente();
+            } while (nombreExpediente == null);
+        }
 
-            Console.WriteLine($"Expediente: {nombreExpediente}");
-            Console.WriteLine($"Área: {codigoArea}");
+        static void GetIdArea()
+        {
+            do
+            {
+                nombreExpediente = Menu.MenuIdArea();
+            } while (nombreExpediente == null);
+        }
+        #endregion
 
+        #region
+        public static SID_PROTOCOL2Entities SingletonDB()
+        {
+            SID_PROTOCOL2Entities db = null;
+
+            if (db == null)
+                db = new SID_PROTOCOL2Entities();
+
+            return db;
         }
         #endregion
     }
